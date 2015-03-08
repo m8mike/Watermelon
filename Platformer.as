@@ -37,7 +37,7 @@ package {
 		
 		public static var _bodiesToRemove:Array = [];
 		
-		public static var controls:Controls;
+		//public static var controls:Controls;
 		
 		public function Platformer() {
 			thisIs = this;
@@ -107,11 +107,20 @@ package {
 					//_player.startSplash();
 				}
 			} else {
-				if (!_player) {
+				/*if (!_player) {
 					_player = new Player(2, -6, new Controls());
-				}
+				}*/
 				// управление камерой
-				if (controls) {	
+				/*if ((Controls(Controls.controls[0])).left) {
+					CameraManager.freePoint.x -= 10;
+				} else if ((Controls(Controls.controls[0])).right) {
+					CameraManager.freePoint.x += 10;
+				} else if ((Controls(Controls.controls[0])).up) {
+					CameraManager.freePoint.y -= 10;
+				} else if ((Controls(Controls.controls[0])).down) {
+					CameraManager.freePoint.y += 10;
+				}*/
+				/*if (controls) {	
 					if (controls.enter) {
 						if (!_player) {
 							_player = new Player(2, -6, controls);
@@ -126,7 +135,7 @@ package {
 					} else if (controls.down) {
 						CameraManager.freePoint.y += 10;
 					}
-				}
+				}*/
 				CameraManager.zoomCameras(CameraManager.freePoint);
 			}
 		}

@@ -36,6 +36,5 @@ package {
 				bubble.gotoAndPlay(2);
 			}
 		}
-		
 	}
 }

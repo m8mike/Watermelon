@@ -8,6 +8,8 @@ package
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	/**
 	 * ...
 	 * @author Mad Mike
@@ -39,22 +41,27 @@ package
 		public static const NO_ITEMS:int = 0;
 		public static const UMBRELLA_IN_RIGHT_HAND:int = 1;
 		public static const NO_HANDS:int = 2;
+		public static const UMBRELLA_GO:int = 3;
+		
+		private var controls:Controls;
 		
 		public function Player(x:int, y:int, controls:Controls) {
 			bodyManager = new PlayerBodyManager(new Point(x * 20, y * 20), this);
 			PlayerBodyManager(bodyManager).controls = controls;
 			costumeManager = new PlayerCostumeManager(this);
 			PlayerCostumeManager(costumeManager).controls = controls;
+			this.controls = controls;
+			controls.player = this;
 		}
 		
-		public function itemGet(item:Item):void {
+		public function itemGet(id:String):void {
 			if (carryingItem) {
-				if (carryingItem.toString() != item.toString()) {
+				if (getQualifiedClassName(carryingItem) != id) {
 					carryingItem.remove();
-					carryingItem = item;
+					carryingItem = new (getDefinitionByName(id))();
 				}
 			} else {
-				carryingItem = item;
+				carryingItem = new (getDefinitionByName(id))();
 			}
 		}
 		
@@ -96,6 +103,8 @@ package
 			if (Platformer._player == this) {
 				Platformer._player = null;
 			}
+			controls.player = null;
+			controls = null;
 			super.cleanUpBeforeRemoving();
 		}
 		

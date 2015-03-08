@@ -79,6 +79,8 @@ package {
 			if (jumpToKill) {
 				dummy.remove();
 				player.impulseUp();
+			} else {
+				player.remove();
 			}
 		}
 		

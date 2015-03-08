@@ -22,6 +22,8 @@ package {
 		
 		public static var allowed:Boolean;
 		
+		private var _player:Player;
+		
 		public function Controls() {
 			if (controls.length == 0) {
 				Platformer.thisIs.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
@@ -69,13 +71,11 @@ package {
 			if (!allowed) {
 				return void;
 			}
-			//for each (var c:Controls in controls) {	
+			//for each (var c:Controls in controls)	
+			if (_player) {
 				switch (e.keyCode) {
-					case 13: //enter
-						//Enter = true;
-						break;
 					case 90: //z
-						useUmbrella = true;
+						//useUmbrella = true;
 						break;
 					case 81: //q
 						//Left = true;
@@ -86,32 +86,36 @@ package {
 						//Up = true;
 						break;
 					case 37: //Left
-						Controls(controls[0]).left = true;
+						left = true;
 						break;
 					case 65: //a
-						Controls(controls[1]).left = true;
+						_player.itemGet("Bazooka");
+						//Controls(controls[1]).left = true;
 						break;
 					case 38: //Up
-						Controls(controls[0]).up = true;
+						up = true;
 						break;
 					case 87: //w
-						Controls(controls[1]).up = true;
+						_player.itemGet("Umbrella");
+						//Controls(controls[1]).up = true;
 						break;
 					case 39: //Right
-						Controls(controls[0]).right = true;
+						right = true;
 						break;
 					case 68: //d
-						Controls(controls[1]).right = true;
+						//Controls(controls[1]).right = true;
 						break;
 					case 40: //Down
-						Controls(controls[0]).down = true;
+						down = true;
 						break;
 					case 83: //s
 						//Platformer._player = new Player(2, -6, this);
-						Controls(controls[1]).down = true;
+						_player.itemGet("SnowGun");
+						//Controls(controls[1]).down = true;
 						break;
 					case 70: //Fly //83
 						//Fly = true;
+						_player.remove();
 						break;
 					/*case 83 ://Shoot Cannon
 					   ShootCannon = true;
@@ -119,17 +123,43 @@ package {
 					case 192: //`
 						Platformer.setFullScreen();
 						break;
-				/*case 85 :
-				   changeCharacter();
-				   break;
-				   case 73 :
-				   changeHat();
-				   break;
-				   case 79 :
-				   changeShoes();
-				 break;*/
 				}
-			//}
+			} else {
+				switch (e.keyCode) {
+					case 13: //enter
+						if (!Platformer._player) {
+							Platformer._player = new Player(CameraManager.freePoint.x/20, CameraManager.freePoint.y/20, this);
+						}
+						break;
+					case 37: //Left
+						CameraManager.freePoint.x -= 10;
+						break;
+					case 65: //a
+						CameraManager.freePoint.x -= 10;
+						break;
+					case 38: //Up
+						CameraManager.freePoint.y -= 10;
+						break;
+					case 87: //w
+						CameraManager.freePoint.y -= 10;
+						break;
+					case 39: //Right
+						CameraManager.freePoint.x += 10;
+						break;
+					case 68: //d
+						CameraManager.freePoint.x += 10;
+						break;
+					case 40: //Down
+						CameraManager.freePoint.y += 10;
+						break;
+					case 83: //s
+						CameraManager.freePoint.y += 10;
+						break;
+					case 192: //`
+						Platformer.setFullScreen();
+						break;
+				}
+			}
 		}
 		
 		private function keyUp(e:KeyboardEvent):void {
@@ -182,6 +212,10 @@ package {
 				 break;*/
 				}
 			}
+		}
+		
+		public function set player(value:Player):void {
+			_player = value;
 		}
 	}
 }

@@ -105,6 +105,8 @@
 		private function umbrellaPartsRight(clip:MovieClip):void {
 			if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
 				clip.getChildAt(0).visible = true;
+			} else if (playerToCache.animationMode == Player.UMBRELLA_GO && clip.numChildren > 2) {
+				clip.getChildAt(2).visible = true;
 			} else {
 				clip.getChildAt(1).visible = true;
 			}
@@ -113,6 +115,8 @@
 		private function umbrellaPartsLeft(clip:MovieClip):void {
 			if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
 				clip.getChildAt(1).visible = true;
+			} else if (playerToCache.animationMode == Player.UMBRELLA_GO && clip.numChildren > 2) {
+				clip.getChildAt(2).visible = true;
 			} else {
 				clip.getChildAt(0).visible = true;
 			}
@@ -159,6 +163,12 @@
 			if (clipDef is go_right) {
 				
 			} else if (clipDef is go_left) {
+				hideRightHand(DisplayObjectContainer(clipDef));
+				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
+					umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(4)));
+				} else {
+					umbrellaPartsRight(MovieClip(go_left(clipDef).getChildAt(4)));
+				}
 				umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(1)));
 			} else if (clipDef is stay_right) {
 				hideRightHand(DisplayObjectContainer(clipDef));

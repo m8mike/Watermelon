@@ -18,6 +18,7 @@ package
 		public var canJump:Boolean = false;
 		public var leftWallJump:Boolean;
 		public var rightWallJump:Boolean;
+		private var canOpenUmbrella:Boolean = false;
 		
 		public static const BALL_DIAMETER:int = 20; //12
 		public static const JUMP_IMPULSE:b2Vec2 = new b2Vec2(0.0, -0.23); //-0.5);//-0.17); true
@@ -54,6 +55,9 @@ package
 		}
 		
 		private function handleControls():void {
+			if (canJump) {
+				canOpenUmbrella = false;
+			}
 			if (!controls) {
 				return void;
 			}
@@ -98,6 +102,9 @@ package
 			if (notPressedAnyButton && canJump && speedIsSmall) {
 				body.PutToSleep();
 			}
+			if (notPressedAnyButton) {
+				controls.useUmbrella = false;
+			}
 		}
 		
 		public function reduceJumpTime():void {
@@ -113,6 +120,9 @@ package
 			if (impulseReducer > 0) {
 				impulseReducer = 0;
 			}
+			if (!canJump) {
+				canOpenUmbrella = true;
+			}
 		}
 		
 		private function jump():void {
@@ -120,6 +130,13 @@ package
 				shortJump();
 			} else if (jumpTimeLeft) {
 				longJump();
+			} else {
+				if (!controls.up) {
+					canOpenUmbrella = true;
+				}
+				if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Umbrella){
+					controls.useUmbrella = true;
+				}
 			}
 			if (leftWallJump) {
 				body.ApplyImpulse(LEFT_WALL_IMPULSE, body.GetWorldCenter()); //-0.2 -0.27
@@ -143,18 +160,19 @@ package
 			impulseReducer++;
 		}
 		
-		public function allowJumps(x:Number, y:Number):void {
+		public function allowJumps(x:Number, y:Number, walls:Boolean = true):void {
 			if (x > -0.72 && x < 0.72 && y < 0) {
 				if (!leftWallJump && !rightWallJump) {
 					canJump = true;
 				}
-			} else 
-			if (y > -0.72 && y < 0.72) {
-				if (x < 0) {
-					leftWallJump = true;
-				}
-				else if (x > 0) {
-					rightWallJump = true;
+			} else if (walls) {
+				if (y > -0.72 && y < 0.72) {
+					if (x < 0) {
+						leftWallJump = true;
+					}
+					else if (x > 0) {
+						rightWallJump = true;
+					}
 				}
 			}
 		}
@@ -170,7 +188,7 @@ package
 		}
 		
 		override public function removeBodies():void {
-			controls.remove();
+			//controls.remove(); //разобраться со временем создания и удаления контролов
 			controls = null;
 			super.removeBodies();
 		}

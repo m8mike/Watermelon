@@ -13,18 +13,14 @@ package {
 		public var mask:Sprite;
 		private var body:b2Body;
 		private var shape:RectShape;
-		private var location:Point;
-		private var koef:int = 20; //размер минимального квадрата
-		
 		
 		public function Spikes(x:Number, y:Number, w:Number, h:Number) {
-			location = new Point(x * koef, y * koef);
-			shape = new RectShape(w * koef, h * koef);
+			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
 			mask = shape.getSimpleSprite(location);
 			CameraManager._staticLayer.addChild(mask);
 			//createCostumes();
 			createBodies();
-			Platformer.platforms.push(this);
 			super(body, mask);
 		}
 		

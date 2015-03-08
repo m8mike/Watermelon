@@ -11,19 +11,16 @@ package {
 		public var mask:Sprite;
 		private var body:b2Body;
 		private var shape:RectShape;
-		private var location:Point;
-		private var koef:int = 20; //размер минимального квадрата
 		
 		public var isOpen:Boolean = false;
 		
 		public function Door(x:Number, y:Number) {
-			location = new Point(x * koef, y * koef);
-			shape = new RectShape(2 * koef, 3 * koef);
+			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			shape = new RectShape(2 * PhysiVals.MIN_SQARE, 3 * PhysiVals.MIN_SQARE);
 			mask = shape.getSimpleSprite(location);
 			CameraManager._staticLayer.addChild(mask);
 			//createCostumes();
 			createBodies();
-			Platformer.platforms.push(this);
 			super(body, mask);
 		}
 		

@@ -17,7 +17,7 @@ package {
 		private static var fon4:Sprite;*/
 		
 		public function Hills() {
-			addHills(2);
+			addHills(4);
 			//addHillsSprite(4);
 		}
 		

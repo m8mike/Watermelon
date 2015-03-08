@@ -21,10 +21,14 @@ package {
 		override public function getShapeDef():b2ShapeDef {
 			shapeDef = new b2PolygonDef();
 			b2PolygonDef(shapeDef).vertexCount = 4;
-			b2Vec2(b2PolygonDef(shapeDef).vertices[0]).Set(0, 0);
-			b2Vec2(b2PolygonDef(shapeDef).vertices[1]).Set(_width / PhysiVals.RATIO, 0);
-			b2Vec2(b2PolygonDef(shapeDef).vertices[2]).Set(_width / PhysiVals.RATIO, _height / PhysiVals.RATIO);
-			b2Vec2(b2PolygonDef(shapeDef).vertices[3]).Set(0, _height / PhysiVals.RATIO);
+			var x:Number = location.x * PhysiVals.MIN_SQARE / PhysiVals.RATIO;
+			var y:Number = location.y * PhysiVals.MIN_SQARE / PhysiVals.RATIO;
+			var w:Number = _width / PhysiVals.RATIO;
+			var h:Number = _height / PhysiVals.RATIO;
+			b2Vec2(b2PolygonDef(shapeDef).vertices[0]).Set(x, y);
+			b2Vec2(b2PolygonDef(shapeDef).vertices[1]).Set(w + x, y);
+			b2Vec2(b2PolygonDef(shapeDef).vertices[2]).Set(w + x, h + y);
+			b2Vec2(b2PolygonDef(shapeDef).vertices[3]).Set(x, h + y);
 			return shapeDef;
 		}
 		

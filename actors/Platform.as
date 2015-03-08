@@ -15,13 +15,7 @@ package {
 	public class Platform extends Actor {
 		private var _body:b2Body;
 		public var _costume:DisplayObject;
-		
-		/*public var _trigger:int;
-		   public static const NONE = 0;
-		   public static const FRAME = 1;
-		   public static const PERIOD = 2;
-		   public static const COLLISION = 3;
-		public static const COLLISIONLESS = 4;*/
+		protected var location:Point;
 		
 		public function Platform(myBody:b2Body, myCostume:DisplayObject) {
 			_body = myBody;
@@ -30,14 +24,40 @@ package {
 			Platformer.platforms.push(this);
 			updateCostumes();
 		}
+		
 		override protected function cleanUpBeforeRemoving():void {
 			Platformer.platforms.splice(Platformer.platforms.indexOf(this), 1);
 			super.cleanUpBeforeRemoving();
 		}
+		
 		override public function destroy():void {
-			Platformer.safeRemoveBody(_body);
-			//PhysiVals.world.DestroyBody(_body);
 			super.destroy();
+		}
+		
+		override protected function removeBodies():void {
+			Platformer.safeRemoveBody(_body);
+			super.removeBodies();
+		}
+		
+		override protected function removeCostumes():void {
+			/*if (_costume) {
+				if (_costume.parent) {
+					_costume.parent.removeChild(_costume);
+				}
+				if (_costume.mask) {
+					if (_costume.mask.parent) {
+						_costume.mask.parent.removeChild(_costume.mask);
+						_costume.mask = null;
+					}
+				}
+			}*/
+			if (_costume) {
+				if (_costume.parent) {
+					_costume.parent.removeChild(_costume);
+				}
+				_costume = null;
+			}
+			super.removeCostumes();
 		}
 		
 		public function updateCostumes():void {

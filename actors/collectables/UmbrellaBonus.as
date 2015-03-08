@@ -10,12 +10,11 @@ package {
 	*/
 	public class UmbrellaBonus extends BubbleBonus {
 		private var umbrella:MovieClip;
-		private var koef:int = 20;
 		
 		public function UmbrellaBonus(x:Number, y:Number) {
 			umbrella = new umbrella_bonus();
-			umbrella.x = x * koef;
-			umbrella.y = y * koef;
+			umbrella.x = x * PhysiVals.MIN_SQARE;
+			umbrella.y = y * PhysiVals.MIN_SQARE;
 			umbrella.scaleX = 0.15;
 			umbrella.scaleY = 0.15;
 			CameraManager._staticLayer.addChild(umbrella);
@@ -23,7 +22,7 @@ package {
 		}
 		
 		override public function pick(player:Player):void {
-			player.itemGet(new Umbrella());
+			player.itemGet("Umbrella");
 			super.pick(player);
 		}
 		

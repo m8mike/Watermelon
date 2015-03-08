@@ -9,6 +9,7 @@ package {
 	*/
 	public class MyShape {
 		protected var shapeDef:b2ShapeDef;
+		protected var location:Point = new Point(0, 0);
 		
 		public function MyShape() {
 		
@@ -21,6 +22,9 @@ package {
 		public function getSimpleSprite(location:Point):Sprite {
 			return null;
 		}
+		
+		public function setLoc(x:Number, y:Number):void {
+			location.setTo(x, y);
+		}
 	}
-
 }

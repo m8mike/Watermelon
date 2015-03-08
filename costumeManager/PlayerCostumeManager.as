@@ -22,7 +22,9 @@ package {
 		public static const FALL_LEFT:int = 7;
 		public static const UMBRELLA_RIGHT:int = 24;
 		public static const UMBRELLA_LEFT:int = 25;
-		public static const RED_SPLASH:int = 26;
+		public static const UMBRELLA_GO_RIGHT:int = 26;
+		public static const UMBRELLA_GO_LEFT:int = 27;
+		public static const RED_SPLASH:int = 28;
 		
 		public function PlayerCostumeManager(player:Player) {
 			parent = player;
@@ -60,6 +62,10 @@ package {
 			Raster.cachePlayerOnce(parent);
 			_costumes.push(new AnimationCostume("umbrella_right", CameraManager.pLayer, 0.128, 0.14285714285714288, 5));
 			_costumes.push(new AnimationCostume("umbrella_left", CameraManager.pLayer, -0.1264822134387352, 0.14092140921409216, 5));
+			parent.animationMode = Player.UMBRELLA_GO;
+			Raster.cachePlayer(parent);
+			_costumes.push(new AnimationCostume("go_right", CameraManager.pLayer, 0.128, 0.14285714285714288));
+			_costumes.push(new AnimationCostume("go_left", CameraManager.pLayer, -0.1264822134387352, 0.14092140921409216));
 			_costumes.push(new AnimationCostume("red_splash", CameraManager.pLayer, -0.028268551236749116, 0.024916943521594685));
 		}
 		
@@ -109,7 +115,13 @@ package {
 		
 		private function checkCondition():void {
 			if (controls.useUmbrella && parent.carryingItem is Umbrella) {
-				if (parent.getBody().GetLinearVelocity().x >= 0) {
+				if (parent.isOnGround()) {
+					if (parent.getBody().GetLinearVelocity().x >= 0) {
+						changeCondition(UMBRELLA_GO_RIGHT);
+					} else {
+						changeCondition(UMBRELLA_GO_LEFT);
+					}
+				} else if (parent.getBody().GetLinearVelocity().x >= 0) {
 					changeCondition(UMBRELLA_RIGHT);
 				} else {
 					changeCondition(UMBRELLA_LEFT);
@@ -167,6 +179,8 @@ package {
 			}
 			if (parent.carryingItem is Bazooka) {
 				Bazooka(parent.carryingItem).setCoords(x2 - 14, y + 20);
+			} else if (parent.carryingItem is SnowGun) {
+				SnowGun(parent.carryingItem).setCoords(x2 - 14, y + 20);
 			}
 		}
 		
@@ -177,7 +191,7 @@ package {
 			var index:int = spriteIndex;
 			if (parent.carryingItem is Umbrella && index < 20) {
 				index += 8;
-			} else if (parent.carryingItem is Bazooka && index < 24) {
+			} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 24) {
 				index += 16;
 			}
 			AnimationCostume(_costumes[index]).play();

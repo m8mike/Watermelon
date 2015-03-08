@@ -203,7 +203,7 @@ package {
 			gui = new Sprite();
 			nearLayers = new Sprite();
 			belowLayer = new Camera(12);
-			pLayer = new Camera(10);
+			pLayer = new Camera(12);
 			zeroLayer = new Sprite();
 			farLayers = new Sprite();
 			_camera01 = new Camera(1, 2);
@@ -215,7 +215,7 @@ package {
 			_camera13 = new Camera(1);
 			_camera12 = new Camera(1, 2);
 			_camera11 = new Camera(1, 3);
-			_camera = new Camera(10); //10
+			_camera = new Camera(12); //10
 			_staticLayer = new Camera(1);
 			_cameraStaticLayer1 = new Camera(1);
 			_dynamicLayer = new Camera(1);

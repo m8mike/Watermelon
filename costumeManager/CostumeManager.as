@@ -7,8 +7,7 @@ package
 	public class CostumeManager {
 		protected  var _costumes:Array = [];
 		
-		public function CostumeManager() 
-		{
+		public function CostumeManager() {
 			
 		}
 		

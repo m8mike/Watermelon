@@ -10,7 +10,7 @@ package {
 		private static var bigCloud3:Animation;
 		
 		public function BigClouds() {
-			addBigClouds(2);
+			addBigClouds(3);
 		}
 		
 		public static function addBigClouds(numClouds:int = 1):void {

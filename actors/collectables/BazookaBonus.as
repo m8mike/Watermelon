@@ -23,7 +23,7 @@ package {
 		}
 		
 		override public function pick(player:Player):void {
-			player.itemGet(new Bazooka());
+			player.itemGet("Bazooka");
 			super.pick(player);
 		}
 		

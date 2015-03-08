@@ -31,6 +31,8 @@ package {
 			cacheAnimation("bubbleBonus");
 			cacheAnimation("GrassBackground");
 			cacheAnimation("GroundBackground");
+			cacheAnimation("hatFinish");
+			cacheAnimation("hatFinishTop");
 			cacheItems();
 		}
 		// вызывать перед созданием игрока
@@ -59,6 +61,7 @@ package {
 		
 		public static function cacheItems():void {
 			cacheAnimation("bazookaHands");
+			cacheAnimation("bazookaSnowHands");
 		}
 		
 		public static function getAnimation(id):Animation {
