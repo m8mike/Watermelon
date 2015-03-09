@@ -1,6 +1,8 @@
 package {
 	import Box2D.Dynamics.b2Body;
+	import flash.display.MovieClip;
 	import flash.geom.Point;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	* ...
@@ -21,8 +23,9 @@ package {
 		}
 		
 		public function createCostumes():void {
+			var clipDef:MovieClip = new (getDefinitionByName("hatFinish"))();
 			hat = new AnimationCostume("hatFinish", CameraManager._dynamicLayer, 0.2, 0.2);
-			hat.setCoords(location.x, location.y);
+			hat.setCoords(location.x - 0.01 * clipDef.width, location.y - 0.018 * clipDef.height);
 			hat.play();
 			topHat = new AnimationCostume("hatFinishTop", CameraManager.belowLayer, 0.2, 0.2);
 			topHat.setCoords(location.x, location.y);

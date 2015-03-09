@@ -78,8 +78,8 @@ package {
 			//create player with controls
 			var controls:Controls = new Controls();
 			Platformer._player = new Player(2, -6, controls);
-			var hills:Hills = new Hills();
-			var clouds:BigClouds = new BigClouds();
+			/*var hills:Hills = new Hills();
+			var clouds:BigClouds = new BigClouds();*/
 			/*new Dummy(10, -40, 20);
 			new Dummy(11, -50, 30);
 			new Dummy(12, -50, 40);

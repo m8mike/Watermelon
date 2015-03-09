@@ -86,7 +86,11 @@ package {
 		
 		private function playerHitsPlatform(player:Player, platform:Platform, point:b2ContactPoint):void {
 			if (!player.isOnGround()) {
-				player.allowJumps(point.normal);
+				if (platform is TopHat) {
+					player.allowJumps(point.normal, false);
+				} else {
+					player.allowJumps(point.normal);
+				}
 			}
 			if (platform is Spikes) {
 				player.kill();

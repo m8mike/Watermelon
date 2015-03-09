@@ -239,6 +239,8 @@
 					bitmapData = new BitmapData(r.width, r.height, true, 0x00000000);
 				} else if (clipDef is red_splash) {
 					bitmapData = new BitmapData(r.width * 2, r.height * 2, true, 0x00000000);
+				} else if (clipDef is hatFinish) {
+					bitmapData = new BitmapData(r.width * 1.1, r.height * 1.1, true, 0x00000000);
 				} else {
 					bitmapData = new BitmapData(r.width * 1.2, r.height * 1.1, true, 0x00000000);
 				}
@@ -247,6 +249,8 @@
 					m.translate(-r.x * 1.2, -r.y * 1.1);
 				} else if (clipDef is red_splash) {
 					m.translate(-r.x * 2, -r.y * 2);
+				} else if (clipDef is hatFinish) {
+					m.translate(-r.x * 1.1, -r.y * 1.1);
 				} else {
 					m.translate(-r.x, -r.y);
 				}

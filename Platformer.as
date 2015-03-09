@@ -9,6 +9,7 @@ package {
 	import Box2D.Dynamics.b2World;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.PixelSnapping;
@@ -36,6 +37,7 @@ package {
 		public static var decorations:Array = [];
 		
 		public static var _bodiesToRemove:Array = [];
+		public static var objectCounter:int = 0;
 		
 		//public static var controls:Controls;
 		
@@ -107,36 +109,27 @@ package {
 					//_player.startSplash();
 				}
 			} else {
-				/*if (!_player) {
-					_player = new Player(2, -6, new Controls());
-				}*/
-				// управление камерой
-				/*if ((Controls(Controls.controls[0])).left) {
-					CameraManager.freePoint.x -= 10;
-				} else if ((Controls(Controls.controls[0])).right) {
-					CameraManager.freePoint.x += 10;
-				} else if ((Controls(Controls.controls[0])).up) {
-					CameraManager.freePoint.y -= 10;
-				} else if ((Controls(Controls.controls[0])).down) {
-					CameraManager.freePoint.y += 10;
-				}*/
-				/*if (controls) {	
-					if (controls.enter) {
-						if (!_player) {
-							_player = new Player(2, -6, controls);
-						}
-						//_player.spawn(2, -6);
-					} else if (controls.left) {
-						CameraManager.freePoint.x -= 10;
-					} else if (controls.right) {
-						CameraManager.freePoint.x += 10;
-					} else if (controls.up) {
-						CameraManager.freePoint.y -= 10;
-					} else if (controls.down) {
-						CameraManager.freePoint.y += 10;
-					}
-				}*/
 				CameraManager.zoomCameras(CameraManager.freePoint);
+			}
+		}
+		
+		public static function countPixels(object:DisplayObject):int {
+			var pixelCounter:int = 0;
+			if (object is DisplayObjectContainer) {
+				for (var i:int = 0; i < DisplayObjectContainer(object).numChildren; i++) {
+					pixelCounter += countPixels(DisplayObjectContainer(object).getChildAt(i));
+				}
+			} else if (object is Bitmap) {
+				pixelCounter += Bitmap(object).bitmapData.height * Bitmap(object).bitmapData.width;
+			}
+			objectCounter++;
+			return pixelCounter;
+		}
+		
+		public static function traceParent(child:DisplayObject):void {
+			if (child.parent) {
+				trace(child.parent.toString());
+				traceParent(child.parent);
 			}
 		}
 		

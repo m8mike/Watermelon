@@ -169,8 +169,8 @@ package
 			PlayerBodyManager(bodyManager).impulseUp();
 		}
 		
-		public function allowJumps(normal:b2Vec2):void {
-			PlayerBodyManager(bodyManager).allowJumps(normal.x, normal.y);
+		public function allowJumps(normal:b2Vec2, walls:Boolean = true):void {
+			PlayerBodyManager(bodyManager).allowJumps(normal.x, normal.y, walls);
 		}
 		
 		public function disallowJumps():void {
