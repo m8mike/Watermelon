@@ -6,6 +6,7 @@ package {
 	import Box2D.Dynamics.b2ContactListener;
 	import Box2D.Dynamics.Contacts.b2Contact;
 	import Box2D.Dynamics.Contacts.b2ContactResult;
+	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	/**
@@ -100,6 +101,29 @@ package {
 					Door(platform).remove();
 				}
 			}
+			var vel:b2Vec2 = point.velocity;
+			
+			// не создавать тела внутри contactListener'a
+			/*var shape:CircleShape = new CircleShape(vel.Length() * 30);
+			var bb:DynamicBodyBuilder = new DynamicBodyBuilder();
+			bb.density = 1;
+			bb.friction = 0.3;
+			bb.restitution = 0.3;
+			//bb.groupIndex = -3;
+			bb.x = point.position.x;
+			bb.y = point.position.y;
+			bb.isSensor = true;
+			var body:b2Body = bb.getBody(new Array(shape));*/
+			
+			var shape:CircleShape = new CircleShape(vel.Length());
+			var sprite:Sprite = shape.getSimpleSprite(new Point(point.position.x, point.position.y));
+			sprite.x = point.position.x*30;
+			sprite.y = point.position.y*30;
+			CameraManager.belowLayer.addChild(sprite);
+			
+			//trace(PhysiVals.world.GetBodyCount() + " " + body.GetPosition().x);
+			//var vel:b2Vec2 = player.getBody().GetLinearVelocity();
+			//trace(vel.x + " " + vel.y);
 		}
 		
 		override public function Remove(point:b2ContactPoint):void {
