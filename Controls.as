@@ -115,7 +115,9 @@ package {
 						break;
 					case 70: //Fly //83
 						//Fly = true;
-						_player.remove();
+						_player.hide();
+						_player.changeSpawnPoint(10, -10);
+						_player.spawn();
 						break;
 					/*case 83 ://Shoot Cannon
 					   ShootCannon = true;

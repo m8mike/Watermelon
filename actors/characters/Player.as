@@ -44,6 +44,7 @@ package
 		public static const UMBRELLA_GO:int = 3;
 		
 		private var controls:Controls;
+		public var spawnPoint:Point;
 		
 		public function Player(x:int, y:int, controls:Controls) {
 			bodyManager = new PlayerBodyManager(new Point(x * 20, y * 20), this);
@@ -68,9 +69,27 @@ package
 		public function kill():void {
 			PlayerCostumeManager(costumeManager).startSplash();
 		}
-		/*public function spawn(x:int, y:int):void {
-			
-		}*/
+		
+		public function hide():void {
+			spawnPoint = getSpriteLoc();
+			PlayerBodyManager(bodyManager).removeBodies();
+			deleted = true;
+			PlayerCostumeManager(costumeManager).hide();
+		}
+		
+		public function spawn(vel:b2Vec2 = null):void {
+			PlayerBodyManager(bodyManager).initBody(spawnPoint, controls, vel);
+			deleted = false;
+		}
+		
+		public function changeSpawnPoint(x:Number, y:Number):void {
+			spawnPoint.x += x;
+			spawnPoint.y += y;
+		}
+		
+		public function setSpawnPoint(point:Point):void {
+			spawnPoint = point;
+		}
 		
 		public function isOnGround():Boolean {
 			return PlayerBodyManager(bodyManager).canJump;
@@ -109,9 +128,13 @@ package
 		}
 		
 		override public function getSpriteLoc():Point {
-			var worldCenter:b2Vec2 = getBody().GetWorldCenter();
-			return new Point(worldCenter.x * PhysiVals.RATIO, 
-							 worldCenter.y * PhysiVals.RATIO);
+			if (deleted) {
+				return spawnPoint;
+			} else {
+				var worldCenter:b2Vec2 = getBody().GetWorldCenter();
+				return new Point(worldCenter.x * PhysiVals.RATIO, 
+								 worldCenter.y * PhysiVals.RATIO);
+			}
 		}
 		
 		public function addLife():void {

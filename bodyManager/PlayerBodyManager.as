@@ -9,6 +9,7 @@ package
 	 */
 	public class PlayerBodyManager extends BodyManager {
 		public var controls:Controls;
+		private var parent:Player;
 		
 		private static const JUMP_TIME:int = 2; //10//true 2
 		public var jumpTimeLeft:int = 0;
@@ -19,6 +20,7 @@ package
 		public var leftWallJump:Boolean;
 		public var rightWallJump:Boolean;
 		private var canOpenUmbrella:Boolean = false;
+		private var ballBodyBuilder:DynamicBodyBuilder;
 		
 		public static const BALL_DIAMETER:int = 20; //12
 		public static const JUMP_IMPULSE:b2Vec2 = new b2Vec2(0.0, -0.23); //-0.5);//-0.17); true
@@ -28,8 +30,9 @@ package
 		public static const RIGHT_WALL_IMPULSE:b2Vec2 = new b2Vec2(0.5 / 1.5, -0.6 / 1.5); //0.5, -0.6); true
 		
 		public function PlayerBodyManager(location:Point, player:Player) {
+			parent = player;
 			shape = new CircleShape(BALL_DIAMETER / 2);
-			var ballBodyBuilder:DynamicBodyBuilder = new DynamicBodyBuilder();
+			ballBodyBuilder = new DynamicBodyBuilder();
 			ballBodyBuilder.density = 0.5;
 			ballBodyBuilder.friction = 0.3;
 			ballBodyBuilder.restitution = 0.3;
@@ -38,12 +41,30 @@ package
 			ballBodyBuilder.y = location.y;
 			ballBodyBuilder.linearDamping = 0;
 			ballBodyBuilder.angularDamping = 1;
-			
+			initBody(location);
+		}
+		
+		public function initBody(spawnPoint:Point, contr:Controls = null, vel:b2Vec2 = null):void {
+			ballBodyBuilder.x = spawnPoint.x;
+			ballBodyBuilder.y = spawnPoint.y;
 			_body = ballBodyBuilder.getBody(new Array(shape));
-			_body.SetUserData(player);
+			if (!_body) {
+				trace("can't create body");
+			}
+			canJump = false;
+			_body.SetUserData(parent);
+			if (vel) {
+				_body.ApplyImpulse(vel, _body.GetWorldCenter());
+			}
+			if (contr) {
+				controls = contr;
+			}
 		}
 		
 		override public function updateNow():void {
+			if (!controls) {
+				return void;
+			}
 			if (canJump && !controls.fly && jetpackTime < 100 && PhysiVals.fps != Infinity) {
 				jetpackTime++;
 			}
@@ -82,7 +103,7 @@ package
 				dontJump();
 			}
 			if (controls.down) {
-				body.ApplyImpulse(new b2Vec2(0.0, 0.05), body.GetWorldCenter());
+				body.ApplyImpulse(new b2Vec2(0.0, 0.25), body.GetWorldCenter());
 			}
 			if (controls.fly) {
 				if (PhysiVals.fps > 0 && PhysiVals.fps != Infinity) {
@@ -92,7 +113,7 @@ package
 					}
 				}
 			}
-			if (controls.useUmbrella && Player(body.GetUserData()).carryingItem is Umbrella) {
+			if (controls.useUmbrella && Player(body.GetUserData()).carryingItem is Umbrella && !canJump) {
 				body.m_linearDamping = 3;
 			} else {
 				body.m_linearDamping = 0;

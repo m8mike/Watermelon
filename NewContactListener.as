@@ -95,35 +95,25 @@ package {
 			}
 			if (platform is Spikes) {
 				player.kill();
-			}
-			if (platform is Door) {
+			} else if (platform is Door) {
 				if (Door(platform).isOpen) {
 					Door(platform).remove();
 				}
+			} else if (platform is Teleporter) {
+				if (!player.deleted){
+					Teleporter(platform).teleportPlayer(player);
+					Teleporter(platform).point1 = CameraUpdater.getCameraSection();
+				}
 			}
-			var vel:b2Vec2 = point.velocity;
+			var vel:Number = player.getBody().GetLinearVelocity().y;
 			
-			// не создавать тела внутри contactListener'a
-			/*var shape:CircleShape = new CircleShape(vel.Length() * 30);
-			var bb:DynamicBodyBuilder = new DynamicBodyBuilder();
-			bb.density = 1;
-			bb.friction = 0.3;
-			bb.restitution = 0.3;
-			//bb.groupIndex = -3;
-			bb.x = point.position.x;
-			bb.y = point.position.y;
-			bb.isSensor = true;
-			var body:b2Body = bb.getBody(new Array(shape));*/
-			
-			var shape:CircleShape = new CircleShape(vel.Length());
-			var sprite:Sprite = shape.getSimpleSprite(new Point(point.position.x, point.position.y));
-			sprite.x = point.position.x*30;
-			sprite.y = point.position.y*30;
-			CameraManager.belowLayer.addChild(sprite);
-			
-			//trace(PhysiVals.world.GetBodyCount() + " " + body.GetPosition().x);
-			//var vel:b2Vec2 = player.getBody().GetLinearVelocity();
-			//trace(vel.x + " " + vel.y);
+			if (vel > 10) {
+				var shape:CircleShape = new CircleShape(vel);
+				var sprite:Sprite = shape.getSimpleSprite(new Point(point.position.x, point.position.y));
+				sprite.x = point.position.x * 30;
+				sprite.y = point.position.y * 30;
+				CameraManager.belowLayer.addChild(sprite);
+			}
 		}
 		
 		override public function Remove(point:b2ContactPoint):void {

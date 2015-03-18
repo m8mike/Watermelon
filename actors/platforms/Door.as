@@ -63,6 +63,7 @@ package {
 			body = standardBodyBuilder.getBody(new Array(shape));
 			body.SetUserData(this);
 		}
+		
 		override protected function removeCostumes():void {
 			mask.parent.removeChild(mask);
 			mask = null;

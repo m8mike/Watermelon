@@ -36,7 +36,7 @@ package {
 			if (condition == RED_SPLASH) {
 				splash();
 			} else {
-				CameraManager.camKoefRed();
+				CameraUpdater.camKoefRed();
 				setCoords();
 				checkAndStop();
 				checkCondition();
@@ -195,6 +195,12 @@ package {
 				index += 16;
 			}
 			AnimationCostume(_costumes[index]).play();
+		}
+		
+		public function hide():void {
+			for each (var s:AnimationCostume in _costumes) {
+				s.hide();
+			}
 		}
 		
 		override public function removeCostumes():void {

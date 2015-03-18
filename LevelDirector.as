@@ -48,6 +48,8 @@ package {
 			var standardPlatform:Standard = new Standard(0, 0, 60, 30);
 			var standardPlatform2:Standard = new Standard(0, -60, 1, 60);
 			var standardPlatform3:Standard = new Standard(12, -2, 1, 1);
+			var teleporter1:Teleporter = new Teleporter(8.6, -3, 3.3, 0.5, new Point(20 * 20, -3 * 20));	
+			var teleporter2:Teleporter = new Teleporter(18.6, -1, 3.3, 0.5, new Point(10 * 20, -5 * 20));	
 			//var standardPlatform3:Standard = new Standard(3, -3, 3, 3);
 			//var spikes:Spikes = new Spikes(10, -3, 3, 3);
 			/*var door:Door = new Door(20, -3);
@@ -64,13 +66,13 @@ package {
 			var b3:BazookaBonus = new BazookaBonus(4, -40);*//*
 			var snowGun1:SnowGunBonus = new SnowGunBonus(4, -33);
 			var snowGun2:SnowGunBonus = new SnowGunBonus(4, -40);*/
-			var jumpThrough1:JumpThrough = new JumpThrough(3, -3, 3, 0.1);
+			/*var jumpThrough1:JumpThrough = new JumpThrough(3, -3, 3, 0.1);
 			var jumpThrough2:JumpThrough = new JumpThrough(3, -7, 3, 0.1);
 			var jumpThrough3:JumpThrough = new JumpThrough(3, -12, 3, 0.1);
 			var jumpThrough4:JumpThrough = new JumpThrough(3, -17, 3, 0.1);
 			var jumpThrough5:JumpThrough = new JumpThrough(3, -23, 3, 0.1);
 			var jumpThrough6:JumpThrough = new JumpThrough(3, -30, 3, 0.1);
-			var jumpThrough7:JumpThrough = new JumpThrough(3, -37, 3, 0.1);
+			var jumpThrough7:JumpThrough = new JumpThrough(3, -37, 3, 0.1);*/
 			var hat1:TopHat = new TopHat(10, -2);
 			var hat2:TopHat = new TopHat(20, 0);
 		//var standardPlatform5:Standard = new Standard(-4, -4, 1, 1);
@@ -78,8 +80,8 @@ package {
 			//create player with controls
 			var controls:Controls = new Controls();
 			Platformer._player = new Player(2, -6, controls);
-			/*var hills:Hills = new Hills();
-			var clouds:BigClouds = new BigClouds();*/
+			var hills:Hills = new Hills();
+			var clouds:BigClouds = new BigClouds();
 			/*new Dummy(10, -40, 20);
 			new Dummy(11, -50, 30);
 			new Dummy(12, -50, 40);
@@ -95,8 +97,8 @@ package {
 			new DummySplitter(12, -30, 40);
 			new DummySplitter(14, -30, 60);
 			new DummySplitter(17, -10, 80);*/
-			/*var coniferous:BigConiferous = new BigConiferous();
-			var mountains:BigMountains = new BigMountains();*/
+			var coniferous:BigConiferous = new BigConiferous();
+			var mountains:BigMountains = new BigMountains();
 			new Ghost(4, -6);
 		}
 		

@@ -67,6 +67,11 @@ package {
 		private function newEventListener(e:Event):void {
 			++PhysiVals.periods;
 			PhysiVals.world.Step(1 / PhysiVals.fps, 10);
+			for each (var platform:Platform in platforms) {
+				if (platform is Teleporter) {
+					Teleporter(platform).check();
+				}
+			}
 			/*for each (var platform:Platform in platforms) {
 				if (!platform._body.IsStatic()) {
 					platform.updateNow();
@@ -103,10 +108,14 @@ package {
 			}
 			reallyRemoveActors();
 			if (_player) {
-				CameraManager.zoomCameras(CameraManager.getCameraSection());
-				if (_player.getSpriteLoc().y > 5000) {
-					CameraManager.freePoint = CameraManager.getCameraSection();
-					//_player.startSplash();
+				if (!_player.deleted){
+					CameraManager.zoomCameras(CameraUpdater.getCameraSection());
+					if (_player.getSpriteLoc().y > 5000) {
+						CameraManager.freePoint = CameraUpdater.getCameraSection();
+						//_player.startSplash();
+					}
+				} else {
+					CameraManager.zoomCameras(CameraManager.freePoint);
 				}
 			} else {
 				CameraManager.zoomCameras(CameraManager.freePoint);

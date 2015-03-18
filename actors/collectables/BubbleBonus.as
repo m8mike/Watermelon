@@ -24,7 +24,7 @@ package {
 			mask.visible = false;
 			bubble = new Bubble(x * koef, y * koef);
 			createBodies();
-			Platformer.platforms.push(this);
+			//Platformer.platforms.push(this);
 			super(body, mask);
 		}
 		
