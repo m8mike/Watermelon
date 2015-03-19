@@ -10,12 +10,11 @@ package {
 	*/
 	public class SnowGunBonus extends BubbleBonus {
 		private var gun:MovieClip;
-		private var koef:int = 20;
 		
 		public function SnowGunBonus(x:Number, y:Number) {
 			gun = new snowgun_bonus();
-			gun.x = x * koef;
-			gun.y = y * koef;
+			gun.x = x * PhysiVals.MIN_SQARE;
+			gun.y = y * PhysiVals.MIN_SQARE;
 			gun.scaleX = 0.15;
 			gun.scaleY = 0.15;
 			CameraManager._staticLayer.addChild(gun);

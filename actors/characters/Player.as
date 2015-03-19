@@ -41,7 +41,8 @@ package
 		public static const NO_ITEMS:int = 0;
 		public static const UMBRELLA_IN_RIGHT_HAND:int = 1;
 		public static const NO_HANDS:int = 2;
-		public static const UMBRELLA_GO:int = 3;
+		public static const ROCKETS:int = 3;
+		public static const UMBRELLA_GO:int = 4;
 		
 		private var controls:Controls;
 		public var spawnPoint:Point;

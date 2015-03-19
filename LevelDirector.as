@@ -61,6 +61,7 @@ package {
 			var door3:Door = new Door(35, -3);
 			var key3:Key = new Key(16, -3, door3);*/
 			var umbrella1:UmbrellaBonus = new UmbrellaBonus(16, -2);
+			var jetpack1:JetpackBonus = new JetpackBonus(27, -2);
 			/*var bazooka1:BazookaBonus = new BazookaBonus(4, -25);
 			var b2:BazookaBonus = new BazookaBonus(4, -33);
 			var b3:BazookaBonus = new BazookaBonus(4, -40);*//*
@@ -81,7 +82,7 @@ package {
 			var controls:Controls = new Controls();
 			Platformer._player = new Player(2, -6, controls);
 			var hills:Hills = new Hills();
-			var clouds:BigClouds = new BigClouds();
+			//var clouds:BigClouds = new BigClouds();
 			/*new Dummy(10, -40, 20);
 			new Dummy(11, -50, 30);
 			new Dummy(12, -50, 40);

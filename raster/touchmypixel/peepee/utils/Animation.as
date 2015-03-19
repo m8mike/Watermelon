@@ -42,6 +42,14 @@
 		
 		public var useSpriteSheet:Boolean = false;
 		
+		private static const LEFT_SHOE:int = 0;
+		private static const LEFT_HAND:int = 1;
+		private static const LEFT_ROCKET:int = 2;
+		private static const HEAD:int = 3;
+		private static const RIGHT_ROCKET:int = 4;
+		private static const RIGHT_SHOE:int = 5;
+		private static const RIGHT_HAND:int = 6;
+		
 		public function Animation() {
 			bitmap = new Bitmap();
 			bitmap.smoothing = false;
@@ -65,21 +73,23 @@
 		}
 		
 		private function hideShoes(clip:DisplayObjectContainer):void {
-			for (var j:int = 0; j < MovieClip(clip.getChildAt(0)).numChildren; j++) {
-				MovieClip(clip.getChildAt(0)).getChildAt(j).visible = false;
-				MovieClip(clip.getChildAt(3)).getChildAt(j).visible = false;
+			for (var j:int = 0; j < MovieClip(clip.getChildAt(LEFT_SHOE)).numChildren; j++) {
+				MovieClip(clip.getChildAt(LEFT_SHOE)).getChildAt(j).visible = false;
+			}
+			for (var u:int = 0; u < MovieClip(clip.getChildAt(RIGHT_SHOE)).numChildren; u++) {
+				MovieClip(clip.getChildAt(RIGHT_SHOE)).getChildAt(u).visible = false;
 			}
 		}
 		
 		private function hideRightHand(clip:DisplayObjectContainer):void {
-			for (var j:int = 0; j < MovieClip(clip.getChildAt(4)).numChildren; j++) {
-				MovieClip(clip.getChildAt(4)).getChildAt(j).visible = false;
+			for (var j:int = 0; j < MovieClip(clip.getChildAt(RIGHT_HAND)).numChildren; j++) {
+				MovieClip(clip.getChildAt(RIGHT_HAND)).getChildAt(j).visible = false;
 			}
 		}
 		
 		private function hideLeftHand(clip:DisplayObjectContainer):void {
-			for (var j:int = 0; j < MovieClip(clip.getChildAt(1)).numChildren; j++) {
-				MovieClip(clip.getChildAt(1)).getChildAt(j).visible = false;
+			for (var j:int = 0; j < MovieClip(clip.getChildAt(LEFT_HAND)).numChildren; j++) {
+				MovieClip(clip.getChildAt(LEFT_HAND)).getChildAt(j).visible = false;
 			}
 		}
 		
@@ -98,8 +108,8 @@
 		}
 		
 		private function showShoes(clip:DisplayObjectContainer):void {
-			MovieClip(clip.getChildAt(0)).getChildAt(playerToCache.shoesIndex).visible = true;
-			MovieClip(clip.getChildAt(3)).getChildAt(playerToCache.shoesIndex).visible = true;
+			MovieClip(clip.getChildAt(LEFT_SHOE)).getChildAt(playerToCache.shoesIndex).visible = true;
+			MovieClip(clip.getChildAt(RIGHT_SHOE)).getChildAt(playerToCache.shoesIndex).visible = true;
 		}
 		
 		private function umbrellaPartsRight(clip:MovieClip):void {
@@ -123,7 +133,7 @@
 		}
 		
 		private function headParts(clipParent:DisplayObjectContainer):void {
-			var clip:DisplayObjectContainer = DisplayObjectContainer(clipParent.getChildAt(2));
+			var clip:DisplayObjectContainer = DisplayObjectContainer(clipParent.getChildAt(HEAD));
 			if (clip is head || clip is headleft) {
 				for (var i:int = 0; i < MovieClip(clip.getChildAt(0)).numChildren; i++) {
 					MovieClip(clip.getChildAt(0)).getChildAt(i).visible = false;
@@ -138,14 +148,21 @@
 			if (clipDef is go_right || clipDef is go_left || clipDef is stay_right || clipDef is stay_left || 
 				clipDef is jump_right || clipDef is jump_left || clipDef is fall_right || clipDef is fall_left || 
 				clipDef is umbrella_right || clipDef is umbrella_left) {
+					
+				if (playerToCache) {
+					if (playerToCache.animationMode != Player.ROCKETS) {
+						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(LEFT_ROCKET)));
+						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(RIGHT_ROCKET)));
+					}
+				}
 				hideShoes(DisplayObjectContainer(clipDef));
 				hideLeftHand(DisplayObjectContainer(clipDef));
 				showShoes(DisplayObjectContainer(clipDef));
 				headParts(DisplayObjectContainer(clipDef));
 				if (playerToCache) {
 					if (playerToCache.animationMode == Player.NO_HANDS) {
-						hideChildren(clipDef.getChildAt(4));
-						hideChildren(clipDef.getChildAt(1));
+						hideChildren(clipDef.getChildAt(RIGHT_HAND));
+						hideChildren(clipDef.getChildAt(LEFT_HAND));
 						if (useSpriteSheet) {
 							buildCacheFromClip2(clipDef);
 						} else {
@@ -157,61 +174,61 @@
 			}
 			if (clipDef is go_right || clipDef is stay_right || clipDef is jump_right) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsRight(MovieClip(MovieClip(clipDef).getChildAt(4)));
-				MovieClip(MovieClip(clipDef).getChildAt(1)).getChildAt(0).visible = true;
+				umbrellaPartsRight(MovieClip(MovieClip(clipDef).getChildAt(RIGHT_HAND)));
+				MovieClip(MovieClip(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
 			}
 			if (clipDef is go_right) {
 				
 			} else if (clipDef is go_left) {
 				hideRightHand(DisplayObjectContainer(clipDef));
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(4)));
+					umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(RIGHT_HAND)));
 				} else {
-					umbrellaPartsRight(MovieClip(go_left(clipDef).getChildAt(4)));
+					umbrellaPartsRight(MovieClip(go_left(clipDef).getChildAt(RIGHT_HAND)));
 				}
-				umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(1)));
+				umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(LEFT_HAND)));
 			} else if (clipDef is stay_right) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(MovieClip(clipDef).getChildAt(4)));
+				umbrellaPartsLeft(MovieClip(MovieClip(clipDef).getChildAt(RIGHT_HAND)));
 			} else if (clipDef is stay_left) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(stay_left(clipDef).getChildAt(1)));
-				MovieClip(stay_left(clipDef).getChildAt(4)).getChildAt(1).visible = true;
+				umbrellaPartsLeft(MovieClip(stay_left(clipDef).getChildAt(LEFT_HAND)));
+				MovieClip(stay_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
 			} else if (clipDef is jump_right) {
 				
 			} else if (clipDef is jump_left) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(jump_left(clipDef).getChildAt(1)));
-				MovieClip(jump_left(clipDef).getChildAt(4)).getChildAt(0).visible = true;
+				umbrellaPartsLeft(MovieClip(jump_left(clipDef).getChildAt(LEFT_HAND)));
+				MovieClip(jump_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			} else if (clipDef is fall_right) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(fall_right(clipDef).getChildAt(1)).getChildAt(0).visible = true;
-				MovieClip(MovieClip(MovieClip(fall_right(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+				MovieClip(fall_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+				MovieClip(MovieClip(MovieClip(fall_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					MovieClip(fall_right(clipDef).getChildAt(4)).getChildAt(1).visible = true;
+					MovieClip(fall_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
 				} else {
-					MovieClip(fall_right(clipDef).getChildAt(4)).getChildAt(2).visible = true;
+					MovieClip(fall_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
 				}
 			} else if (clipDef is fall_left) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+				MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0).visible = true;
+					MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
 					MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = true;
 				} else {
-					MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0).visible = true;
-					MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+					MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+					MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				}
-				MovieClip(fall_left(clipDef).getChildAt(4)).getChildAt(2).visible = true;
+				MovieClip(fall_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
 			} else if (clipDef is umbrella_right) {
 				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(umbrella_right(clipDef).getChildAt(1)).getChildAt(0).visible = true;
-				MovieClip(MovieClip(umbrella_right(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0).visible = false;
-				MovieClip(umbrella_right(clipDef).getChildAt(4)).getChildAt(0).visible = true;
+				MovieClip(umbrella_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+				MovieClip(MovieClip(umbrella_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0).visible = false;
+				MovieClip(umbrella_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			} else if (clipDef is umbrella_left) {
 				hideRightHand(DisplayObjectContainer(clipDef));
 				//MovieClip(umbrella_left(clipDef).getChildAt(1)).getChildAt(1).visible = true;
-				MovieClip(umbrella_left(clipDef).getChildAt(4)).getChildAt(0).visible = true;
+				MovieClip(umbrella_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			}
 			if (useSpriteSheet) {
 				buildCacheFromClip2(clipDef);

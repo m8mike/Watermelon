@@ -51,7 +51,7 @@ package {
 			addEventListener(Event.ENTER_FRAME, newEventListener);
 			stage.addEventListener(Event.DEACTIVATE, deactivation);
 			stage.addEventListener(Event.ACTIVATE, activation);
-			setupDebugDraw();
+			//setupDebugDraw();
 		}
 		
 		private function setupDebugDraw():void {

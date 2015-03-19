@@ -15,7 +15,8 @@ package {
 		public var down:Boolean = false;
 		public var enter:Boolean = false;
 		public var useUmbrella:Boolean = false;
-		public var fly:Boolean = false;
+		public var useJetpack:Boolean = false;
+		//public var fly:Boolean = false;
 		public var shootCannon:Boolean = false;
 		
 		public static var controls:Array = [];
@@ -190,6 +191,7 @@ package {
 						break;
 					case 38: //Up
 						c.up = false;
+						c.useJetpack = false;
 						break;
 					case 87: //w
 						c.up = false;
@@ -207,7 +209,6 @@ package {
 						c.down = false;
 						break;
 					case 70: //Fly
-						c.fly = false;
 						break;
 				/*case 83 ://Shoot Cannon
 				   ShootCannon = false;

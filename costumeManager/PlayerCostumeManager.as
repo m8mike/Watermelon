@@ -20,11 +20,11 @@ package {
 		public static const JUMP_LEFT:int = 5;
 		public static const FALL_RIGHT:int = 6;
 		public static const FALL_LEFT:int = 7;
-		public static const UMBRELLA_RIGHT:int = 24;
-		public static const UMBRELLA_LEFT:int = 25;
-		public static const UMBRELLA_GO_RIGHT:int = 26;
-		public static const UMBRELLA_GO_LEFT:int = 27;
-		public static const RED_SPLASH:int = 28;
+		public static const UMBRELLA_RIGHT:int = 32;
+		public static const UMBRELLA_LEFT:int = 33;
+		public static const UMBRELLA_GO_RIGHT:int = 34;
+		public static const UMBRELLA_GO_LEFT:int = 35;
+		public static const RED_SPLASH:int = 36;
 		
 		public function PlayerCostumeManager(player:Player) {
 			parent = player;
@@ -56,6 +56,9 @@ package {
 			Raster.cachePlayer(parent);
 			pushCostumesToArray();
 			parent.animationMode = Player.NO_HANDS;
+			Raster.cachePlayer(parent);
+			pushCostumesToArray();
+			parent.animationMode = Player.ROCKETS;
 			Raster.cachePlayer(parent);
 			pushCostumesToArray();
 			parent.animationMode = Player.NO_ITEMS;
@@ -193,6 +196,8 @@ package {
 				index += 8;
 			} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 24) {
 				index += 16;
+			} else if (parent.carryingItem is Jetpack && index < 33) {
+				index += 24;
 			}
 			AnimationCostume(_costumes[index]).play();
 		}

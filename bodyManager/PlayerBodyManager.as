@@ -65,17 +65,17 @@ package
 			if (!controls) {
 				return void;
 			}
-			if (canJump && !controls.fly && jetpackTime < 100 && PhysiVals.fps != Infinity) {
+			if (canJump && !controls.useJetpack && jetpackTime < 100 && PhysiVals.fps != Infinity) {
 				jetpackTime++;
 			}
 			if (jetpackTime <= 0) {
-				controls.fly = false;
+				controls.useJetpack = false;
 			}
 			handleControls();
 			super.updateNow();
 		}
 		
-		private function handleControls():void {
+		private function handleControls():void { 
 			if (canJump) {
 				canOpenUmbrella = false;
 			}
@@ -105,20 +105,28 @@ package
 			if (controls.down) {
 				body.ApplyImpulse(new b2Vec2(0.0, 0.25), body.GetWorldCenter());
 			}
-			if (controls.fly) {
+			if (controls.useJetpack) {
 				if (PhysiVals.fps > 0 && PhysiVals.fps != Infinity) {
 					if (jetpackTime > 0) {
 						jetpackTime--;
-						body.ApplyForce(new b2Vec2(0.0, -1.8), body.GetWorldCenter()); ///-0.8
+						body.ApplyForce(new b2Vec2(0.0, -3.8), body.GetWorldCenter()); ///-1.8
+					} else {
+						body.m_linearDamping = 3;
 					}
+				}
+			} else {
+				if (Player(body.GetUserData()).carryingItem is Jetpack) {
+					body.m_linearDamping = 0;
 				}
 			}
 			if (controls.useUmbrella && Player(body.GetUserData()).carryingItem is Umbrella && !canJump) {
 				body.m_linearDamping = 3;
 			} else {
-				body.m_linearDamping = 0;
+				if (Player(body.GetUserData()).carryingItem is Umbrella) {
+					body.m_linearDamping = 0;
+				}
 			}
-			var notPressedAnyButton:Boolean = !controls.up && !controls.left && !controls.right && !controls.down && !controls.fly;
+			var notPressedAnyButton:Boolean = !controls.up && !controls.left && !controls.right && !controls.down && !controls.useJetpack;
 			var speedIsSmall:Boolean = (body.GetLinearVelocity().x < 9) && (body.GetLinearVelocity().x > -9);
 			if (notPressedAnyButton && canJump && speedIsSmall) {
 				body.PutToSleep();
@@ -157,6 +165,8 @@ package
 				}
 				if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Umbrella){
 					controls.useUmbrella = true;
+				} else if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Jetpack) {
+					controls.useJetpack = true;
 				}
 			}
 			if (leftWallJump) {
