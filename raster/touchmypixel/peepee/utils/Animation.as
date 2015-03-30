@@ -318,8 +318,10 @@
 			for (var i:int = 0; i < m.numChildren; i++) {
 				var c = m.getChildAt(i);
 				if (c is MovieClip) {
-					makeAllChildrenGoToFrame(c, f);
-					c.gotoAndStop(f);
+					if (!(c is rocketRC)) {	
+						makeAllChildrenGoToFrame(c, f);
+						c.gotoAndStop(f);
+					}
 				}
 			}
 		}

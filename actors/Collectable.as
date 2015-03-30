@@ -8,15 +8,19 @@ package {
 	*/
 	public class Collectable extends Actor {
 		
-		private var _body:b2Body;
+		protected var _body:b2Body;
 		public var _costume:DisplayObject;
+		public var needBody:Boolean;
 		
-		public function Collectable(myBody:b2Body, myCostume:DisplayObject) {
-			_body = myBody;
-			_body.SetUserData(this);
+		public function Collectable(myCostume:DisplayObject) {
 			_costume = myCostume;
 			Platformer.collectables.push(this);
 			updateCostumes();
+			needBody = true;
+		}
+		
+		public function createBodies():void {
+			needBody = false;
 		}
 		
 		public function pick(player:Player):void {
@@ -24,9 +28,13 @@ package {
 		}
 		
 		public function updateCostumes():void {
-			_costume.x = _body.GetPosition().x * PhysiVals.RATIO;
-			_costume.y = _body.GetPosition().y * PhysiVals.RATIO;
-			_costume.rotation = _body.GetAngle() * 180 / Math.PI;
+			if (_body) {
+				_costume.x = _body.GetPosition().x * PhysiVals.RATIO;
+				_costume.y = _body.GetPosition().y * PhysiVals.RATIO;
+				_costume.rotation = _body.GetAngle() * 180 / Math.PI;
+			} else {
+				_costume.visible = false;
+			}
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {
@@ -34,5 +42,4 @@ package {
 			super.cleanUpBeforeRemoving();
 		}
 	}
-
 }

@@ -141,16 +141,16 @@ package {
 				}
 			} else if (!parent.isOnGround()) {
 				if (parent.getBody().GetLinearVelocity().y < 0) {
-					if (parent.getBody().GetLinearVelocity().x > 0) {
+					if (parent.getBody().GetLinearVelocity().x >= 0) {
 						changeCondition(JUMP_RIGHT);
 					} else {
 						changeCondition(JUMP_LEFT);
 					}
-				} else if (parent.getBody().GetLinearVelocity().x > 0) {
-					if (AnimationCostume(_costumes[JUMP_RIGHT]).animation.currentFrame == 8) { //20
+				} else if (parent.getBody().GetLinearVelocity().x >= 0) {
+					if (AnimationCostume(_costumes[JUMP_RIGHT]).animation.currentFrame == 8 || condition == FALL_LEFT) { //20
 						changeCondition(FALL_RIGHT);
 					}
-				} else if (AnimationCostume(_costumes[JUMP_LEFT]).animation.currentFrame == 8) { //20
+				} else if (AnimationCostume(_costumes[JUMP_LEFT]).animation.currentFrame == 8 || condition == FALL_RIGHT) { //20
 					changeCondition(FALL_LEFT);
 				}
 			}

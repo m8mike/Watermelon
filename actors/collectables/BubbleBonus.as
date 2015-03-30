@@ -18,17 +18,16 @@ package {
 		
 		public function BubbleBonus(x:Number, y:Number) {
 			location = new Point(x * koef, y * koef);
-			shape = new CircleShape(10);// 1/3
+			shape = new CircleShape(10); // 1/3
 			mask = shape.getSimpleSprite(location);
 			CameraManager._staticLayer.addChild(mask);
 			mask.visible = false;
 			bubble = new Bubble(x * koef, y * koef);
-			createBodies();
 			//Platformer.platforms.push(this);
-			super(body, mask);
+			super(mask);
 		}
 		
-		private function createBodies():void {
+		override public function createBodies():void {
 			var standardBodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
 			standardBodyBuilder.density = 0;
 			standardBodyBuilder.friction = 0.2;
@@ -39,6 +38,7 @@ package {
 			standardBodyBuilder.y = location.y;
 			body = standardBodyBuilder.getBody(new Array(shape));
 			body.SetUserData(this);
+			super.createBodies();
 		}
 		
 		override public function pick(player:Player):void {

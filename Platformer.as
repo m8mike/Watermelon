@@ -88,6 +88,12 @@ package {
 			for each (var collectable:Collectable in collectables) {
 				collectable.updateNow();
 			}
+			for each (collectable in collectables) {
+				if (collectable.needBody) {
+					collectable.createBodies();
+					break;
+				}
+			}
 			var ghostCount:int = 0;
 			for each (var character:Actor in characters) {
 				character.updateNow();
@@ -104,7 +110,7 @@ package {
 				}
 			}
 			if (ghostCount == 0) {
-				new Ghost(4, -30);
+				new Ghost(30, -10);
 			}
 			reallyRemoveActors();
 			if (_player) {

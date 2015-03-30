@@ -33,6 +33,9 @@ package {
 			cacheAnimation("GroundBackground");
 			cacheAnimation("hatFinish");
 			cacheAnimation("hatFinishTop");
+			cacheAnimation("dustBlow");
+			cacheAnimation("lightBlow");
+			cacheAnimation("rocketSmoke");
 			cacheItems();
 		}
 		// вызывать перед созданием игрока

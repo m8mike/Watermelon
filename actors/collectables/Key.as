@@ -22,12 +22,11 @@ package {
 			shape = new CircleShape(1 / 3);
 			mask = shape.getSimpleSprite(location);
 			CameraManager._staticLayer.addChild(mask);
-			createBodies();
 			Platformer.platforms.push(this);
-			super(body, mask);
+			super(mask);
 		}
 		
-		private function createBodies():void {
+		override public function createBodies():void {
 			var standardBodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
 			standardBodyBuilder.density = 0;
 			standardBodyBuilder.friction = 0.2;
@@ -38,6 +37,7 @@ package {
 			standardBodyBuilder.y = location.y;
 			body = standardBodyBuilder.getBody(new Array(shape));
 			body.SetUserData(this);
+			super.createBodies();
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {

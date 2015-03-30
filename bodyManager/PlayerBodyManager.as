@@ -113,6 +113,15 @@ package
 					} else {
 						body.m_linearDamping = 3;
 					}
+					var bodyCenter:b2Vec2 = body.GetWorldCenter();
+					var offset:Number;
+					if (body.GetLinearVelocity().x >= 0) {
+						offset = -0.3;
+					} else {
+						offset = 0.3;
+					}
+					var smokePoint:Point = new Point(bodyCenter.x + offset, bodyCenter.y);
+					new RocketSmoke(smokePoint);
 				}
 			} else {
 				if (Player(body.GetUserData()).carryingItem is Jetpack) {

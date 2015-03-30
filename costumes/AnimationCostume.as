@@ -32,12 +32,14 @@ package
 			animation.visible = true;
 		}
 		
-		public function checkAndStop():void {
+		public function checkAndStop():Boolean {
 			if (stopFrame != 0) {
 				if (animation.currentFrame == stopFrame) {
 					animation.stop();
+					return true;
 				}
 			}
+			return false;
 		}
 		
 		public function setCoords(x:Number, y:Number):void {

@@ -108,11 +108,13 @@ package {
 			var vel:Number = player.getBody().GetLinearVelocity().y;
 			
 			if (vel > 10) {
-				var shape:CircleShape = new CircleShape(vel);
+				//new Lightning(vel, new Point(point.position.x, point.position.y));
+				new Dust(vel, new Point(point.position.x, point.position.y));
+				/*var shape:CircleShape = new CircleShape(vel);
 				var sprite:Sprite = shape.getSimpleSprite(new Point(point.position.x, point.position.y));
 				sprite.x = point.position.x * 30;
 				sprite.y = point.position.y * 30;
-				CameraManager.belowLayer.addChild(sprite);
+				CameraManager.belowLayer.addChild(sprite);*/
 			}
 		}
 		
