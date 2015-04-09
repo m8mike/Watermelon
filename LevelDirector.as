@@ -1,4 +1,5 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
 	import flash.geom.Point;
 	
 	public class LevelDirector {
@@ -45,11 +46,24 @@ package {
 		
 		private static function createLevel1():void {
 			//create standard platform
-			var standardPlatform:Standard = new Standard(0, 0, 60, 30);
+			var standardPlatform:Standard = new Standard(0, 0, 1000, 30);
 			var standardPlatform2:Standard = new Standard(0, -60, 1, 60);
-			var standardPlatform3:Standard = new Standard(12, -2, 1, 1);
+			/*var standardPlatform3:Standard = new Standard(12, -2, 1, 1);
 			var teleporter1:Teleporter = new Teleporter(8.6, -3, 3.3, 0.5, new Point(20 * 20, -3 * 20));	
-			var teleporter2:Teleporter = new Teleporter(18.6, -1, 3.3, 0.5, new Point(10 * 20, -5 * 20));	
+			var teleporter2:Teleporter = new Teleporter(18.6, -1, 3.3, 0.5, new Point(10 * 20, -5 * 20));
+			var wooden:Wooden = new Wooden(3, -3);
+			var crateBox1:CrateBox = new CrateBox(4, -12);*/
+			var springBush1:SpringBush = new SpringBush(10, -1);
+			var springBush2:SpringBush = new SpringBush(14, -1);
+			var springBush3:SpringBush = new SpringBush(20, -1);
+			var springBush4:SpringBush = new SpringBush(30, -1);
+			var springBush5:SpringBush = new SpringBush(50, -1);
+			var springBush6:SpringBush = new SpringBush(65, -1);
+			var cloud1:Cloud = new Cloud(10, -10);
+			var cloud2:Cloud = new Cloud(20, -15);
+			var cloud3:Cloud = new Cloud(30, -20);
+			var cloud4:Cloud = new Cloud(50, -30);
+			var cloud5:Cloud = new Cloud(65, -50);
 			//var standardPlatform3:Standard = new Standard(3, -3, 3, 3);
 			//var spikes:Spikes = new Spikes(10, -3, 3, 3);
 			/*var door:Door = new Door(20, -3);
@@ -60,8 +74,8 @@ package {
 			var key2:Key = new Key(15, -1, door2);
 			var door3:Door = new Door(35, -3);
 			var key3:Key = new Key(16, -3, door3);*/
-			var umbrella1:UmbrellaBonus = new UmbrellaBonus(16, -2);
-			var jetpack1:JetpackBonus = new JetpackBonus(27, -2);
+			/*var umbrella1:UmbrellaBonus = new UmbrellaBonus(16, -2);
+			var jetpack1:JetpackBonus = new JetpackBonus(27, -2);*/
 			/*var bazooka1:BazookaBonus = new BazookaBonus(4, -25);
 			var b2:BazookaBonus = new BazookaBonus(4, -33);
 			var b3:BazookaBonus = new BazookaBonus(4, -40);*//*
@@ -74,8 +88,8 @@ package {
 			var jumpThrough5:JumpThrough = new JumpThrough(3, -23, 3, 0.1);
 			var jumpThrough6:JumpThrough = new JumpThrough(3, -30, 3, 0.1);
 			var jumpThrough7:JumpThrough = new JumpThrough(3, -37, 3, 0.1);*/
-			var hat1:TopHat = new TopHat(10, -2);
-			var hat2:TopHat = new TopHat(20, 0);
+			/*var hat1:TopHat = new TopHat(10, -2);
+			var hat2:TopHat = new TopHat(20, 0);*/
 		//var standardPlatform5:Standard = new Standard(-4, -4, 1, 1);
 		//var standardPlatform6:Standard = new Standard(-3, 2, 1, 1);
 			//create player with controls

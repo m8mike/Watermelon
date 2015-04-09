@@ -18,7 +18,6 @@ package {
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
 			createCostumes();
 			createBodies();
-			Platformer.platforms.push(this);
 			super(body, shape1.getSimpleSprite(location));
 		}
 		

@@ -109,10 +109,26 @@ package {
 			var lazySection:Point = new Point(
 				spriteLoc.x - previous.x / 3, 
 				spriteLoc.y - previous.y / 3);
-			var greenSection = new Point(
+			var greenSection:Point = new Point(
 				spriteLoc.x, 
 				groveSection.y - 18.144);
+			var percentage:Number = 0.5;
+			if (Platformer._player.getBody().GetLinearVelocity().y >= 0) {
+				percentage *= 0.9;
+			} else {
+				if (percentage < 0.999) {
+					percentage *= 1.1;
+				}
+			}
+			var ariSection:Point = new Point(
+				//greenSection.x*(1-percentage) + lazySection.x * percentage,
+				groveSection.x,
+				greenSection.y*percentage + lazySection.y*(1-percentage));
 			return greenSection;
+			/*if (Platformer._player.getBody().GetLinearVelocity().y >= 0) {
+				return greenSection;
+			} else 
+			return lazySection;//greenSection;*/
 		}
 		
 		public static function camKoefRed():void {

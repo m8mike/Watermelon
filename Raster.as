@@ -35,7 +35,14 @@ package {
 			cacheAnimation("hatFinishTop");
 			cacheAnimation("dustBlow");
 			cacheAnimation("lightBlow");
+			cacheAnimation("flinders");
 			cacheAnimation("rocketSmoke");
+			cacheAnimation("wooden_block");
+			cacheAnimation("wooden_block_damaged");
+			cacheAnimation("crate_box");
+			cacheAnimation("bullet_rocket");
+			cacheAnimation("bush_spring");
+			cacheAnimation("cloudblue");
 			cacheItems();
 		}
 		// вызывать перед созданием игрока

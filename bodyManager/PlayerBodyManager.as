@@ -10,6 +10,7 @@ package
 	public class PlayerBodyManager extends BodyManager {
 		public var controls:Controls;
 		private var parent:Player;
+		private var ballBodyBuilder:DynamicBodyBuilder;
 		
 		private static const JUMP_TIME:int = 2; //10//true 2
 		public var jumpTimeLeft:int = 0;
@@ -20,7 +21,7 @@ package
 		public var leftWallJump:Boolean;
 		public var rightWallJump:Boolean;
 		private var canOpenUmbrella:Boolean = false;
-		private var ballBodyBuilder:DynamicBodyBuilder;
+		private var cloudJumping:Boolean = false;
 		
 		public static const BALL_DIAMETER:int = 20; //12
 		public static const JUMP_IMPULSE:b2Vec2 = new b2Vec2(0.0, -0.23); //-0.5);//-0.17); true
@@ -64,6 +65,9 @@ package
 		override public function updateNow():void {
 			if (!controls) {
 				return void;
+			}
+			if (body.GetLinearVelocity().y >= 0) {
+				cloudJumping = false;
 			}
 			if (canJump && !controls.useJetpack && jetpackTime < 100 && PhysiVals.fps != Infinity) {
 				jetpackTime++;
@@ -137,7 +141,7 @@ package
 			}
 			var notPressedAnyButton:Boolean = !controls.up && !controls.left && !controls.right && !controls.down && !controls.useJetpack;
 			var speedIsSmall:Boolean = (body.GetLinearVelocity().x < 9) && (body.GetLinearVelocity().x > -9);
-			if (notPressedAnyButton && canJump && speedIsSmall) {
+			if (notPressedAnyButton && canJump && speedIsSmall && !parent.inCloud) {
 				body.PutToSleep();
 			}
 			if (notPressedAnyButton) {
@@ -198,6 +202,13 @@ package
 			var jumpForceReduced:b2Vec2 = new b2Vec2(JUMP_FORCE.x, JUMP_FORCE.y + 0.3 * impulseReducer); //0.3
 			body.ApplyForce(jumpForceReduced, body.GetWorldCenter()); //выполнится <= 12 раз
 			impulseReducer++;
+		}
+		
+		public function cloudJump():void {
+			if (!cloudJumping) {
+				cloudJumping = true;
+				body.ApplyImpulse(new b2Vec2(0, -2), body.GetWorldCenter());
+			}
 		}
 		
 		public function allowJumps(x:Number, y:Number, walls:Boolean = true):void {

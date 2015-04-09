@@ -31,6 +31,10 @@ package
 			super(body, mask);
 		}
 		
+		public function bodyTrace():void {
+			trace(body.GetWorldCenter().x + " " + body.GetWorldCenter().y);
+		}
+		
 		private function createCostumes():MovieClip {
 			var loc:Point = location.clone();
 			var loc1:Point = new Point(0, 0);

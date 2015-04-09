@@ -14,30 +14,45 @@ package {
 	public class Bazooka extends Gun {
 		public function Bazooka() {
 			super("bazookaHands");
-			Platformer.thisIs.stage.addEventListener(MouseEvent.CLICK, check);
+			Platformer.thisIs.stage.addEventListener(MouseEvent.CLICK, shoot);
 		}
 		
 		private function check(e:MouseEvent):void {
-			var x:Number = (e.stageX - CameraManager.pLayer.x) / 90;
-			var y:Number = (e.stageY - CameraManager.pLayer.y) / 90;
-			var x1:Number = (e.stageX - CameraManager.pLayer.x) / 60;
-			var y1:Number = (e.stageY - CameraManager.pLayer.y) / 60;
+			var x:Number = (e.stageX - CameraManager.pLayer.x) / 72;
+			var y:Number = (e.stageY - CameraManager.pLayer.y) / 72;
+			var x1:Number = (e.stageX - CameraManager.pLayer.x)/108;
+			var y1:Number = (e.stageY - CameraManager.pLayer.y)/108;
 			
-			var p:b2Vec2 = new b2Vec2(x, y);
+			trace("X");
+			trace((e.stageX - CameraManager.pLayer.x));
+			trace("Y");
+			trace((e.stageY - CameraManager.pLayer.y));
+			
+			
+			//x *= 1.25;
+			//y *= 1.25;
+			
+			var p:b2Vec2 = new b2Vec2(x1, y1);
 			var callback:Array = [];
 			var aabb:b2AABB = new b2AABB();
-			aabb.lowerBound.Set(x, y);
-			aabb.upperBound.Set(x, y);
+			aabb.lowerBound.Set(x1, y1);
+			aabb.upperBound.Set(x1, y1);
 			PhysiVals.world.Query(aabb, callback, 1);
 			if (callback.length) {
 				if (callback[0] is b2PolygonShape) {
 					var ud = b2PolygonShape(callback[0]).GetBody().GetUserData();
 					if (ud is Standard) {
-						Standard(ud).remove();
+						trace("body");
+						Standard(ud).bodyTrace();
+						trace("x");
+						trace(x + " " + y);
+						trace("x1");
+						trace(x1 + " " + y1);
+						//Standard(ud).remove();
 					}
 				}
 			} else {
-				new Standard(x1, y1, 1, 1);
+				new Standard(x, y, 1, 1);
 			}
 		}
 		
@@ -48,9 +63,15 @@ package {
 		}
 		
 		private function shoot(e:MouseEvent):void {
-			var x:Number = (e.stageX - CameraManager.pLayer.x) / 60;
-			var y:Number = (e.stageY - CameraManager.pLayer.y) / 60;
-			new DummyCircle(x, y, 5);
+			var x:Number = (e.stageX - CameraManager.pLayer.x) / 108;
+			var y:Number = (e.stageY - CameraManager.pLayer.y) / 108;
+			var px:Number = Platformer._player.getBody().GetWorldCenter().x;
+			var py:Number = Platformer._player.getBody().GetWorldCenter().y;
+			//trace(x + " " + px + " " + y + " " + py);
+			var angle:Number = Math.PI / 2 - Math.atan2(x - px, y - py);
+			var ox:Number = Math.cos(angle) / 2;
+			var oy:Number = Math.sin(angle) / 2;
+			new Bullet(px + ox, py + oy, 5, new b2Vec2(ox*10, oy*10));
 		}
 		
 		private function click(e:MouseEvent):void {
@@ -60,7 +81,7 @@ package {
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {
-			Platformer.thisIs.stage.removeEventListener(MouseEvent.CLICK, check);
+			Platformer.thisIs.stage.removeEventListener(MouseEvent.CLICK, shoot);//не забывать убирать используемую функцию
 			super.cleanUpBeforeRemoving();
 		}
 	}

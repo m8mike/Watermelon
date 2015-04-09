@@ -21,7 +21,7 @@ package {
 			bodyBuilder.angularDamping = 1;
 			
 			_body = bodyBuilder.getBody(new Array(shape));
-			if (_body) {	
+			if (_body) {
 				_body.SetUserData(dummy);
 			}
 		}

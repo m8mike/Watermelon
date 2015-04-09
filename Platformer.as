@@ -70,6 +70,8 @@ package {
 			for each (var platform:Platform in platforms) {
 				if (platform is Teleporter) {
 					Teleporter(platform).check();
+				} else if (platform is SpringBush) {
+					platform.updateNow();
 				}
 			}
 			/*for each (var platform:Platform in platforms) {

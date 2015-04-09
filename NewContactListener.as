@@ -32,8 +32,20 @@ package {
 				collect(Player(actor1), Collectable(actor2));
 			} else if (actor2 is Player && actor1 is Collectable) {
 				collect(Player(actor2), Collectable(actor1));
+			} else if (actor1 is Bullet) {
+				shotSomebody(Bullet(actor1), actor2, point);
+			} else if (actor2 is Bullet) {
+				shotSomebody(Bullet(actor2), actor1, point);
 			}
 			super.Add(point);
+		}
+		
+		private function shotSomebody(bullet:Bullet, actor1:Actor, point:b2ContactPoint):void {
+			bullet.remove();
+			new Flinders(10, new Point(point.position.x, point.position.y));
+			if (actor1 is Ghost) {
+				actor1.remove();
+			}
 		}
 		
 		private function collect(player:Player, collectable:Collectable):void {
@@ -78,21 +90,38 @@ package {
 				jumpToKill = point.normal.y < -0.7;
 			}
 			if (jumpToKill) {
+				hitCharacter(player, dummy, point);
+			} else {
+				hitPlayer(player, dummy, point);
+				//player.remove();
+			}
+		}
+		
+		private function hitCharacter(player:Player, dummy:Character, point:b2ContactPoint):void {
+			if (dummy is Ghost) {
 				dummy.remove();
 				player.impulseUp();
-			} else {
-				player.remove();
+			} else if (dummy is CrateBox) {
+				var vel:Number = player.getBody().GetLinearVelocity().y;
+				if (vel > 10) {
+					dummy.remove();
+				}
 			}
+		}
+		
+		private function hitPlayer(player:Player, dummy:Character, point:b2ContactPoint):void {
+			
 		}
 		
 		private function playerHitsPlatform(player:Player, platform:Platform, point:b2ContactPoint):void {
 			if (!player.isOnGround()) {
 				if (platform is TopHat) {
 					player.allowJumps(point.normal, false);
-				} else {
+				} else if (!(platform is SpringBush)) {
 					player.allowJumps(point.normal);
 				}
 			}
+			var vel:Number = player.getBody().GetLinearVelocity().y;
 			if (platform is Spikes) {
 				player.kill();
 			} else if (platform is Door) {
@@ -104,8 +133,25 @@ package {
 					Teleporter(platform).teleportPlayer(player);
 					Teleporter(platform).point1 = CameraUpdater.getCameraSection();
 				}
+			} else if (platform is Wooden) {
+				if (vel > 10) {
+					Wooden(platform).hit(vel);
+					new Flinders(vel, new Point(point.position.x, point.position.y));
+				}
+				return void;
+			} else if (platform is SpringBush) {
+				SpringBush(platform).hit();
+				player.getBody().ApplyImpulse(new b2Vec2(0, -0.3), player.getBody().GetWorldCenter());
+				//new leaves (or dust - delete flinders class)
+				return void;
+			} else if (platform is Cloud) {
+				if (player.getBody().GetLinearVelocity().y >= 0) {	
+					player.getBody().m_linearDamping = 20;
+				} else {
+					player.getBody().m_linearDamping = 0;
+				}
+				player.inCloud = true;
 			}
-			var vel:Number = player.getBody().GetLinearVelocity().y;
 			
 			if (vel > 10) {
 				//new Lightning(vel, new Point(point.position.x, point.position.y));
@@ -123,8 +169,16 @@ package {
 			var actor2:Actor = point.shape2.GetBody().GetUserData();
 			if (actor1 is Player) {
 				Player(actor1).disallowJumps();
+				if (actor2 is Cloud) {
+					Player(actor1).inCloud = false;
+					point.shape1.GetBody().m_linearDamping = 0;
+				}
 			} else if (actor2 is Player) {
 				Player(actor2).disallowJumps();
+				if (actor1 is Cloud) {
+					Player(actor2).inCloud = false;
+					point.shape2.GetBody().m_linearDamping = 0;
+				}
 			}
 			super.Remove(point);
 		}

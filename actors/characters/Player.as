@@ -36,6 +36,8 @@ package
 		public var shoesIndex:int = 1;
 		public var handsIndex:int = 0;
 		
+		public var inCloud:Boolean = false;
+		
 		//cache animation with
 		public var animationMode:int = 0;
 		public static const NO_ITEMS:int = 0;
@@ -102,6 +104,10 @@ package
 		
 		public function getBody():b2Body {
 			return bodyManager.body;
+		}
+		
+		public function cloudJump():void {
+			PlayerBodyManager(bodyManager).cloudJump();
 		}
 		
 		override public function updateNow():void {
