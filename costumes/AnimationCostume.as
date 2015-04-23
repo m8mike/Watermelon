@@ -5,8 +5,7 @@ package
 	 * ...
 	 * @author Mad Mike
 	 */
-	public class AnimationCostume extends Costume
-	{
+	public class AnimationCostume extends Costume {
 		public var animation:Animation;
 		public var id:String;
 		private var startFrame:int = 1;
@@ -48,7 +47,7 @@ package
 		}
 		
 		public function hide():void {
-			animation.stop();
+			//animation.stop();
 			animation.visible = false;
 		}
 		

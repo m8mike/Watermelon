@@ -45,27 +45,61 @@ package {
 		}
 		
 		private static function createLevel1():void {
+			/*Standard
+			 * SpringBush
+			 * Wooden
+			 * CrateBox
+			 * Cloud
+			 * TopHat Teleporter
+			 * Key Door
+			 * JumpThrough
+			 * Ghost
+			 * Spikes
+			 * */
+			/*Static
+			 * Dynamic
+			 * Kinematic AB*/
+			/*x:Number = 0;
+			y:Number = 0;
+			w:Number
+			h:Number
+			density:Number = 0;
+			friction:Number = 0.2;
+			restitution:Number = 0.3;
+			groupIndex:int = 0;
+			isSensor:Boolean = false;
+			linearDamping:Number = 0;
+			angularDamping:Number = 0;
+			jumpThrough:Boolean = false;
+			fixedRotation:Boolean = false;
+			bullet:Boolean = false;*/
 			//create standard platform
-			var standardPlatform:Standard = new Standard(0, 0, 1000, 30);
+			var standardPlatform:Standard = new Standard(1, 0, 60, 1);
 			var standardPlatform2:Standard = new Standard(0, -60, 1, 60);
-			/*var standardPlatform3:Standard = new Standard(12, -2, 1, 1);
-			var teleporter1:Teleporter = new Teleporter(8.6, -3, 3.3, 0.5, new Point(20 * 20, -3 * 20));	
+			/*var standardPlatform3:Standard = new Standard(12, -2, 1, 1);*/
+			/*var teleporter1:Teleporter = new Teleporter(8.6, -3, 3.3, 0.5, new Point(20 * 20, -3 * 20));	
 			var teleporter2:Teleporter = new Teleporter(18.6, -1, 3.3, 0.5, new Point(10 * 20, -5 * 20));
+			var hat1:TopHat = new TopHat(10, -2);
+			var hat2:TopHat = new TopHat(20, 0);*/
 			var wooden:Wooden = new Wooden(3, -3);
-			var crateBox1:CrateBox = new CrateBox(4, -12);*/
-			var springBush1:SpringBush = new SpringBush(10, -1);
-			var springBush2:SpringBush = new SpringBush(14, -1);
-			var springBush3:SpringBush = new SpringBush(20, -1);
+			var crateBox1:CrateBox = new CrateBox(18, -12);
+			var crateBox2:CrateBox = new CrateBox(20, -5);
+			/*var crateBox3:CrateBox = new CrateBox(21, -18);
+			var crateBox4:CrateBox = new CrateBox(19, -22);
+			var crateBox5:CrateBox = new CrateBox(25, -2);*/
+			/*var springBush1:SpringBush = new SpringBush(10, -1);
+			var springBush2:SpringBush = new SpringBush(14, -1);*/
+			/*var springBush3:SpringBush = new SpringBush(20, -1);
 			var springBush4:SpringBush = new SpringBush(30, -1);
 			var springBush5:SpringBush = new SpringBush(50, -1);
-			var springBush6:SpringBush = new SpringBush(65, -1);
+			var springBush6:SpringBush = new SpringBush(65, -1);*/
 			var cloud1:Cloud = new Cloud(10, -10);
-			var cloud2:Cloud = new Cloud(20, -15);
+			/*var cloud2:Cloud = new Cloud(20, -15);
 			var cloud3:Cloud = new Cloud(30, -20);
 			var cloud4:Cloud = new Cloud(50, -30);
-			var cloud5:Cloud = new Cloud(65, -50);
+			var cloud5:Cloud = new Cloud(65, -50);*/
 			//var standardPlatform3:Standard = new Standard(3, -3, 3, 3);
-			//var spikes:Spikes = new Spikes(10, -3, 3, 3);
+			var spikes:Spikes = new Spikes(50, -3, 3, 3);
 			/*var door:Door = new Door(20, -3);
 			var key:Key = new Key(15, -2, door);
 			var door1:Door = new Door(25, -3);
@@ -88,16 +122,14 @@ package {
 			var jumpThrough5:JumpThrough = new JumpThrough(3, -23, 3, 0.1);
 			var jumpThrough6:JumpThrough = new JumpThrough(3, -30, 3, 0.1);
 			var jumpThrough7:JumpThrough = new JumpThrough(3, -37, 3, 0.1);*/
-			/*var hat1:TopHat = new TopHat(10, -2);
-			var hat2:TopHat = new TopHat(20, 0);*/
 		//var standardPlatform5:Standard = new Standard(-4, -4, 1, 1);
 		//var standardPlatform6:Standard = new Standard(-3, 2, 1, 1);
 			//create player with controls
 			var controls:Controls = new Controls();
 			Platformer._player = new Player(2, -6, controls);
 			var hills:Hills = new Hills();
-			//var clouds:BigClouds = new BigClouds();
-			/*new Dummy(10, -40, 20);
+			/*var clouds:BigClouds = new BigClouds();
+			new Dummy(10, -40, 20);
 			new Dummy(11, -50, 30);
 			new Dummy(12, -50, 40);
 			new Dummy(14, -10, 60);
@@ -114,7 +146,11 @@ package {
 			new DummySplitter(17, -10, 80);*/
 			var coniferous:BigConiferous = new BigConiferous();
 			var mountains:BigMountains = new BigMountains();
-			new Ghost(4, -6);
+			//new Ghost(4, -6);
+			/*var zap:AnimationCostume = new AnimationCostume("zapped", CameraManager.pLayer, 0.128, 0.14285714285714288, 8);
+			zap.setCoords(0, 0);
+			zap.play();*/
+			new LevelEditor();
 		}
 		
 		private static function createLevel2():void {

@@ -15,7 +15,6 @@ package
 		private var body:b2Body;
 		private var costume:MovieClip;
 		public var mask:Sprite;
-		private var shape:RectShape;
 		private var bounds:Bounds;
 		
 		public function Standard(x:Number, y:Number, w:Number, h:Number) {
@@ -29,6 +28,26 @@ package
 			
 			createBodies();
 			super(body, mask);
+		}
+		
+		
+		public function reload(x:Number, y:Number, w:Number, h:Number):void {
+			removeBodies();
+			removeCostumes();
+			costume = null;
+			mask = null;
+			shape = null;
+			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			mask.x = location.x;
+			mask.y = location.y;
+			CameraManager._staticLayer.addChild(mask);
+			createCostumes();
+			bounds = new Bounds(x, y, w, h);
+			
+			createBodies();
+			super.init(body, mask);
 		}
 		
 		public function bodyTrace():void {
@@ -58,6 +77,8 @@ package
 				}
 			}
 			costume.mask = mask;
+			costume.x = location.x-30;
+			costume.y = location.y-30;
 			return costume;
 		}
 		
@@ -69,27 +90,26 @@ package
 					}
 					costume.mask = null;
 				}
+				if (costume.parent) {
+					costume.parent.removeChild(costume);
+				}
 				PhysiVals.cleanChildren(costume);
 				/*while (costume.numChildren) {
 					costume.removeChildAt(0);
 				}*/
-				if (costume.parent) {
-					costume.parent.removeChild(costume);
-				}
 			}
 			bounds.remove();
 			super.removeCostumes();
 		}
 		
 		private function createBodies():void {
-			var standardBodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			standardBodyBuilder.density = 0;
-			standardBodyBuilder.friction = 0.2;
-			standardBodyBuilder.restitution = 0.3;
-			standardBodyBuilder.groupIndex = -2;
-			standardBodyBuilder.x = location.x;
-			standardBodyBuilder.y = location.y;
-			body = standardBodyBuilder.getBody(new Array(shape));
+			if (!bodyBuilder) {
+				bodyBuilder = new StaticBodyBuilder();
+				StaticBodyBuilder(bodyBuilder).groupIndex = -2;
+			}
+			StaticBodyBuilder(bodyBuilder).x = location.x;
+			StaticBodyBuilder(bodyBuilder).y = location.y;
+			body = StaticBodyBuilder(bodyBuilder).getBody(new Array(shape));
 			body.SetUserData(this);
 		}
 	}

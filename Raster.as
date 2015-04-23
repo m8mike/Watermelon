@@ -42,6 +42,7 @@ package {
 			cacheAnimation("crate_box");
 			cacheAnimation("bullet_rocket");
 			cacheAnimation("bush_spring");
+			cacheAnimation("bush_spring1");
 			cacheAnimation("cloudblue");
 			cacheItems();
 		}
@@ -58,7 +59,7 @@ package {
 			cacheAnimation("fall_left");
 			cacheAnimation("umbrella_right");
 			cacheAnimation("umbrella_left");
-			cacheAnimation("red_splash");
+			//cacheAnimation("red_splash");
 			Animation.playerToCache = null;
 		}
 		
@@ -67,6 +68,8 @@ package {
 			cacheAnimation("umbrella_right");
 			cacheAnimation("umbrella_left");
 			cacheAnimation("red_splash");
+			cacheAnimation("zapped");
+			cacheAnimation("birds");
 		}
 		
 		public static function cacheItems():void {

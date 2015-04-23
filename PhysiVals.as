@@ -78,7 +78,7 @@ package {
 			timeNumbText.scaleY = 2;
 			timeNumbText.selectable = false;
 			timeNumbText.text = "0"; // Platformer.childCounter.toString();
-			CameraManager.gui.addChild(timeNumbText);
+			CameraManager.hud.addChild(timeNumbText);
 			myTimer.start();
 			
 			var timer:Timer = new Timer(1000);

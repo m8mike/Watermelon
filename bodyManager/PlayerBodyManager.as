@@ -118,14 +118,19 @@ package
 						body.m_linearDamping = 3;
 					}
 					var bodyCenter:b2Vec2 = body.GetWorldCenter();
-					var offset:Number;
+					var offset1:Number;
+					var offset2:Number;
 					if (body.GetLinearVelocity().x >= 0) {
-						offset = -0.3;
+						offset1 = -0.3;
+						offset2 = -0.1;
 					} else {
-						offset = 0.3;
+						offset1 = 0.3;
+						offset2 = 0.1;
 					}
-					var smokePoint:Point = new Point(bodyCenter.x + offset, bodyCenter.y);
-					new RocketSmoke(smokePoint);
+					var smokePoint1:Point = new Point(bodyCenter.x + offset1, bodyCenter.y);
+					var smokePoint2:Point = new Point(bodyCenter.x + offset2, bodyCenter.y);
+					new RocketSmoke(smokePoint1);
+					new RocketSmoke(smokePoint2);
 				}
 			} else {
 				if (Player(body.GetUserData()).carryingItem is Jetpack) {

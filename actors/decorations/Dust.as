@@ -7,9 +7,13 @@ package {
 	*/
 	public class Dust extends Decor {
 		private var costume:AnimationCostume;
+		public static const DUST:String = "dustBlow";
+		public static const FLINDERS:String = "flinders";
+		public static const LIGHTNING:String = "lightBlow";
+		public static const BLOW:String = "rocketBlow";
 		
-		public function Dust(size:Number, location:Point) {
-			costume = new AnimationCostume("dustBlow", CameraManager.belowLayer, size / 100, size / 100, 10);
+		public function Dust(size:Number, location:Point, id:String = DUST) {
+			costume = new AnimationCostume(id, CameraManager.belowLayer, size / 100, size / 100, 10);
 			costume.setCoords(location.x * 30, location.y * 30);
 			costume.play();
 		}

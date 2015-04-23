@@ -10,7 +10,6 @@ package {
 		private var body:b2Body;
 		private var costume:AnimationCostume;
 		private var damaged:AnimationCostume;
-		private var shape:RectShape;
 		private var condition:int;
 		
 		private const NORMAL:int = 2;
@@ -62,11 +61,13 @@ package {
 		}
 		
 		private function createBodies():void {
-			var bodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			bodyBuilder.density = 0;
-			bodyBuilder.friction = 0.2;
-			bodyBuilder.restitution = 0.3;
-			bodyBuilder.groupIndex = -2;
+			if (!bodyBuilder) {
+				bodyBuilder = new StaticBodyBuilder();
+				bodyBuilder.density = 0;
+				bodyBuilder.friction = 0.2;
+				bodyBuilder.restitution = 0.3;
+				bodyBuilder.groupIndex = -2;
+			}
 			bodyBuilder.x = location.x;
 			bodyBuilder.y = location.y;
 			body = bodyBuilder.getBody(new Array(shape));

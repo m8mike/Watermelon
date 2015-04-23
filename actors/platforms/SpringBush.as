@@ -9,7 +9,6 @@ package {
 	public class SpringBush extends Platform {
 		private var body:b2Body;
 		private var costume:AnimationCostume;
-		private var shape:RectShape;
 		
 		private var playing:Boolean = false;
 		
@@ -39,7 +38,7 @@ package {
 		}
 		
 		public function createCostumes():void {
-			costume = new AnimationCostume("bush_spring", CameraManager._dynamicLayer, 0.25, 0.25, 10);
+			costume = new AnimationCostume("bush_spring1", CameraManager._dynamicLayer, 0.25, 0.25, 10);
 			costume.setCoords(location.x, location.y);
 			costume.animation.visible = true;
 		}
@@ -50,11 +49,13 @@ package {
 		}
 		
 		private function createBodies():void {
-			var bodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			bodyBuilder.density = 0;
-			bodyBuilder.friction = 0.2;
-			bodyBuilder.restitution = 0.7;
-			bodyBuilder.groupIndex = -2;
+			if (!bodyBuilder) {
+				bodyBuilder = new StaticBodyBuilder();
+				bodyBuilder.density = 0;
+				bodyBuilder.friction = 0.2;
+				bodyBuilder.restitution = 0.7;
+				bodyBuilder.groupIndex = -2;
+			}
 			bodyBuilder.x = location.x;
 			bodyBuilder.y = location.y;
 			bodyBuilder.isSensor = true;

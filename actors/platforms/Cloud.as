@@ -9,7 +9,6 @@ package {
 	public class Cloud extends Platform {
 		private var body:b2Body;
 		private var costume:AnimationCostume;
-		private var shape:RectShape;
 		
 		public function Cloud(x:Number, y:Number) {
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
@@ -31,11 +30,13 @@ package {
 		}
 		
 		private function createBodies():void {
-			var bodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			bodyBuilder.density = 0;
-			bodyBuilder.friction = 0.2;
-			bodyBuilder.restitution = 0.7;
-			bodyBuilder.groupIndex = -2;
+			if (!bodyBuilder) {	
+				bodyBuilder = new StaticBodyBuilder();
+				bodyBuilder.density = 0;
+				bodyBuilder.friction = 0.2;
+				bodyBuilder.restitution = 0.7;
+				bodyBuilder.groupIndex = -2;
+			}
 			bodyBuilder.x = location.x;
 			bodyBuilder.y = location.y;
 			bodyBuilder.isSensor = true;

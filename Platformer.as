@@ -52,6 +52,9 @@ package {
 			stage.addEventListener(Event.DEACTIVATE, deactivation);
 			stage.addEventListener(Event.ACTIVATE, activation);
 			//setupDebugDraw();
+			/*var zap:AnimationCostume = new AnimationCostume("zapped", CameraManager.gui, 0.128*10, 0.14285714285714288*10, 8);
+			zap.setCoords(10, 10);
+			zap.play();*/
 		}
 		
 		private function setupDebugDraw():void {
@@ -113,6 +116,8 @@ package {
 			}
 			if (ghostCount == 0) {
 				new Ghost(30, -10);
+				//countPixels(thisIs);
+				//trace("<end>");
 			}
 			reallyRemoveActors();
 			if (_player) {
@@ -124,6 +129,17 @@ package {
 					}
 				} else {
 					CameraManager.zoomCameras(CameraManager.freePoint);
+					if (_player.invincibilityTime > 1000) {
+						_player.setSpawnPoint(new Point(2 * 20, -6 * 20));
+						if (_player.carryingItem) {	
+							_player.carryingItem.remove();
+							_player.carryingItem = null;
+						}
+						while (_player.inventory._lifes.length < 3) {	
+							_player.addLife();
+						}
+						_player.spawn();
+					}
 				}
 			} else {
 				CameraManager.zoomCameras(CameraManager.freePoint);
@@ -139,6 +155,7 @@ package {
 			} else if (object is Bitmap) {
 				pixelCounter += Bitmap(object).bitmapData.height * Bitmap(object).bitmapData.width;
 			}
+			trace(object.toString());
 			objectCounter++;
 			return pixelCounter;
 		}

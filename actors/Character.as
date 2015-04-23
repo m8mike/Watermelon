@@ -7,7 +7,6 @@ package {
 	public class Character extends Actor {
 		protected var bodyManager:BodyManager;
 		protected var costumeManager:CostumeManager;
-		public var deleted:Boolean = false;
 		
 		public function Character() {
 			Platformer.characters.push(this);

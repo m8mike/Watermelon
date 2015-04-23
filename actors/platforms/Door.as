@@ -10,7 +10,6 @@ package {
 	public class Door extends Platform {
 		public var mask:Sprite;
 		private var body:b2Body;
-		private var shape:RectShape;
 		
 		public var isOpen:Boolean = false;
 		
@@ -53,14 +52,16 @@ package {
 		}
 		
 		private function createBodies():void {
-			var standardBodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			standardBodyBuilder.density = 0;
-			standardBodyBuilder.friction = 0.2;
-			standardBodyBuilder.restitution = 0.3;
-			standardBodyBuilder.groupIndex = -2;
-			standardBodyBuilder.x = location.x;
-			standardBodyBuilder.y = location.y;
-			body = standardBodyBuilder.getBody(new Array(shape));
+			if (!bodyBuilder) {	
+				bodyBuilder = new StaticBodyBuilder();
+				bodyBuilder.density = 0;
+				bodyBuilder.friction = 0.2;
+				bodyBuilder.restitution = 0.3;
+				bodyBuilder.groupIndex = -2;
+			}
+			bodyBuilder.x = location.x;
+			bodyBuilder.y = location.y;
+			body = bodyBuilder.getBody(new Array(shape));
 			body.SetUserData(this);
 		}
 		

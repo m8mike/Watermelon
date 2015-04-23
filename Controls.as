@@ -79,10 +79,12 @@ package {
 						//useUmbrella = true;
 						break;
 					case 81: //q
+						CameraManager.zoomKoef /= 1.1;
 						//Left = true;
 						//Up = true;
 						break;
 					case 69: //e
+						CameraManager.zoomKoef *= 1.1;
 						//Right = true;
 						//Up = true;
 						break;
@@ -132,6 +134,8 @@ package {
 					case 13: //enter
 						if (!Platformer._player) {
 							Platformer._player = new Player(CameraManager.freePoint.x/20, CameraManager.freePoint.y/20, this);
+						} else {
+							Platformer._player.spawn();
 						}
 						break;
 					case 37: //Left

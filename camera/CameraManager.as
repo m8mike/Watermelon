@@ -24,8 +24,8 @@ package {
 		
 		public static var loadingScreen:Sprite;
 		public static var menu:Sprite;
+		public static var hud:Sprite;
 		public static var invisibleButtons:Sprite;
-		public static var gui:Sprite;
 		public static var nearLayers:Sprite;
 		public static var belowLayer:Camera;
 		public static var pLayer:Camera;
@@ -67,6 +67,8 @@ package {
 		
 		public static var renderArea:Sprite = new Sprite();
 		
+		public static var zoomKoef:Number = 1;
+		
 		// render less, not renderless
 		public static function renderLess():void {
 			var c:Point = CameraUpdater.getCameraSection();
@@ -89,19 +91,19 @@ package {
 		
 		public static function zoomCameras(section:Point):void {
 			if (_camera) {
-				_camera.zoomTo(section, 0.3); //0.9
-				pLayer.zoomTo(section, 0.3);
-				belowLayer.zoomTo(section, 0.3);
-				_camera01.zoomTo(section, 1.2); //1/1.7
-				_camera02.zoomTo(section, 1.2); //?
-				_camera03.zoomTo(section, 1.2); //?
-				_camera04.zoomTo(section, 1.2); //?
-				_cameraMount.zoomTo(section, 1.2); //?
-				_cameraConiferous.zoomTo(section, 1.2); //?
+				_camera.zoomTo(section, 0.3 * zoomKoef); //0.9
+				pLayer.zoomTo(section, 0.3 * zoomKoef);
+				belowLayer.zoomTo(section, 0.3 * zoomKoef);
+				_camera01.zoomTo(section, 1.2 * zoomKoef); //1/1.7
+				_camera02.zoomTo(section, 1.2 * zoomKoef); //?
+				_camera03.zoomTo(section, 1.2 * zoomKoef); //?
+				_camera04.zoomTo(section, 1.2 * zoomKoef); //?
+				_cameraMount.zoomTo(section, 1.2 * zoomKoef); //?
+				_cameraConiferous.zoomTo(section, 1.2 * zoomKoef); //?
 				//
-				_camera11.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6); //?
-				_camera12.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6); //?
-				_camera13.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6); //?
+				_camera11.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6 * zoomKoef); //?
+				_camera12.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6 * zoomKoef); //?
+				_camera13.zoomTo(new Point(section.x * 0.2, section.y * 0.2), 0.6 * zoomKoef); //?
 			} else {
 				throw new Error("can't zoom because there is no _camera");
 			}
@@ -115,8 +117,8 @@ package {
 		public static function initCameras():void {
 			loadingScreen = new Sprite();
 			menu = new Sprite();
+			hud = new Sprite();
 			invisibleButtons = new Sprite();
-			gui = new Sprite();
 			nearLayers = new Sprite();
 			belowLayer = new Camera(12);
 			pLayer = new Camera(12);
@@ -159,8 +161,8 @@ package {
 			Platformer.thisIs.addChild(pLayer);
 			Platformer.thisIs.addChild(belowLayer); //belowLayer.visible = false;
 			Platformer.thisIs.addChild(nearLayers); //nearLayers.visible = false;
-			Platformer.thisIs.addChild(gui);
 			Platformer.thisIs.addChild(invisibleButtons);
+			Platformer.thisIs.addChild(hud);
 			Platformer.thisIs.addChild(menu);
 			Platformer.thisIs.addChild(loadingScreen);
 			/*
@@ -194,7 +196,7 @@ package {
 			cleanLayer(CameraManager.zeroLayer);*/
 			cleanLayer(belowLayer);
 			cleanLayer(pLayer);
-			cleanLayer(gui);
+			cleanLayer(hud);
 			cleanLayer(_camera01);
 			cleanLayer(_camera02);
 			cleanLayer(_camera03);

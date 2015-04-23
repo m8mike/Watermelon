@@ -133,18 +133,41 @@
 		}
 		
 		private function headParts(clipParent:DisplayObjectContainer):void {
-			var clip:DisplayObjectContainer = DisplayObjectContainer(clipParent.getChildAt(HEAD));
+			var clip:DisplayObjectContainer;
+			if (clipParent is zapped) {
+				clip = DisplayObjectContainer(clipParent.getChildAt(4));
+			} else {
+				clip = DisplayObjectContainer(clipParent.getChildAt(HEAD));
+			}
 			if (clip is head || clip is headleft) {
 				for (var i:int = 0; i < MovieClip(clip.getChildAt(0)).numChildren; i++) {
 					MovieClip(clip.getChildAt(0)).getChildAt(i).visible = false;
 				}
-				MovieClip(clip.getChildAt(0)).getChildAt(playerToCache.characterIndex + (clip is head ? 0 : 1)).visible = true;
+				MovieClip(clip.getChildAt(0)).getChildAt(playerToCache.characterIndex + (clip is headleft ? 1 : 0)).visible = true;
 				MovieClip(clip.getChildAt(0)).getChildAt(playerToCache.hatIndex).visible = true;
+			} else if (clip is head_zapped) {
+				hideChildren(MovieClip(clip.getChildAt(0)));
+				for (var k:int = 0; k < MovieClip(clip).numChildren; k++) {
+					clip.getChildAt(k).visible = false;
+				}
+				MovieClip(clip).gotoAndStop(4);
+				clip.getChildAt(0).visible = false;
+				clip.getChildAt(playerToCache.characterIndex).visible = true;
+				clip.getChildAt(playerToCache.hatIndex - 7).visible = true;
 			}
 		}
 		
 		public function buildCacheFromLibrary(identifier:String):void {
 			clipDef = new (getDefinitionByName(identifier))();
+			if (clipDef is zapped) {
+				if (playerToCache) {
+					if (playerToCache.animationMode != Player.ROCKETS) {
+						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(2)));
+						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(3)));
+					}
+				}
+				headParts(DisplayObjectContainer(clipDef));
+			}
 			if (clipDef is go_right || clipDef is go_left || clipDef is stay_right || clipDef is stay_left || 
 				clipDef is jump_right || clipDef is jump_left || clipDef is fall_right || clipDef is fall_left || 
 				clipDef is umbrella_right || clipDef is umbrella_left) {
@@ -251,6 +274,9 @@
 			for (var i = 1; i <= clip.totalFrames; i++) {
 				clip.gotoAndStop(i)
 				makeAllChildrenGoToFrame(clip, i);
+				/*if (clipDef is zapped) {
+					makeHeadGoToFrame(clip, i);
+				}*/
 				var bitmapData:BitmapData;
 				if (clipDef is GroundBackground || clipDef is GrassBackground) {
 					bitmapData = new BitmapData(r.width, r.height, true, 0x00000000);
@@ -314,11 +340,25 @@
 			_totalFrames = clip.totalFrames;
 		}
 		
+		private function makeHeadGoToFrame(m:MovieClip, f:int):void {
+			for (var i:int = 0; i < m.numChildren; i++) {
+				var c:DisplayObject = m.getChildAt(i);
+				if (c is MovieClip) {
+					makeHeadGoToFrame(MovieClip(c), f);
+					if (c is head_zapped) {
+						MovieClip(c).gotoAndStop(f % 2 + 1);
+						makeHeadGoToFrame(MovieClip(c), f % 2 + 1);
+					}
+					MovieClip(c).gotoAndStop(f);
+				}
+			}
+		}
+		
 		private function makeAllChildrenGoToFrame(m:MovieClip, f:int):void {
 			for (var i:int = 0; i < m.numChildren; i++) {
 				var c = m.getChildAt(i);
 				if (c is MovieClip) {
-					if (!(c is rocketRC)) {	
+					if (!(c is rocketRC || c is headz)) {	
 						makeAllChildrenGoToFrame(c, f);
 						c.gotoAndStop(f);
 					}

@@ -6,8 +6,9 @@ package {
 	*/
 	public class PlayerCostumeManager extends CostumeManager {
 		public var controls:Controls;
-		private var condition:int = 1; //состояние персонажа для анимации и т.д.
+		public var condition:int = 1; //состояние персонажа для анимации и т.д.
 		private var changedCondition:Boolean = false;
+		private var visible:Boolean = true;
 		
 		private var parent:Player;
 		
@@ -25,16 +26,23 @@ package {
 		public static const UMBRELLA_GO_RIGHT:int = 34;
 		public static const UMBRELLA_GO_LEFT:int = 35;
 		public static const RED_SPLASH:int = 36;
+		public static const ZAPPED:int = 37;
+		public static const STUNNED:int = 38;
 		
 		public function PlayerCostumeManager(player:Player) {
 			parent = player;
 			createCostumes();
 			changeCondition(0);
+			show();
 		}
 		
 		override public function updateNow():void {
 			if (condition == RED_SPLASH) {
 				splash();
+			} else if (condition == ZAPPED) {
+				zapp();
+			} else if (condition == STUNNED) {
+				stun();
 			} else {
 				CameraUpdater.camKoefRed();
 				setCoords();
@@ -70,6 +78,8 @@ package {
 			_costumes.push(new AnimationCostume("go_right", CameraManager.pLayer, 0.128, 0.14285714285714288));
 			_costumes.push(new AnimationCostume("go_left", CameraManager.pLayer, -0.1264822134387352, 0.14092140921409216));
 			_costumes.push(new AnimationCostume("red_splash", CameraManager.pLayer, -0.028268551236749116, 0.024916943521594685));
+			_costumes.push(new AnimationCostume("zapped", CameraManager.pLayer, 0.128, 0.14285714285714288, 8));
+			_costumes.push(new AnimationCostume("birds", CameraManager.pLayer, 0.07, 0.07, 80));
 		}
 		
 		private function pushCostumesToArray():void {
@@ -97,10 +107,48 @@ package {
 		
 		private function splash():void {
 			AnimationCostume(_costumes[RED_SPLASH]).setCoords(parent.getBody().GetPosition().x * PhysiVals.RATIO + 19.6818/2, 
-													  parent.getBody().GetPosition().y * PhysiVals.RATIO - 26.37/2);
+															  parent.getBody().GetPosition().y * PhysiVals.RATIO - 26.37/2);
 			AnimationCostume(_costumes[RED_SPLASH]).animation.visible = true;
 			if (AnimationCostume(_costumes[RED_SPLASH]).animation.currentFrame >= 15) {
 				parent.remove();
+			}
+		}
+		
+		public function startZapp():void {
+			if (condition != ZAPPED) {
+				condition = ZAPPED;
+				changedCondition = true;
+				parent.removeLife();
+				for each (var costume:AnimationCostume in _costumes) {
+					if (costume.id.indexOf("zapped") != -1) {
+						costume.play();
+					}
+				}
+			}
+		}
+		
+		private function zapp():void {
+			AnimationCostume(_costumes[ZAPPED]).setCoords(parent.getBody().GetPosition().x * PhysiVals.RATIO - 19.6818, 
+														  parent.getBody().GetPosition().y * PhysiVals.RATIO - 26.37);
+			AnimationCostume(_costumes[ZAPPED]).animation.visible = true;
+			if (AnimationCostume(_costumes[ZAPPED]).animation.currentFrame >= 8) {
+				if (parent.getLifesNum() > 0) {	
+					changeCondition(STAY_RIGHT);
+				} else {
+					parent.kill();
+					changeCondition(STUNNED);
+				}
+			}
+		}
+		
+		private function stun():void {
+			AnimationCostume(_costumes[STUNNED]).setCoords(parent.getBody().GetPosition().x * PhysiVals.RATIO, 
+														   parent.getBody().GetPosition().y * PhysiVals.RATIO + 5);
+			AnimationCostume(_costumes[STUNNED]).animation.visible = true;
+			if (AnimationCostume(_costumes[STUNNED]).animation.currentFrame >= 80) {
+				parent.setSpawnPoint(parent.getSpriteLoc());
+				parent.invincibilityTime = 10000;
+				parent.hide();
 			}
 		}
 		
@@ -188,9 +236,7 @@ package {
 		}
 		
 		private function changeAnimation(spriteIndex:int):void {
-			for each (var s:AnimationCostume in _costumes) {
-				s.hide();
-			}
+			hideCostumes();
 			var index:int = spriteIndex;
 			if (parent.carryingItem is Umbrella && index < 20) {
 				index += 8;
@@ -199,12 +245,36 @@ package {
 			} else if (parent.carryingItem is Jetpack && index < 33) {
 				index += 24;
 			}
-			AnimationCostume(_costumes[index]).play();
+			if (visible) {	
+				AnimationCostume(_costumes[index]).play();
+			}
+		}
+		
+		private function hideCostumes():void {
+			for each (var s:AnimationCostume in _costumes) {
+				s.hide();
+			}
 		}
 		
 		public function hide():void {
-			for each (var s:AnimationCostume in _costumes) {
-				s.hide();
+			if (visible) {	
+				visible = false;
+				hideCostumes();
+			}
+		}
+		
+		public function show():void {
+			if (!visible) {
+				visible = true;
+				var index:int = condition;
+				if (parent.carryingItem is Umbrella && index < 20) {
+					index += 8;
+				} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 24) {
+					index += 16;
+				} else if (parent.carryingItem is Jetpack && index < 33) {
+					index += 24;
+				}
+				AnimationCostume(_costumes[index]).animation.visible = true;
 			}
 		}
 		

@@ -13,13 +13,15 @@ package {
 			var randomNumber:int = Math.random() * 5;
 			switch (randomNumber) {
 				case 0:
-					new SnowGunBonus(x, y);
+					new JetpackBonus(x, y);
+					//new SnowGunBonus(x, y);
 				break;
 				case 1:
 					new JetpackBonus(x, y);
 				break;
 				case 2:
-					new BazookaBonus(x, y);
+					new UmbrellaBonus(x, y);
+					//new BazookaBonus(x, y);
 				break;
 				case 3:
 					new UmbrellaBonus(x, y);

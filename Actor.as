@@ -8,6 +8,8 @@ package {
 	*/
 	public class Actor extends EventDispatcher {
 		
+		public var deleted:Boolean = false;
+		
 		public function Actor() {
 		
 		}
@@ -21,7 +23,10 @@ package {
 		}
 		
 		public function destroy():void {
-			cleanUpBeforeRemoving();
+			if (!deleted) {
+				deleted = true;
+				cleanUpBeforeRemoving();
+			}
 		}
 		
 		protected function cleanUpBeforeRemoving():void {

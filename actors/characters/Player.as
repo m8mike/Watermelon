@@ -15,7 +15,8 @@ package
 	 * @author Mad Mike
 	 */
 	public class Player extends Character {
-		public var removeLiveTime:int = 0;
+		public var invincibilityTime:int = 0;
+		private var invincibilityKoef:Number = 2;
 		/*
 		private const LAUNCH_POINT:Point = new Point(500, 100);
 		private const LAUNCH_POINT2:Point = new Point(1000, 100);
@@ -23,11 +24,6 @@ package
 		private const LAUNCH_POINT_PLAYER2:Point = new Point(200, 10);
 		*/
 		public var direction:Boolean = false; //направление (вправо - true)
-		
-		public var _lifes:Array = [];
-		public var _keys:Array = [];
-		public static const MAX_LIFES:int = 5;
-		public static const MAX_KEYS:int = 3;
 		
 		public var carryingItem:Item;
 		public var hatIndex:int = 11;// + Platformer.characters.length * 2;
@@ -47,6 +43,7 @@ package
 		public static const UMBRELLA_GO:int = 4;
 		
 		private var controls:Controls;
+		public var inventory:HUD;
 		public var spawnPoint:Point;
 		
 		public function Player(x:int, y:int, controls:Controls) {
@@ -54,8 +51,13 @@ package
 			PlayerBodyManager(bodyManager).controls = controls;
 			costumeManager = new PlayerCostumeManager(this);
 			PlayerCostumeManager(costumeManager).controls = controls;
+			PlayerCostumeManager(costumeManager).show();
 			this.controls = controls;
 			controls.player = this;
+			inventory = new HUD();
+			addLife();
+			addLife();
+			addLife();
 		}
 		
 		public function itemGet(id:String):void {
@@ -69,20 +71,34 @@ package
 			}
 		}
 		
+		public function hit():void {
+			if (invincibilityTime <= 0 && PlayerCostumeManager(costumeManager).condition != PlayerCostumeManager.STUNNED) {
+				PlayerCostumeManager(costumeManager).startZapp();
+				invincibilityTime = 50;
+				invincibilityKoef = 2;
+			}
+		}
+		
 		public function kill():void {
-			PlayerCostumeManager(costumeManager).startSplash();
+			invincibilityKoef = 2;
+			//invincibilityTime = 0;
+			Controls.disallowControls();
+			bodyManager.body.SetLinearVelocity(new b2Vec2(0, 0));
 		}
 		
 		public function hide():void {
-			spawnPoint = getSpriteLoc();
 			PlayerBodyManager(bodyManager).removeBodies();
 			deleted = true;
 			PlayerCostumeManager(costumeManager).hide();
 		}
 		
 		public function spawn(vel:b2Vec2 = null):void {
+			invincibilityTime = 0;
 			PlayerBodyManager(bodyManager).initBody(spawnPoint, controls, vel);
 			deleted = false;
+			PlayerCostumeManager(costumeManager).condition = PlayerCostumeManager.STAY_RIGHT;
+			PlayerCostumeManager(costumeManager).show();
+			Controls.allowControls();
 		}
 		
 		public function changeSpawnPoint(x:Number, y:Number):void {
@@ -114,8 +130,17 @@ package
 			/*if (Platformer.stopLevel) {
 			   return void;
 			}*/
-			if (removeLiveTime > 0) {
-				removeLiveTime--;
+			if (!deleted && invincibilityTime >= 0) {
+				invincibilityTime--;
+				
+				if (invincibilityTime % Math.round(invincibilityKoef)) {
+					PlayerCostumeManager(costumeManager).show();
+				} else {
+					if (PlayerCostumeManager(costumeManager).condition != PlayerCostumeManager.ZAPPED) {
+						PlayerCostumeManager(costumeManager).hide();
+					}
+					invincibilityKoef += 0.2;
+				}
 			}
 			CameraManager.renderLess();
 			//Body.m_sweep.a = 0;//This is what stops the player from rotating
@@ -131,6 +156,8 @@ package
 			}
 			controls.player = null;
 			controls = null;
+			Controls.allowControls();
+			inventory = null;
 			super.cleanUpBeforeRemoving();
 		}
 		
@@ -145,54 +172,19 @@ package
 		}
 		
 		public function addLife():void {
-			if (_lifes.length < MAX_LIFES) {
-				var hpHeart:MovieClip = new heart();
-				hpHeart.x = 60 + _lifes.length * 40;
-				hpHeart.y = 420;
-				hpHeart.scaleX = 0.5;
-				hpHeart.scaleY = 0.5;
-				CameraManager.gui.addChild(hpHeart);
-				_lifes.push(hpHeart);
-			}
+			inventory.addLife();
 		}
 		
 		public function removeLife():void {
-			if (removeLiveTime <= 0) {
-				removeLiveTime = 100;
-				if (_lifes.length > 0) {
-					for (var i:int = CameraManager.gui.numChildren - 1; i > 0; i--) {
-						if (CameraManager.gui.getChildAt(i) is heart) {
-							CameraManager.gui.removeChildAt(i);
-							break;
-						}
-					}
-					_lifes.splice(_lifes.length - 1, 1);
-				}
-			}
+			inventory.removeLife();
 		}
 		
 		public function addKey():void {
-			if (_keys.length < MAX_KEYS) {
-				var key:MovieClip = new key1();
-				key.x = 500 + _keys.length * 40;
-				key.y = 40;
-				key.scaleX = 0.5;
-				key.scaleY = 0.5;
-				CameraManager.gui.addChild(key);
-				_keys.push(key);
-			}
+			inventory.addKey();
 		}
 		
 		public function removeKey():void {
-			if (_keys.length > 0) {
-				for (var i:int = CameraManager.gui.numChildren - 1; i > 0; i--) {
-					if (CameraManager.gui.getChildAt(i) is key1) {
-						CameraManager.gui.removeChildAt(i);
-						break;
-					}
-				}
-				_keys.splice(_keys.length - 1, 1);
-			}
+			inventory.removeKey();
 		}
 		
 		public function impulseUp():void {
@@ -205,6 +197,10 @@ package
 		
 		public function disallowJumps():void {
 			PlayerBodyManager(bodyManager).disallowJumps();
+		}
+		
+		public function getLifesNum():int {
+			return inventory._lifes.length;
 		}
 	}
 }

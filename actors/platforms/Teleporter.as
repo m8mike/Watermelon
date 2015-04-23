@@ -11,7 +11,6 @@ package {
 	public class Teleporter extends Platform {
 		private var body:b2Body;
 		public var mask:Sprite;
-		private var shape:RectShape;
 		private var spawnPoint:Point;
 		private const IMPULSE:b2Vec2 = new b2Vec2(0, -1);
 		private var player:Player;
@@ -42,7 +41,7 @@ package {
 				} else if (framesToMoveCameraLeft == 0) {
 					framesToMoveCameraLeft = -1;
 					player.spawn(IMPULSE);
-					trace((player.getBody().GetWorldCenter().x - spawnPoint.x) + " " + (player.getBody().GetWorldCenter().y - spawnPoint.y));
+					//trace((player.getBody().GetWorldCenter().x - spawnPoint.x) + " " + (player.getBody().GetWorldCenter().y - spawnPoint.y));
 					player = null;
 				} else {
 					if (framesToMoveCameraLeft > 60) {
@@ -56,13 +55,15 @@ package {
 		}
 		
 		private function createBodies():void {
-			var standardBodyBuilder:StaticBodyBuilder = new StaticBodyBuilder();
-			standardBodyBuilder.density = 0;
-			standardBodyBuilder.restitution = 0.3;
-			standardBodyBuilder.isSensor = true;
-			standardBodyBuilder.x = location.x;
-			standardBodyBuilder.y = location.y;
-			body = standardBodyBuilder.getBody(new Array(shape));
+			if (!bodyBuilder) {	
+				bodyBuilder = new StaticBodyBuilder();
+				bodyBuilder.density = 0;
+				bodyBuilder.restitution = 0.3;
+				bodyBuilder.isSensor = true;
+			}
+			bodyBuilder.x = location.x;
+			bodyBuilder.y = location.y;
+			body = bodyBuilder.getBody(new Array(shape));
 			body.SetUserData(this);
 		}
 	}

@@ -15,14 +15,36 @@ package {
 	public class Platform extends Actor {
 		private var _body:b2Body;
 		public var _costume:DisplayObject;
-		protected var location:Point;
+		public var location:Point;
+		public var shape:RectShape;
+		public var bodyBuilder:StaticBodyBuilder;
 		
 		public function Platform(myBody:b2Body, myCostume:DisplayObject) {
+			init(myBody, myCostume);
+			Platformer.platforms.push(this);
+			updateCostumes();
+		}
+		
+		protected function init(myBody:b2Body, myCostume:DisplayObject):void {
 			_body = myBody;
 			_body.SetUserData(this);
 			_costume = myCostume;
-			Platformer.platforms.push(this);
-			updateCostumes();
+		}
+		
+		public function reload(x:Number, y:Number, w:Number, h:Number):void {
+			removeBodies();
+			removeCostumes();
+			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			mask.x = location.x;
+			mask.y = location.y;
+			CameraManager._staticLayer.addChild(mask);
+			createCostumes();
+			bounds = new Bounds(x, y, w, h);
+			
+			createBodies();
+			super.init(body, mask);
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {

@@ -41,8 +41,10 @@ package {
 		}
 		
 		private function shotSomebody(bullet:Bullet, actor1:Actor, point:b2ContactPoint):void {
-			bullet.remove();
-			new Flinders(10, new Point(point.position.x, point.position.y));
+			if (!(actor1 is Player)) {	
+				bullet.remove();
+				new Dust(10, new Point(point.position.x, point.position.y), Dust.FLINDERS);
+			}
 			if (actor1 is Ghost) {
 				actor1.remove();
 			}
@@ -102,6 +104,7 @@ package {
 				dummy.remove();
 				player.impulseUp();
 			} else if (dummy is CrateBox) {
+				player.allowJumps(point.normal);
 				var vel:Number = player.getBody().GetLinearVelocity().y;
 				if (vel > 10) {
 					dummy.remove();
@@ -117,13 +120,13 @@ package {
 			if (!player.isOnGround()) {
 				if (platform is TopHat) {
 					player.allowJumps(point.normal, false);
-				} else if (!(platform is SpringBush)) {
+				} else if (!(platform is SpringBush) && !(platform is Teleporter)) {
 					player.allowJumps(point.normal);
 				}
 			}
 			var vel:Number = player.getBody().GetLinearVelocity().y;
 			if (platform is Spikes) {
-				player.kill();
+				player.hit();
 			} else if (platform is Door) {
 				if (Door(platform).isOpen) {
 					Door(platform).remove();
@@ -133,10 +136,11 @@ package {
 					Teleporter(platform).teleportPlayer(player);
 					Teleporter(platform).point1 = CameraUpdater.getCameraSection();
 				}
+				return void;
 			} else if (platform is Wooden) {
 				if (vel > 10) {
 					Wooden(platform).hit(vel);
-					new Flinders(vel, new Point(point.position.x, point.position.y));
+					new Dust(vel, new Point(point.position.x, point.position.y), Dust.FLINDERS);
 				}
 				return void;
 			} else if (platform is SpringBush) {
