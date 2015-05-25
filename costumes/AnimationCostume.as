@@ -55,11 +55,10 @@ package
 			animation.destroy();
 		}
 		
-		/*public function setLoc(x:Number, y:Number) {
-			animation.x = x;
-			animation.y = y;
-		}*/
-		
+		public function changeRange(start:int, stop:int):void {
+			startFrame = start;
+			stopFrame = stop;
+		}
 	}
 
 }

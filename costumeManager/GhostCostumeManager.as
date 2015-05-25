@@ -1,4 +1,6 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
+	import Box2D.Dynamics.b2Body;
 	
 	/**
 	* ...
@@ -27,10 +29,19 @@ package {
 		}
 		
 		private function setCoords():void {
-			var x:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO + 8;
-			var y:Number = parent.getBody().GetPosition().y * PhysiVals.RATIO + 12;
+			var body:b2Body = parent.getBody();
+			var loc:b2Vec2 = body.GetWorldCenter();
+			var x:Number = loc.x * PhysiVals.RATIO;// + 8;
+			var y:Number = loc.y * PhysiVals.RATIO;// + 12;
+			var vel:b2Vec2 = body.GetLinearVelocity();
 			for each (var costume:AnimationCostume in _costumes) {
 				costume.setCoords(x, y);
+				costume.animation.rotation = parent.getBody().GetAngle() * 180 / Math.PI;
+				if (vel.x < 0) {
+					costume.animation.scaleX = -Math.abs(costume.animation.scaleX);
+				} else {
+					costume.animation.scaleX = Math.abs(costume.animation.scaleX);
+				}
 			}
 		}
 	}

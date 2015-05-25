@@ -14,20 +14,28 @@ package {
 		public var isOpen:Boolean = false;
 		
 		public function Door(x:Number, y:Number) {
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(2 * PhysiVals.MIN_SQARE, 3 * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			CameraManager._staticLayer.addChild(mask);
-			//createCostumes();
-			createBodies();
-			super(body, mask);
+			super.reload();
+			super.init(body, mask);
 		}
 		
 		public function open():void {
 			isOpen = true;
 		}
 		
-		private function createCostumes():void {
+		override public function reload():void {
+			super.reload();
+			super.init(body, mask);
+		}
+		
+		override protected function createShapes():void {
+			shape = new RectShape(2 * PhysiVals.MIN_SQARE, 3 * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			CameraManager._staticLayer.addChild(mask);
+		}
+		
+		override protected function createCostumes():void {
 			/*var loc:Point = location.clone();
 			var loc1:Point = new Point(0, 0);
 			var row:MovieClip = new ug2();
@@ -51,7 +59,12 @@ package {
 			row.mask = mask;*/
 		}
 		
-		private function createBodies():void {
+		override protected function cleanUpBeforeRemoving():void {
+			Platformer._player.inventory.removeKey();
+			super.cleanUpBeforeRemoving();
+		}
+		
+		override protected function createBodies():void {
 			if (!bodyBuilder) {	
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;
@@ -71,5 +84,4 @@ package {
 			super.removeCostumes();
 		}
 	}
-
 }

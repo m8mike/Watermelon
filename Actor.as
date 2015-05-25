@@ -43,5 +43,9 @@ package {
 		public function getSpriteLoc():Point {
 			return null;
 		}
+		
+		public function getXML():XML {
+			return null;
+		}
 	}
 }

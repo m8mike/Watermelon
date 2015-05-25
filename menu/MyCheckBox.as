@@ -6,7 +6,7 @@ package {
 	* ...
 	* @author Mad Mike
 	*/
-	public class MyCheckBox extends Decor{
+	public class MyCheckBox extends Decor {
 		private var _checked:Boolean;
 		public var checkedMC:MovieClip;
 		public var uncheckedMC:MovieClip;
@@ -31,6 +31,16 @@ package {
 			uncheckedMC.visible = !enabled;
 			checkedMC.addEventListener(MouseEvent.CLICK, change);
 			uncheckedMC.addEventListener(MouseEvent.CLICK, change);
+		}
+		
+		public function hide():void {
+			checkedMC.x = -10000;
+			uncheckedMC.x = -10000;
+		}
+		
+		public function show():void {
+			checkedMC.x = 480;
+			uncheckedMC.x = 480;
 		}
 		
 		public function change(e:MouseEvent):void {

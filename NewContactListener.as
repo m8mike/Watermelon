@@ -118,9 +118,10 @@ package {
 		
 		private function playerHitsPlatform(player:Player, platform:Platform, point:b2ContactPoint):void {
 			if (!player.isOnGround()) {
-				if (platform is TopHat) {
+				if (platform is TopHat && platform is Cloud && platform is Spikes) {
 					player.allowJumps(point.normal, false);
-				} else if (!(platform is SpringBush) && !(platform is Teleporter)) {
+				} else if (!(platform is SpringBush) && !(platform is Teleporter) 
+							&& !(platform is EndLevel) && !(platform is Fan)) {
 					player.allowJumps(point.normal);
 				}
 			}
@@ -132,10 +133,13 @@ package {
 					Door(platform).remove();
 				}
 			} else if (platform is Teleporter) {
-				if (!player.deleted){
+				if (!player.deleted && player.invincibilityTime != 10000) {	
 					Teleporter(platform).teleportPlayer(player);
 					Teleporter(platform).point1 = CameraUpdater.getCameraSection();
 				}
+				return void;
+			} else if (platform is EndLevel) {
+				EndLevel(platform).finish(player);
 				return void;
 			} else if (platform is Wooden) {
 				if (vel > 10) {
@@ -149,12 +153,19 @@ package {
 				//new leaves (or dust - delete flinders class)
 				return void;
 			} else if (platform is Cloud) {
-				if (player.getBody().GetLinearVelocity().y >= 0) {	
+				if (player.getBody().GetLinearVelocity().y >= 0 && player.isOnGround()) {	
 					player.getBody().m_linearDamping = 20;
 				} else {
 					player.getBody().m_linearDamping = 0;
 				}
 				player.inCloud = true;
+			} if (platform is Fan) {
+				player.inFan = true;
+				return void;
+			} else if (platform is TopHat) {
+				return void;
+			} else if (platform is JumpThrough) {
+				player.setJumpThrough(JumpThrough(platform));
 			}
 			
 			if (vel > 10) {
@@ -176,12 +187,20 @@ package {
 				if (actor2 is Cloud) {
 					Player(actor1).inCloud = false;
 					point.shape1.GetBody().m_linearDamping = 0;
+				} else if (actor2 is JumpThrough) {
+					Player(actor1).setJumpThrough(null);
+				} else if (actor2 is Fan) {
+					Player(actor1).inFan = false;
 				}
 			} else if (actor2 is Player) {
 				Player(actor2).disallowJumps();
 				if (actor1 is Cloud) {
 					Player(actor2).inCloud = false;
 					point.shape2.GetBody().m_linearDamping = 0;
+				} else if (actor1 is JumpThrough) {
+					Player(actor2).setJumpThrough(null);
+				} else if (actor1 is Fan) {
+					Player(actor2).inFan = false;
 				}
 			}
 			super.Remove(point);

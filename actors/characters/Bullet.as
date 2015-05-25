@@ -12,6 +12,7 @@ package {
 		public function Bullet(x:Number, y:Number, size:Number, velocity:b2Vec2) {
 			bodyManager = new BulletBodyManager(new Point(x * 30, y * 30), size, velocity, this);
 			costumeManager = new BulletCostumeManager(size, this);
+			super(x, y);
 		}
 		
 		public function getBody():b2Body {

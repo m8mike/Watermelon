@@ -20,8 +20,8 @@ package {
 					new JetpackBonus(x, y);
 				break;
 				case 2:
-					new UmbrellaBonus(x, y);
-					//new BazookaBonus(x, y);
+					//new UmbrellaBonus(x, y);
+					new BazookaBonus(x, y);
 				break;
 				case 3:
 					new UmbrellaBonus(x, y);

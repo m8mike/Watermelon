@@ -41,7 +41,7 @@ package {
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {
-			Platformer._player.addKey();
+			Platformer._player.inventory.addKey();
 			door.open();
 			door = null;
 			super.cleanUpBeforeRemoving();

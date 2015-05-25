@@ -1,8 +1,12 @@
 package {
 	import Box2D.Collision.b2AABB;
 	import Box2D.Common.Math.b2Vec2;
+	import Box2D.Dynamics.b2DebugDraw;
 	import Box2D.Dynamics.b2World;
+	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Sprite;
 	import flash.events.TimerEvent;
 	import flash.text.TextField;
 	import flash.utils.Timer;
@@ -22,10 +26,24 @@ package {
 		public static var removeLiveTime:int = 0;
 		public static var myTimer:Timer;
 		private static var time:int;
+		public static var spriteToDebugDraw:Sprite;
 		public static var periods:int = 0;
+		public static var objectCounter:int = 0;
 		
 		public function PhysiVals() {
 		
+		}
+		
+		public static function setupDebugDraw():void {
+			spriteToDebugDraw = new Sprite();
+			var artistForHire:b2DebugDraw = new b2DebugDraw();
+			artistForHire.m_sprite = spriteToDebugDraw;
+			artistForHire.m_drawScale = RATIO;
+			artistForHire.SetFlags(b2DebugDraw.e_shapeBit);
+			artistForHire.m_lineThickness = 2.0;
+			artistForHire.m_fillAlpha = 0.8;
+			PhysiVals.world.SetDebugDraw(artistForHire);
+			CameraManager._dynamicLayer.addChild(spriteToDebugDraw);
 		}
 		
 		static public function get world():b2World {
@@ -53,6 +71,27 @@ package {
 					cleanChildren(DisplayObjectContainer(mc.getChildAt(0)));
 				}
 				mc.removeChildAt(0);
+			}
+		}
+		
+		public static function countPixels(object:DisplayObject):int {
+			var pixelCounter:int = 0;
+			if (object is DisplayObjectContainer) {
+				for (var i:int = 0; i < DisplayObjectContainer(object).numChildren; i++) {
+					pixelCounter += countPixels(DisplayObjectContainer(object).getChildAt(i));
+				}
+			} else if (object is Bitmap) {
+				pixelCounter += Bitmap(object).bitmapData.height * Bitmap(object).bitmapData.width;
+			}
+			trace(object.toString());
+			objectCounter++;
+			return pixelCounter;
+		}
+		
+		public static function traceParent(child:DisplayObject):void {
+			if (child.parent) {
+				trace(child.parent.toString());
+				traceParent(child.parent);
 			}
 		}
 		

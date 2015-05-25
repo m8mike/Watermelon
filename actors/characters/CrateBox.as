@@ -12,6 +12,7 @@ package {
 		public function CrateBox(x:Number, y:Number) {
 			bodyManager = new CrateBoxBodyManager(new Point(x * 20, y * 20), this);
 			costumeManager = new CrateBoxCostumeManager(this);
+			super(x, y);
 		}
 		
 		public function getBody():b2Body {

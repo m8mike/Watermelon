@@ -1,4 +1,5 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import flash.geom.Point;
 	
@@ -13,11 +14,15 @@ package {
 		private var playing:Boolean = false;
 		
 		public function SpringBush(x:Number, y:Number) {
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(PhysiVals.MIN_SQARE, PhysiVals.MIN_SQARE);
-			createCostumes();
-			createBodies();
-			super(body, shape.getSimpleSprite(location));
+			super.reload();
+			super.init(body, shape.getSimpleSprite(location));
+		}
+		
+		override public function reload():void {
+			super.reload();
+			super.init(body, shape.getSimpleSprite(location));
 		}
 		
 		override public function updateNow():void {
@@ -34,21 +39,37 @@ package {
 			if (!playing) {
 				playing = true;
 				costume.play();
+				SoundMusic.playBoink();
 			}
 		}
 		
-		public function createCostumes():void {
+		override protected function createShapes():void {
+			shape = new RectShape(PhysiVals.MIN_SQARE, PhysiVals.MIN_SQARE);
+		}
+		
+		override protected function createCostumes():void {
 			costume = new AnimationCostume("bush_spring1", CameraManager._dynamicLayer, 0.25, 0.25, 10);
 			costume.setCoords(location.x, location.y);
 			costume.animation.visible = true;
 		}
 		
+		override public function updateCostumes():void {
+			var angle:Number = body.GetAngle() / Math.PI * 180;
+			costume.animation.rotation = angle;
+			var loc:b2Vec2 = body.GetPosition().Copy();
+			loc.Multiply(PhysiVals.RATIO);
+			costume.setCoords(loc.x, loc.y);
+			super.updateCostumes();
+		}
+		
 		override protected function removeCostumes():void {
-			costume.remove();
+			if (costume) {	
+				costume.remove();
+			}
 			super.removeCostumes();
 		}
 		
-		private function createBodies():void {
+		override protected function createBodies():void {
 			if (!bodyBuilder) {
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;

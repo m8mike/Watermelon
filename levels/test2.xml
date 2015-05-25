@@ -1,0 +1,20 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="200" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="8" h="4">Standard</Standard>
+    <Standard x="360" y="-60" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="5">Standard</Standard>
+    <Standard x="-200" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="-200" y="-200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="9">Standard</Standard>
+    <JumpThrough x="600" y="-55.74999999999999" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <JumpThrough x="680" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <JumpThrough x="580" y="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <JumpThrough x="700" y="-100" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <Standard x="360" y="40" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="100" h="2">Standard</Standard>
+    <Standard x="541.8333333333333" y="-74.47222222222223" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="1">Standard</Standard>
+    <Standard x="560" y="-200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="10">Standard</Standard>
+  </platforms>
+  <collectables/>
+  <characters>
+    <Player x="28" y="-3">Player</Player>
+  </characters>
+</actors>

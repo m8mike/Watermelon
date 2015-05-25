@@ -1,4 +1,5 @@
 package {
+	import flash.geom.Point;
 	
 	/**
 	* ...
@@ -8,8 +9,11 @@ package {
 		protected var bodyManager:BodyManager;
 		protected var costumeManager:CostumeManager;
 		
-		public function Character() {
+		public var loc2Spawn:Point;
+		
+		public function Character(x:Number, y:Number) {
 			Platformer.characters.push(this);
+			loc2Spawn = new Point(x, y);
 		}
 		
 		override public function updateNow():void {
@@ -39,6 +43,13 @@ package {
 		
 		override protected function removeBodies():void {
 			bodyManager.removeBodies();
+		}
+		
+		override public function getXML():XML {
+			var typeOfCharacter:String = this.toString().substring(8, this.toString().length - 1);
+			var xml:XML =  < { typeOfCharacter } x = { loc2Spawn.x } y = { loc2Spawn.y }>{typeOfCharacter}
+							</{typeOfCharacter}>;
+			return xml;
 		}
 	}
 }

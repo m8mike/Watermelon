@@ -23,6 +23,8 @@ package
 		private var canOpenUmbrella:Boolean = false;
 		private var cloudJumping:Boolean = false;
 		
+		public var jumpThrough:JumpThrough;
+		
 		public static const BALL_DIAMETER:int = 20; //12
 		public static const JUMP_IMPULSE:b2Vec2 = new b2Vec2(0.0, -0.23); //-0.5);//-0.17); true
 		public static const JUMP_IMPULSE_BIGGER:b2Vec2 = new b2Vec2(0.0, -0.5); //test new type of jump (bigger impulse)
@@ -107,6 +109,13 @@ package
 				dontJump();
 			}
 			if (controls.down) {
+				if (jumpThrough) {
+					parent.hide();
+					parent.setSpawnPoint(new Point(body.GetWorldCenter().x * 30, body.GetWorldCenter().y * 30));
+					parent.changeSpawnPoint(0, 10);
+					parent.spawn();
+					jumpThrough = null;
+				}
 				body.ApplyImpulse(new b2Vec2(0.0, 0.25), body.GetWorldCenter());
 			}
 			if (controls.useJetpack) {
@@ -149,7 +158,7 @@ package
 			if (notPressedAnyButton && canJump && speedIsSmall && !parent.inCloud) {
 				body.PutToSleep();
 			}
-			if (notPressedAnyButton) {
+			if (!controls.up) {
 				controls.useUmbrella = false;
 			}
 		}
@@ -198,6 +207,7 @@ package
 			body.ApplyImpulse(JUMP_IMPULSE, body.GetWorldCenter()); //0.0  -0.27 jumpImpulse
 			jumpTimeLeft = JUMP_TIME;
 			impulseReducer = 0;
+			SoundMusic.playJump();
 		}
 		
 		private function longJump():void {

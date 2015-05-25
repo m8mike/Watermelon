@@ -13,7 +13,7 @@ package {
 		public var mask:Sprite;
 		private var body:b2Body;
 		private var shape:CircleShape;
-		private var location:Point;
+		public var location:Point;
 		private var koef:int = 20;
 		
 		public function BubbleBonus(x:Number, y:Number) {
@@ -46,7 +46,9 @@ package {
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {
-			bubble.pop();
+			if (!bubble.deleted) {	
+				bubble.pop();
+			}
 			super.cleanUpBeforeRemoving();
 		}
 		

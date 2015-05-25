@@ -1,4 +1,5 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import flash.geom.Point;
 	
@@ -16,12 +17,16 @@ package {
 		private const DAMAGED:int = 1;
 		
 		public function Wooden(x:int, y:int) {
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(3 * PhysiVals.MIN_SQARE, 0.2 * PhysiVals.MIN_SQARE);
-			createCostumes();
-			createBodies();
+			super.reload();
 			condition = 2;
-			super(body, shape.getSimpleSprite(location));
+			super.init(body, shape.getSimpleSprite(location));
+		}
+		
+		override public function reload():void {
+			super.reload();
+			super.init(body, shape.getSimpleSprite(location));
 		}
 		
 		public function hit(vel:Number):void {
@@ -46,7 +51,11 @@ package {
 			}
 		}
 		
-		public function createCostumes():void {
+		override protected function createShapes():void {
+			shape = new RectShape(3 * PhysiVals.MIN_SQARE, 0.2 * PhysiVals.MIN_SQARE);
+		}
+		
+		override protected function createCostumes():void {
 			costume = new AnimationCostume("wooden_block", CameraManager._dynamicLayer, 0.2, 0.2);
 			costume.setCoords(location.x, location.y);
 			costume.play();
@@ -54,13 +63,32 @@ package {
 			damaged.setCoords(location.x, location.y);
 		}
 		
+		override public function updateCostumes():void {
+			var angle:Number = body.GetAngle() / Math.PI * 180;
+			var loc:b2Vec2 = body.GetPosition().Copy();
+			loc.Multiply(PhysiVals.RATIO);
+			if (costume) {
+				costume.setCoords(loc.x, loc.y);
+				costume.animation.rotation = angle;
+			}
+			if (damaged) {
+				damaged.setCoords(loc.x, loc.y);
+				damaged.animation.rotation = angle;
+			}
+			super.updateCostumes();
+		}
+		
 		override protected function removeCostumes():void {
-			costume.remove();
-			damaged.remove();
+			if (costume) {	
+				costume.remove();
+			}
+			if (damaged) {
+				damaged.remove();
+			}
 			super.removeCostumes();
 		}
 		
-		private function createBodies():void {
+		override protected function createBodies():void {
 			if (!bodyBuilder) {
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;

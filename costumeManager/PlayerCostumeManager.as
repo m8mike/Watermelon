@@ -1,4 +1,5 @@
 package {
+	import flash.text.TextField;
 	
 	/**
 	* ...
@@ -118,7 +119,7 @@ package {
 			if (condition != ZAPPED) {
 				condition = ZAPPED;
 				changedCondition = true;
-				parent.removeLife();
+				parent.inventory.removeLife();
 				for each (var costume:AnimationCostume in _costumes) {
 					if (costume.id.indexOf("zapped") != -1) {
 						costume.play();
@@ -146,7 +147,19 @@ package {
 														   parent.getBody().GetPosition().y * PhysiVals.RATIO + 5);
 			AnimationCostume(_costumes[STUNNED]).animation.visible = true;
 			if (AnimationCostume(_costumes[STUNNED]).animation.currentFrame >= 80) {
-				parent.setSpawnPoint(parent.getSpriteLoc());
+				//parent.setSpawnPoint(parent.getSpriteLoc());
+				if (HUD._spawn.length) {
+					if (TextField(HUD._spawn[0]).text != "" && TextField(HUD._spawn[1]).text != "") {
+						parent.spawnPoint.x = Number(TextField(HUD._spawn[0]).text);
+						parent.spawnPoint.y = Number(TextField(HUD._spawn[1]).text);
+					} else {
+						parent.spawnPoint.x = 2 * 20;
+						parent.spawnPoint.y = -6 * 20;
+					}
+				} else {
+					parent.spawnPoint.x = 2 * 20;
+					parent.spawnPoint.y = -6 * 20;
+				}
 				parent.invincibilityTime = 10000;
 				parent.hide();
 			}

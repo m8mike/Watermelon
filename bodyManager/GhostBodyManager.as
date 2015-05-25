@@ -1,4 +1,5 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import flash.geom.Point;
 	
@@ -18,7 +19,7 @@ package {
 			ballBodyBuilder.x = location.x;
 			ballBodyBuilder.y = location.y;
 			ballBodyBuilder.linearDamping = 0;
-			ballBodyBuilder.angularDamping = 1;
+			ballBodyBuilder.angularDamping = 0;
 			
 			_body = ballBodyBuilder.getBody(new Array(shape));
 			_body.SetUserData(ghost);
@@ -26,7 +27,11 @@ package {
 		
 		override public function updateNow():void {
 			if (_body) {
-				_body.m_sweep.a = 0;
+				if (Ghost(_body.GetUserData()).behavior is Rotate) {
+					_body.ApplyForce(new b2Vec2(0, -2.7), _body.GetWorldCenter());
+				} else {	
+					_body.m_sweep.a = 0;
+				}
 			}
 			super.updateNow();
 		}

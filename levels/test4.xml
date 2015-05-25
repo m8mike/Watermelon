@@ -1,0 +1,43 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="-20" y="-400" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
+    <Standard x="200" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="400" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="6">Standard</Standard>
+    <Standard x="600" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="4">Standard</Standard>
+    <Standard x="700" y="-60" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="8">Standard</Standard>
+    <Standard x="900" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="5">Standard</Standard>
+    <Standard x="1000" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="1200" y="-100" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="10">Standard</Standard>
+    <JumpThrough x="941.4820685920841" y="-57.251684467083365" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <JumpThrough x="1030.2028276726396" y="-74.5194832143056" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <JumpThrough x="1120.7099107615286" y="-89.40551661708339" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="0.1">JumpThrough</JumpThrough>
+    <Standard x="1300" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="30">Standard</Standard>
+    <Standard x="1100" y="-260" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="7" h="5">Standard</Standard>
+    <Standard x="900" y="-300" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="7" h="5">Standard</Standard>
+    <Standard x="840" y="-600" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="18">Standard</Standard>
+    <Standard x="960" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="6">Standard</Standard>
+    <Standard x="1160" y="-900" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="21">Standard</Standard>
+    <Standard x="540" y="-600" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="3">Standard</Standard>
+    <SpringBush x="998.1205972222228" y="-524.2661111111115" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="1126.6902777777782" y="-285.20555555555575" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="740" y="-540" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="1">Standard</Standard>
+    <Fan x="740" y="-760" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+    <Standard x="520" y="-960" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="20">Standard</Standard>
+    <Fan x="640" y="-900" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+    <Fan x="743.2953069011841" y="-977.8234301346187" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+    <Fan x="855.420306056611" y="-1005.7612424241793" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+    <Fan x="986.2328050712757" y="-1090.5090542858227" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+    <Standard x="1180" y="-900" angle="-9.999999999999998" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Standard</Standard>
+    <Standard x="1380" y="-935" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="2">Standard</Standard>
+    <Standard x="1560" y="-900" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="7" h="1">Standard</Standard>
+    <Standard x="1700" y="-1080" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Fan x="1580" y="-1120" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Fan</Fan>
+  </platforms>
+  <collectables>
+    <UmbrellaBonus x="572.1178081905657" y="-646.7743701282209">UmbrellaBonus</UmbrellaBonus>
+  </collectables>
+  <characters>
+    <Player x="6" y="-4">Player</Player>
+  </characters>
+</actors>

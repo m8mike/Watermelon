@@ -15,5 +15,12 @@ package {
 				AnimationCostume(funkyMountains[i]).animation.visible = true;
 			}
 		}
+		
+		override protected function removeCostumes():void {
+			for each (var mountain:AnimationCostume in funkyMountains) {
+				mountain.remove();
+			}
+			super.removeCostumes();
+		}
 	}
 }

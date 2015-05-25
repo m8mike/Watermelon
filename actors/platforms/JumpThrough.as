@@ -9,21 +9,32 @@ package {
 	* @author Mad Mike
 	*/
 	public class JumpThrough extends Platform {
-		
 		public var mask:Sprite;
 		private var body:b2Body;
+		public var width:Number;
+		public var height:Number;
 		
-		public function JumpThrough(x:Number, y:Number, w:Number, h:Number) {
+		public function JumpThrough(x:Number, y:Number, w:Number = 1, h:Number = 1) {
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			CameraManager._staticLayer.addChild(mask);
-			createCostumes();
-			createBodies();
-			super(body, mask);
+			width = w;
+			height = h;
+			super.reload();
+			super.init(body, mask);
 		}
 		
-		private function createCostumes():void {
+		override public function reload():void {
+			super.reload();
+			super.init(body, mask);
+		}
+		
+		override protected function createShapes():void {
+			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			CameraManager._staticLayer.addChild(mask);
+		}
+		
+		override protected function createCostumes():void {
 			var loc:Point = location.clone();
 			var loc1:Point = new Point(0, 0);
 			var row:MovieClip = new ug2();
@@ -47,7 +58,7 @@ package {
 			row.mask = mask;
 		}
 		
-		private function createBodies():void {
+		override protected function createBodies():void {
 			if (!bodyBuilder) {	
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;

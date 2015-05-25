@@ -33,6 +33,7 @@ package
 		public var handsIndex:int = 0;
 		
 		public var inCloud:Boolean = false;
+		public var inFan:Boolean = false;
 		
 		//cache animation with
 		public var animationMode:int = 0;
@@ -43,7 +44,7 @@ package
 		public static const UMBRELLA_GO:int = 4;
 		
 		private var controls:Controls;
-		public var inventory:HUD;
+		public var inventory:Inventory;
 		public var spawnPoint:Point;
 		
 		public function Player(x:int, y:int, controls:Controls) {
@@ -54,10 +55,12 @@ package
 			PlayerCostumeManager(costumeManager).show();
 			this.controls = controls;
 			controls.player = this;
-			inventory = new HUD();
-			addLife();
-			addLife();
-			addLife();
+			inventory = new Inventory();
+			inventory.addLife();
+			inventory.addLife();
+			inventory.addLife();
+			spawnPoint = new Point(x * 20, y * 20);
+			super(x, y);
 		}
 		
 		public function itemGet(id:String):void {
@@ -69,6 +72,10 @@ package
 			} else {
 				carryingItem = new (getDefinitionByName(id))();
 			}
+		}
+		
+		public function diamondGet():void {
+			inventory.addDiamond();
 		}
 		
 		public function hit():void {
@@ -107,7 +114,7 @@ package
 		}
 		
 		public function setSpawnPoint(point:Point):void {
-			spawnPoint = point;
+			spawnPoint = new Point(point.x, point.y);
 		}
 		
 		public function isOnGround():Boolean {
@@ -126,6 +133,10 @@ package
 			PlayerBodyManager(bodyManager).cloudJump();
 		}
 		
+		public function setJumpThrough(platform:JumpThrough):void {
+			PlayerBodyManager(bodyManager).jumpThrough = platform;
+		}
+		
 		override public function updateNow():void {
 			/*if (Platformer.stopLevel) {
 			   return void;
@@ -142,6 +153,14 @@ package
 					invincibilityKoef += 0.2;
 				}
 			}
+			if (inFan) {
+				if ((PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_GO_LEFT) ||
+					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_GO_RIGHT) ||
+					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_LEFT) ||
+					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_RIGHT)) {
+					getBody().ApplyForce(new b2Vec2(0, -5), getBody().GetWorldCenter());
+				}
+			}
 			CameraManager.renderLess();
 			//Body.m_sweep.a = 0;//This is what stops the player from rotating
 			super.updateNow();
@@ -153,6 +172,9 @@ package
 			}
 			if (Platformer._player == this) {
 				Platformer._player = null;
+			}
+			while (inventory._lifes.length) {
+				inventory.removeLife();
 			}
 			controls.player = null;
 			controls = null;
@@ -169,22 +191,6 @@ package
 				return new Point(worldCenter.x * PhysiVals.RATIO, 
 								 worldCenter.y * PhysiVals.RATIO);
 			}
-		}
-		
-		public function addLife():void {
-			inventory.addLife();
-		}
-		
-		public function removeLife():void {
-			inventory.removeLife();
-		}
-		
-		public function addKey():void {
-			inventory.addKey();
-		}
-		
-		public function removeKey():void {
-			inventory.removeKey();
 		}
 		
 		public function impulseUp():void {

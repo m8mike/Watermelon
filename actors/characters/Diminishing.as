@@ -16,6 +16,7 @@ package {
 		public function Diminishing(x:int, y:int, size:Number) {
 			bodyManager = new DummyBodyManager(new Point(x * 20, y * 20), this, MyShape(new RectShape(size, size)));
 			actualSize = size;
+			super(x, y);
 		}
 		
 		public function getBody():b2Body {

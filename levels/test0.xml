@@ -1,0 +1,28 @@
+<actors>
+  <platforms>
+    <Standard x="20" y="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="200" h="1">Standard</Standard>
+    <Standard x="0" y="-1200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="60">Standard</Standard>
+    <Standard x="100" y="-400" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="20" h="1">Standard</Standard>
+    <Cloud x="20" y="-300" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Cloud</Cloud>
+    <JumpThrough x="100" y="-200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="0.1">JumpThrough</JumpThrough>
+    <SpringBush x="360" y="-60" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="260" y="-60" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Wooden x="300" y="-40" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">Wooden</Wooden>
+    <TopHat x="440" y="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+    <TopHat x="600" y="-100" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+    <Teleporter x="412" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" x1="600" y1="-160">Teleporter</Teleporter>
+    <Teleporter x="572" y="-120" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" x1="440" y1="-60">Teleporter</Teleporter>
+    <Spikes x="480" y="-100" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Spikes</Spikes>
+  </platforms>
+  <collectables>
+    <BubbleBonus x="120" y="-420">BubbleBonus</BubbleBonus>
+    <BazookaBonus x="160" y="-440">BazookaBonus</BazookaBonus>
+    <JetpackBonus x="200" y="-420">JetpackBonus</JetpackBonus>
+    <SnowGunBonus x="220" y="-420">SnowGunBonus</SnowGunBonus>
+    <UmbrellaBonus x="240" y="-440">UmbrellaBonus</UmbrellaBonus>
+  </collectables>
+  <characters>
+    <Ghost x="4" y="-6">Ghost</Ghost>
+    <Player x="2" y="-6">Player</Player>
+  </characters>
+</actors>

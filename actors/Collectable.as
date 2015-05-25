@@ -1,4 +1,5 @@
 package {
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import flash.display.DisplayObject;
 	
@@ -40,6 +41,19 @@ package {
 		override protected function cleanUpBeforeRemoving():void {
 			Platformer.collectables.splice(Platformer.collectables.indexOf(this), 1);
 			super.cleanUpBeforeRemoving();
+		}
+		
+		override public function getXML():XML {
+			var typeOfCollectable:String = this.toString().substring(8, this.toString().length - 1);
+			var loc:b2Vec2;
+			if (this is BubbleBonus) {
+				loc = new b2Vec2(BubbleBonus(this).location.x, BubbleBonus(this).location.y);
+			} else {
+				loc = _body.GetPosition();
+			}
+			var xml:XML =  <{typeOfCollectable} x = {loc.x} y = {loc.y}>{typeOfCollectable}
+							</{typeOfCollectable}>;
+			return xml;
 		}
 	}
 }

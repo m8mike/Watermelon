@@ -11,6 +11,7 @@
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	import raster.bit101.display.BigAssCanvas;
 	
 	public class Animation extends Sprite {
@@ -412,7 +413,6 @@
 				currentFrame = totalFrames;
 			goto(Math.floor(currentFrame));
 		}
-		import flash.utils.getQualifiedClassName;
 		
 		private function goto(frame:Number):void {
 			if (!_cache) {

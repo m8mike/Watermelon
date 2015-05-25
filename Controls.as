@@ -19,6 +19,14 @@ package {
 		//public var fly:Boolean = false;
 		public var shootCannon:Boolean = false;
 		
+		
+		public static var freeLeft:Boolean = false;
+		public static var freeRight:Boolean = false;
+		public static var freeUp:Boolean = false;
+		public static var freeDown:Boolean = false;
+		public static var zoom:Boolean = false;
+		public static var unzoom:Boolean = false;
+		
 		public static var controls:Array = [];
 		
 		public static var allowed:Boolean;
@@ -77,14 +85,17 @@ package {
 				switch (e.keyCode) {
 					case 90: //z
 						//useUmbrella = true;
+						HUD.toggleInfo();
 						break;
 					case 81: //q
-						CameraManager.zoomKoef /= 1.1;
+						unzoom = true;
+						//CameraManager.zoomKoef /= 1.1;
 						//Left = true;
 						//Up = true;
 						break;
 					case 69: //e
-						CameraManager.zoomKoef *= 1.1;
+						zoom = true;
+						//CameraManager.zoomKoef *= 1.1;
 						//Right = true;
 						//Up = true;
 						break;
@@ -131,6 +142,9 @@ package {
 				}
 			} else {
 				switch (e.keyCode) {
+					case 90: //z
+						HUD.toggleInfo();
+						break;
 					case 13: //enter
 						if (!Platformer._player) {
 							Platformer._player = new Player(CameraManager.freePoint.x/20, CameraManager.freePoint.y/20, this);
@@ -138,29 +152,45 @@ package {
 							Platformer._player.spawn();
 						}
 						break;
+					case 81: //q
+						unzoom = true;
+						//CameraManager.zoomKoef /= 1.1;
+						break;
+					case 69: //e
+						zoom = true;
+						//CameraManager.zoomKoef *= 1.1;
+						break;
 					case 37: //Left
-						CameraManager.freePoint.x -= 10;
+						freeLeft = true;
+						//CameraManager.freePoint.x -= 10;
 						break;
 					case 65: //a
-						CameraManager.freePoint.x -= 10;
+						freeLeft = true;
+						//CameraManager.freePoint.x -= 10;
 						break;
 					case 38: //Up
-						CameraManager.freePoint.y -= 10;
+						freeUp = true;
+						//CameraManager.freePoint.y -= 10;
 						break;
 					case 87: //w
-						CameraManager.freePoint.y -= 10;
+						freeUp = true;
+						//CameraManager.freePoint.y -= 10;
 						break;
 					case 39: //Right
-						CameraManager.freePoint.x += 10;
+						freeRight = true;
+						//CameraManager.freePoint.x += 10;
 						break;
 					case 68: //d
-						CameraManager.freePoint.x += 10;
+						freeRight = true;
+						//CameraManager.freePoint.x += 10;
 						break;
 					case 40: //Down
-						CameraManager.freePoint.y += 10;
+						freeDown = true;
+						//CameraManager.freePoint.y += 10;
 						break;
 					case 83: //s
-						CameraManager.freePoint.y += 10;
+						freeDown = true;
+						//CameraManager.freePoint.y += 10;
 						break;
 					case 192: //`
 						Platformer.setFullScreen();
@@ -180,37 +210,47 @@ package {
 						c.useUmbrella = false;
 						break;
 					case 81: //q
+						unzoom = false;
 						c.left = false;
 						c.up = false;
 						break;
 					case 69: //e
+						zoom = false;
 						c.right = false;
 						c.up = false;
 						break;
 					case 37: //Left
 						c.left = false;
+						freeLeft = false;
 						break;
 					case 65: //a
 						c.left = false;
+						freeLeft = false;
 						break;
 					case 38: //Up
 						c.up = false;
 						c.useJetpack = false;
+						freeUp = false;
 						break;
 					case 87: //w
 						c.up = false;
+						freeUp = false;
 						break;
 					case 39: //Right
 						c.right = false;
+						freeRight = false;
 						break;
 					case 68: //d
 						c.right = false;
+						freeRight = false;
 						break;
 					case 40: //Down
 						c.down = false;
+						freeDown = false;
 						break;
 					case 83: //s
 						c.down = false;
+						freeDown = false;
 						break;
 					case 70: //Fly
 						break;

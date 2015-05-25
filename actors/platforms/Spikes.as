@@ -11,42 +11,65 @@ package {
 	public class Spikes extends Platform {
 		public var mask:Sprite;
 		private var body:b2Body;
+		public var width:Number;
+		public var height:Number;
+		private var _costumes:Array;
+		private var spikesCostume:MovieClip;
 		
-		public function Spikes(x:Number, y:Number, w:Number, h:Number) {
+		public function Spikes(x:Number, y:Number, w:Number = 1, h:Number = 1) {
+			_costumes = [];
+			width = w;
+			height = h;
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
+			super.reload();
+			super.init(body, mask);
+		}
+		
+		override public function reload():void {
+			super.reload();
+			super.init(body, mask);
+		}
+		
+		override protected function createShapes():void {
+			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
 			mask = shape.getSimpleSprite(location);
 			CameraManager._staticLayer.addChild(mask);
-			//createCostumes();
-			createBodies();
-			super(body, mask);
+			mask.visible = false;
 		}
 		
-		private function createCostumes():void {
-			var loc:Point = location.clone();
-			var loc1:Point = new Point(0, 0);
-			var row:MovieClip = new ug2();
-			CameraManager._staticLayer.addChildAt(row, 0);
-			loc.x -= 30;
-			loc.y -= 30;
-			row.x = loc.x;
-			row.y = loc.y;
-			var k:int = 1 + mask.width / (row.width * 0.8);
-			var l:int = 1 + mask.height / (row.height * 0.5);
-			for (var i:int = 0; i <= l; i++) {
-				for (var j:int = 0; j <= k; j++) {
-					var undergr:MovieClip = new ug2();
-					loc1.x = undergr.width * 0.8 * j;
-					loc1.y = undergr.height * 0.5 * i;
-					undergr.x = loc1.x;
-					undergr.y = loc1.y;
-					row.addChild(undergr);
-				}
+		override protected function createCostumes():void {
+			spikesCostume = new MovieClip();
+			var count:int = int(width);
+			while (count >= 1) {
+				count--;
+				var costume:AnimationCostume = new AnimationCostume("spikes_2", spikesCostume, 0.05, 0.05);
+				costume.setCoords(count * PhysiVals.MIN_SQARE, 0);
+				costume.animation.visible = true;
+				_costumes.push(costume);
 			}
-			row.mask = mask;
+			CameraManager._dynamicLayer.addChild(spikesCostume);
 		}
 		
-		private function createBodies():void {
+		override public function updateCostumes():void {
+			var x:Number = body.GetPosition().x * PhysiVals.RATIO;
+			var y:Number = body.GetPosition().y * PhysiVals.RATIO;
+			spikesCostume.rotation = body.GetAngle() / Math.PI * 180;
+			spikesCostume.x = x;
+			spikesCostume.y = y;
+			super.updateCostumes();
+		}
+		
+		override protected function removeCostumes():void {
+			while (_costumes.length) {
+				AnimationCostume(_costumes[0]).remove();
+				_costumes.splice(0, 1);
+			}
+			spikesCostume.parent.removeChild(spikesCostume);
+			super.removeCostumes();
+		}
+		
+		override protected function createBodies():void {
 			if (!bodyBuilder) {
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;

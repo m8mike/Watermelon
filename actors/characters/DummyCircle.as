@@ -10,6 +10,7 @@ package {
 		
 		public function DummyCircle(x:int, y:int, size:Number) {
 			bodyManager = new DummyBodyManager(new Point(x * 20, y * 20), this, MyShape(new CircleShape(size)));
+			super(x, y);
 		}
 		
 		public function getBody():b2Body {

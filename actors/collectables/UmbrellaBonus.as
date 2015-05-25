@@ -24,8 +24,6 @@ package {
 		override public function pick(player:Player):void {
 			player.itemGet("Umbrella");
 			super.pick(player);
-			/*trace(Platformer.countPixels(Platformer.thisIs));
-			trace(Platformer.objectCounter);*/
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {

@@ -8,10 +8,21 @@ package {
 	* @author Mad Mike
 	*/
 	public class Ghost extends Character {
+		private var point2:Point;
+		public var behavior:Behavior;
 		
-		public function Ghost(x:int, y:int) {
-			bodyManager = new GhostBodyManager(new Point(x * 20, y * 20), this);
+		public function Ghost(x:int, y:int, offsetToMove:Point = null) {
+			bodyManager = new GhostBodyManager(new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE), this);
 			costumeManager = new GhostCostumeManager(this);
+			super(x, y);
+			if (offsetToMove) {
+				behavior = new Rotate(3);
+				/*var wc:b2Vec2 = bodyManager.body.GetWorldCenter();
+				point2 = new Point(wc.x + offsetToMove.x, wc.y + offsetToMove.y);
+				behavior = new MoveAB(new Point(wc.x, wc.y), point2);*/
+			} else {
+				behavior = new Jump(100, 1);
+			}
 		}
 		
 		public function getBody():b2Body {
@@ -19,6 +30,9 @@ package {
 		}
 		
 		override public function updateNow():void {
+			if (behavior) {
+				behavior.update(bodyManager.body);
+			}
 			super.updateNow();
 		}
 		

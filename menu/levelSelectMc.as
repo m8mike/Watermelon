@@ -73,7 +73,8 @@ package
 		public function clicked(e:MouseEvent):void {
 			trace("start level №" + level);
 			LevelSelectionMC.remove();
-			Platformer.needToStartLevel = level;
+			LevelDirector.createLevel(level);
+			//Platformer.needToStartLevel = level;
 			/*LevelDirector.removeScreen = false;
 			LevelDirector.screen.gotoAndPlay(1);
 			LevelDirector.screen.visible = true;

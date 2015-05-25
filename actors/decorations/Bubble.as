@@ -34,6 +34,7 @@ package {
 		public function pop() {
 			if (bubble.currentFrame == 1) {
 				bubble.gotoAndPlay(2);
+				SoundMusic.playPopBubble();
 			}
 		}
 	}

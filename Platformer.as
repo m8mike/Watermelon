@@ -12,7 +12,6 @@ package {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
-	import flash.display.PixelSnapping;
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
@@ -37,56 +36,56 @@ package {
 		public static var decorations:Array = [];
 		
 		public static var _bodiesToRemove:Array = [];
-		public static var objectCounter:int = 0;
+		
+		public static var deleteAll:Boolean = false;
 		
 		//public static var controls:Controls;
 		
 		public function Platformer() {
 			thisIs = this;
+			CameraManager.initCameras();
 			Raster.cacheBackground();
 			PhysiVals.setupPhysicsWorld();
-			CameraManager.initCameras();
 			PhysiVals.setupTimers();
-			LevelDirector.createLevel(1);
+			new LevelEditor();
+			LevelSelectionMC.add(33);
+			//LevelDirector.createLevel(1);
 			addEventListener(Event.ENTER_FRAME, newEventListener);
 			stage.addEventListener(Event.DEACTIVATE, deactivation);
 			stage.addEventListener(Event.ACTIVATE, activation);
 			//setupDebugDraw();
-			/*var zap:AnimationCostume = new AnimationCostume("zapped", CameraManager.gui, 0.128*10, 0.14285714285714288*10, 8);
-			zap.setCoords(10, 10);
-			zap.play();*/
-		}
-		
-		private function setupDebugDraw():void {
-			var artistForHire:b2DebugDraw = new b2DebugDraw();
-			artistForHire.m_sprite = CameraManager._dynamicLayer;
-			artistForHire.m_drawScale = PhysiVals.RATIO;
-			artistForHire.SetFlags(b2DebugDraw.e_shapeBit);
-			artistForHire.m_lineThickness = 2.0;
-			artistForHire.m_fillAlpha = 0.8;
-			PhysiVals.world.SetDebugDraw(artistForHire);
 		}
 		
 		private function newEventListener(e:Event):void {
 			++PhysiVals.periods;
 			PhysiVals.world.Step(1 / PhysiVals.fps, 10);
+			if (deleteAll) {
+				if (platforms.length) {
+					Platform(platforms[0]).remove();
+				} else if (collectables.length) {
+					Collectable(collectables[0]).remove();
+				} else if (characters.length) {
+					Character(characters[0]).remove();
+				} else if (decorations.length) {
+					Decor(decorations[0]).remove();
+				} else {
+					trace("deleted");
+					deleteAll = false;
+					if (LevelLoader.xmlToLoad) {
+						LevelLoader.loadXml();
+					}
+				}
+			}
 			for each (var platform:Platform in platforms) {
 				if (platform is Teleporter) {
 					Teleporter(platform).check();
 				} else if (platform is SpringBush) {
 					platform.updateNow();
 				}
-			}
-			/*for each (var platform:Platform in platforms) {
-				if (!platform._body.IsStatic()) {
+				if (platform.behavior) {
 					platform.updateNow();
 				}
 			}
-			for each (var decor:Decor in decorations) {
-				if (!decor._body.IsStatic()) {
-					decor.updateNow();
-				}
-			}*/
 			for each (var decor:Decor in decorations) {
 				decor.updateNow();
 			}
@@ -114,12 +113,17 @@ package {
 					}
 				}
 			}
-			if (ghostCount == 0) {
+			/*if (ghostCount == 0) {
 				new Ghost(30, -10);
 				//countPixels(thisIs);
 				//trace("<end>");
-			}
+			}*/
 			reallyRemoveActors();
+			if (Controls.zoom) {
+				CameraManager.zoomKoef *= 1.1;
+			} else if (Controls.unzoom) {
+				CameraManager.zoomKoef /= 1.1;
+			}
 			if (_player) {
 				if (!_player.deleted){
 					CameraManager.zoomCameras(CameraUpdater.getCameraSection());
@@ -130,46 +134,35 @@ package {
 				} else {
 					CameraManager.zoomCameras(CameraManager.freePoint);
 					if (_player.invincibilityTime > 1000) {
-						_player.setSpawnPoint(new Point(2 * 20, -6 * 20));
+						//_player.setSpawnPoint(new Point(2 * 20, -6 * 20));
 						if (_player.carryingItem) {	
 							_player.carryingItem.remove();
 							_player.carryingItem = null;
 						}
 						while (_player.inventory._lifes.length < 3) {	
-							_player.addLife();
+							_player.inventory.addLife();
 						}
 						_player.spawn();
 					}
 				}
 			} else {
+				if (Controls.freeDown) {
+					CameraManager.freePoint.y += 10;
+				} else if (Controls.freeUp) {
+					CameraManager.freePoint.y -= 10;
+				}
+				if (Controls.freeLeft) {
+					CameraManager.freePoint.x -= 10;
+				} else if (Controls.freeRight) {
+					CameraManager.freePoint.x += 10;
+				}
 				CameraManager.zoomCameras(CameraManager.freePoint);
 			}
 		}
 		
-		public static function countPixels(object:DisplayObject):int {
-			var pixelCounter:int = 0;
-			if (object is DisplayObjectContainer) {
-				for (var i:int = 0; i < DisplayObjectContainer(object).numChildren; i++) {
-					pixelCounter += countPixels(DisplayObjectContainer(object).getChildAt(i));
-				}
-			} else if (object is Bitmap) {
-				pixelCounter += Bitmap(object).bitmapData.height * Bitmap(object).bitmapData.width;
-			}
-			trace(object.toString());
-			objectCounter++;
-			return pixelCounter;
-		}
-		
-		public static function traceParent(child:DisplayObject):void {
-			if (child.parent) {
-				trace(child.parent.toString());
-				traceParent(child.parent);
-			}
-		}
-		
-		private static function deleteAll():void {
+		/*private static function deleteAll():void {
 			//trace(System.totalMemory / 1024);
-			/*NewContactListener.handleContacts = false;
+			NewContactListener.handleContacts = false;
 			controls.disallowControls();
 			for each (var a:Actor in _allActors) {
 				if (a is ArbiStaticActor) {
@@ -190,8 +183,8 @@ package {
 			trace(PhysiVals.world.GetBodyCount().toString()+ " bodies");
 			//System.gc();
 			thisIs.countChildren(thisIs);
-			LevelSelectionMC.add(++Platformer.levelsOpen);*/
-		}
+			LevelSelectionMC.add(++Platformer.levelsOpen);
+		}*/
 		
 		// Mark an actor to be removed later
 		public static function safeRemoveBody(bodyToRemove:b2Body):void {

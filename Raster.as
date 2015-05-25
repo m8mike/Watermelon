@@ -29,6 +29,7 @@ package {
 			cacheAnimation("hillsWithTrees4"); //"fon5");
 			cacheAnimation("ghost1");
 			cacheAnimation("bubbleBonus");
+			cacheAnimation("diamond_bonus");
 			cacheAnimation("GrassBackground");
 			cacheAnimation("GroundBackground");
 			cacheAnimation("hatFinish");
@@ -44,6 +45,9 @@ package {
 			cacheAnimation("bush_spring");
 			cacheAnimation("bush_spring1");
 			cacheAnimation("cloudblue");
+			cacheAnimation("spikes_2");
+			cacheAnimation("loadingBackground");
+			cacheAnimation("fan_working");
 			cacheItems();
 		}
 		// вызывать перед созданием игрока

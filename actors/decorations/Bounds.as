@@ -51,7 +51,32 @@ package {
 			horisontals.width = w * PhysiVals.MIN_SQARE;
 			CameraManager._staticLayer.addChild(verticals);
 			CameraManager._staticLayer.addChild(horisontals);
-			
+		}
+		
+		public function setAngle(angle:Number):void {
+			/*if (grass) {
+				grass.animation.rotation = angle;
+			}
+			if (ceiling) {
+				ceiling.animation.rotation = angle;
+			}*/
+			if (verticals) {
+				verticals.rotation = angle;
+			}
+			if (horisontals) {
+				horisontals.rotation = angle;
+			}
+		}
+		
+		public function setLoc(x:Number, y:Number):void {
+			if (verticals) {
+				verticals.x = x;
+				verticals.y = y;
+			}
+			if (horisontals) {
+				horisontals.x = x;
+				horisontals.y = y;
+			}
 		}
 		
 		override protected function removeCostumes():void {

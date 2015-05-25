@@ -16,37 +16,25 @@ package
 		private var costume:MovieClip;
 		public var mask:Sprite;
 		private var bounds:Bounds;
+		public var width:Number;
+		public var height:Number;
+		private var offsetCostumeFromMask:Point;
 		
-		public function Standard(x:Number, y:Number, w:Number, h:Number) {
+		public function Standard(x:Number, y:Number, w:Number = 1, h:Number = 1) {
+			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			
-			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			CameraManager._staticLayer.addChild(mask);
-			createCostumes();
+			width = w;
+			height = h;
+			super.reload();
 			bounds = new Bounds(x, y, w, h);
-			
-			createBodies();
-			super(body, mask);
+			super.init(body, mask);
 		}
 		
-		
-		public function reload(x:Number, y:Number, w:Number, h:Number):void {
-			removeBodies();
-			removeCostumes();
-			costume = null;
-			mask = null;
-			shape = null;
-			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			mask.x = location.x;
-			mask.y = location.y;
-			CameraManager._staticLayer.addChild(mask);
-			createCostumes();
-			bounds = new Bounds(x, y, w, h);
-			
-			createBodies();
+		override public function reload():void {
+			super.reload();
+			/*mask.x = location.x * PhysiVals.MIN_SQARE;
+			mask.y = location.y * PhysiVals.MIN_SQARE;*/
+			bounds = new Bounds(location.x / PhysiVals.MIN_SQARE, location.y / PhysiVals.MIN_SQARE, width, height);
 			super.init(body, mask);
 		}
 		
@@ -54,12 +42,22 @@ package
 			trace(body.GetWorldCenter().x + " " + body.GetWorldCenter().y);
 		}
 		
-		private function createCostumes():MovieClip {
+		override protected function createShapes():void {
+			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			mask.x = location.x * PhysiVals.MIN_SQARE;
+			mask.y = location.y * PhysiVals.MIN_SQARE;
+			CameraManager._staticLayer.addChild(mask);
+		}
+		
+		override protected function createCostumes():void {
 			var loc:Point = location.clone();
 			var loc1:Point = new Point(0, 0);
 			costume = new MovieClip();
 			costume.addChild(new ug2());
 			CameraManager._staticLayer.addChildAt(costume, 0);
+			loc.x *= PhysiVals.MIN_SQARE;
+			loc.y *= PhysiVals.MIN_SQARE;
 			loc.x -= 30;
 			loc.y -= 30;
 			costume.x = loc.x;
@@ -77,9 +75,9 @@ package
 				}
 			}
 			costume.mask = mask;
-			costume.x = location.x-30;
-			costume.y = location.y-30;
-			return costume;
+			costume.x = location.x - 30;
+			costume.y = location.y - 30;
+			offsetCostumeFromMask = new Point(costume.x - mask.x, costume.y - mask.y);
 		}
 		
 		override protected function removeCostumes():void {
@@ -98,11 +96,30 @@ package
 					costume.removeChildAt(0);
 				}*/
 			}
-			bounds.remove();
+			if (bounds) {
+				bounds.remove();
+			}
 			super.removeCostumes();
 		}
 		
-		private function createBodies():void {
+		override public function updateCostumes():void {
+			super.updateCostumes();
+			var angle:Number = body.GetAngle() / Math.PI * 180;
+			if (bounds) {
+				bounds.setAngle(angle);
+				bounds.setLoc(body.GetPosition().x * PhysiVals.RATIO, body.GetPosition().y * PhysiVals.RATIO);
+			}
+			if (mask) {
+				mask.rotation = angle;
+			}
+			if (costume) {
+				costume.rotation = angle;
+				costume.x = mask.x - 30;
+				costume.y = mask.y - 30;
+			}
+		}
+		
+		override protected function createBodies():void {
 			if (!bodyBuilder) {
 				bodyBuilder = new StaticBodyBuilder();
 				StaticBodyBuilder(bodyBuilder).groupIndex = -2;
@@ -110,7 +127,6 @@ package
 			StaticBodyBuilder(bodyBuilder).x = location.x;
 			StaticBodyBuilder(bodyBuilder).y = location.y;
 			body = StaticBodyBuilder(bodyBuilder).getBody(new Array(shape));
-			body.SetUserData(this);
 		}
 	}
 }

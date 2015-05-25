@@ -15,5 +15,12 @@ package {
 				AnimationCostume(coniferous[i]).animation.visible = true;
 			}
 		}
+		
+		override protected function removeCostumes():void {
+			for each (var tree:AnimationCostume in coniferous) {
+				tree.remove();
+			}
+			super.removeCostumes();
+		}
 	}
 }

@@ -1,0 +1,24 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="200" y="20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="8" h="4">Standard</Standard>
+    <Standard x="360" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="5">Standard</Standard>
+    <Standard x="420" y="10" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="6">Standard</Standard>
+    <Standard x="520" y="-50" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="14" h="7">Standard</Standard>
+    <Standard x="-200" y="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="-200" y="-200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="9">Standard</Standard>
+    <Standard x="800" y="-200" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="11">Standard</Standard>
+    <TopHat x="760" y="-40" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+  </platforms>
+  <collectables>
+    <BubbleBonus x="535.6958887500003" y="-89.20435944444449">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="358.4055795833336" y="-46.81663097222226">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="182.50209847222231" y="-27.66945652777779">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="760.4722222222222" y="-144.72222222222223">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="766.875" y="-190.79166666666666">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="735.4722222222223" y="-174.81944444444446">BubbleBonus</BubbleBonus>
+  </collectables>
+  <characters>
+    <Player x="31" y="-5">Player</Player>
+  </characters>
+</actors>

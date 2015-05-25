@@ -17,6 +17,7 @@ package {
 		
 		public var x:Number = 0;
 		public var y:Number = 0;
+		public var angle:Number = 0;
 		public var density:Number = 0;
 		public var friction:Number = 0.2;
 		public var restitution:Number = 0.3;
@@ -64,6 +65,9 @@ package {
 				}
 				_body.SetMassFromShapes();
 				_body.SetBullet(bullet);
+				if (angle) {
+					_body.SetXForm(_body.GetPosition(), angle * Math.PI / 180);
+				}
 				return _body;
 			}
 		}

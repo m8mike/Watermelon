@@ -17,15 +17,30 @@ package {
 		private var framesToMoveCameraLeft:int = -1;
 		public var point1:Point;//для более плавного движения камеры в момент запрыгивания в шляпу
 		
-		public function Teleporter(x:Number, y:Number, w:Number, h:Number, point:Point) {
-			spawnPoint = point;
-			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			shape = new RectShape(w * PhysiVals.MIN_SQARE, h * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			CameraManager._staticLayer.addChild(mask);
-			
-			createBodies();
-			super(body, mask);
+		public var width:Number;
+		public var height:Number;
+		
+		public function Teleporter(x:Number, y:Number, x1:Number = 0, y1:Number = 0) {
+			super();
+			location = new Point((x - 1.4) * PhysiVals.MIN_SQARE, (y - 1) * PhysiVals.MIN_SQARE);
+			width = 3.3;
+			height = 0.5;
+			spawnPoint = new Point(x1 * 20, (y1 - 3) * 20);
+			super.reload();
+			super.init(body, mask);
+		}
+		
+		public function setSpawnPoint(x:Number, y:Number):void {
+			spawnPoint = new Point(x, y);
+		}
+		
+		public function getSpawnPoint():Point {
+			return spawnPoint;
+		}
+		
+		override public function reload():void {
+			super.reload();
+			super.init(body, mask);
 		}
 		
 		public function teleportPlayer(player:Player):void {
@@ -54,7 +69,13 @@ package {
 			}
 		}
 		
-		private function createBodies():void {
+		override protected function createShapes():void {
+			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
+			mask = shape.getSimpleSprite(location);
+			CameraManager._staticLayer.addChild(mask);
+		}
+		
+		override protected function createBodies():void {
 			if (!bodyBuilder) {	
 				bodyBuilder = new StaticBodyBuilder();
 				bodyBuilder.density = 0;
