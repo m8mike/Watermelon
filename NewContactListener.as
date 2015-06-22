@@ -118,7 +118,7 @@ package {
 		
 		private function playerHitsPlatform(player:Player, platform:Platform, point:b2ContactPoint):void {
 			if (!player.isOnGround()) {
-				if (platform is TopHat && platform is Cloud && platform is Spikes) {
+				if ((platform is TopHat || platform is Cloud || platform is Spikes) || Platformer._player.carryingItem is Jetpack) {
 					player.allowJumps(point.normal, false);
 				} else if (!(platform is SpringBush) && !(platform is Teleporter) 
 							&& !(platform is EndLevel) && !(platform is Fan)) {
@@ -149,7 +149,6 @@ package {
 				return void;
 			} else if (platform is SpringBush) {
 				SpringBush(platform).hit();
-				player.getBody().ApplyImpulse(new b2Vec2(0, -0.3), player.getBody().GetWorldCenter());
 				//new leaves (or dust - delete flinders class)
 				return void;
 			} else if (platform is Cloud) {

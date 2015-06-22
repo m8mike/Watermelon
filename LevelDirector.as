@@ -8,7 +8,7 @@ package {
 		public static var hills:Hills;
 		
 		public function LevelDirector() {
-		
+			
 		}
 		
 		public static function createLevel(level:int):void {
@@ -147,6 +147,11 @@ package {
 			new DiamondBonus(10, -1 - 20);
 			new DiamondBonus(11, -1 - 20);
 			new DiamondBonus(12, -2 - 20);
+			/*new HatBonus(6, -1 - 20, 8);
+			new HatBonus(8, -2 - 20, 9);
+			new HatBonus(10, -1 - 20, 18);
+			new HatBonus(11, -1 - 20, 19);
+			new HatBonus(12, -2 - 20, 21);*/
 			
 			/*coniferous = new BigConiferous();
 			mountains = new BigMountains();

@@ -83,6 +83,13 @@ package {
 			//for each (var c:Controls in controls)	
 			if (_player) {
 				switch (e.keyCode) {
+					case 8: //backspace
+						if (CarbonMenu.carbonMenu.visible) {
+							CarbonMenu.carbonMenu.hide();
+						} else {
+							CarbonMenu.carbonMenu.show();
+						}
+						break;
 					case 90: //z
 						//useUmbrella = true;
 						HUD.toggleInfo();

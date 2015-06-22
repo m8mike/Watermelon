@@ -71,8 +71,11 @@ package
 			if (body.GetLinearVelocity().y >= 0) {
 				cloudJumping = false;
 			}
-			if (canJump && !controls.useJetpack && jetpackTime < 100 && PhysiVals.fps != Infinity) {
-				jetpackTime++;
+			if (parent.carryingItem is Jetpack) {
+				if (canJump && !controls.useJetpack && jetpackTime < 100 && PhysiVals.fps != Infinity) {
+					jetpackTime++;
+					parent.inventory.setJetpackTime(jetpackTime);
+				}
 			}
 			if (jetpackTime <= 0) {
 				controls.useJetpack = false;
@@ -122,6 +125,7 @@ package
 				if (PhysiVals.fps > 0 && PhysiVals.fps != Infinity) {
 					if (jetpackTime > 0) {
 						jetpackTime--;
+						parent.inventory.setJetpackTime(jetpackTime);
 						body.ApplyForce(new b2Vec2(0.0, -3.8), body.GetWorldCenter()); ///-1.8
 					} else {
 						body.m_linearDamping = 3;

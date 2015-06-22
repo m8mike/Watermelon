@@ -35,6 +35,7 @@ package {
 			createCostumes();
 			changeCondition(0);
 			show();
+			parent.deleted = false;
 		}
 		
 		override public function updateNow():void {

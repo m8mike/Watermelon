@@ -66,16 +66,31 @@ package
 		public function itemGet(id:String):void {
 			if (carryingItem) {
 				if (getQualifiedClassName(carryingItem) != id) {
+					if (getQualifiedClassName(carryingItem) == "Jetpack") {
+						inventory.hideJetpackTime();
+					}
 					carryingItem.remove();
 					carryingItem = new (getDefinitionByName(id))();
 				}
 			} else {
 				carryingItem = new (getDefinitionByName(id))();
 			}
+			if (id == "Jetpack") {
+				PlayerBodyManager(bodyManager).jetpackTime = 100;
+				inventory.addJetpackTime();
+			}
 		}
 		
 		public function diamondGet():void {
 			inventory.addDiamond();
+		}
+		
+		public function changeHat(index:int):void {
+			deleted = true;
+			costumeManager.removeCostumes();
+			hatIndex = index;
+			setSpawnPoint(new Point(getBody().GetWorldCenter().x * 30, getBody().GetWorldCenter().y * 30));
+			costumeManager = new PlayerCostumeManager(this);
 		}
 		
 		public function hit():void {
@@ -176,6 +191,7 @@ package
 			while (inventory._lifes.length) {
 				inventory.removeLife();
 			}
+			inventory.removeJetpackTime();
 			controls.player = null;
 			controls = null;
 			Controls.allowControls();

@@ -2,10 +2,13 @@ package
 {
 	import bodyBuilder.StaticBodyBuilder;
 	import Box2D.Dynamics.b2Body;
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	/**
 	 * ...
@@ -27,15 +30,13 @@ package
 			height = h;
 			super.reload();
 			bounds = new Bounds(x, y, w, h);
-			super.init(body, mask);
+			super.init(body, costume);
 		}
 		
 		override public function reload():void {
 			super.reload();
-			/*mask.x = location.x * PhysiVals.MIN_SQARE;
-			mask.y = location.y * PhysiVals.MIN_SQARE;*/
 			bounds = new Bounds(location.x / PhysiVals.MIN_SQARE, location.y / PhysiVals.MIN_SQARE, width, height);
-			super.init(body, mask);
+			super.init(body, costume);
 		}
 		
 		public function bodyTrace():void {
@@ -44,40 +45,28 @@ package
 		
 		override protected function createShapes():void {
 			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			mask.x = location.x * PhysiVals.MIN_SQARE;
-			mask.y = location.y * PhysiVals.MIN_SQARE;
-			CameraManager._staticLayer.addChild(mask);
 		}
 		
 		override protected function createCostumes():void {
-			var loc:Point = location.clone();
-			var loc1:Point = new Point(0, 0);
-			costume = new MovieClip();
-			costume.addChild(new ug2());
-			CameraManager._staticLayer.addChildAt(costume, 0);
-			loc.x *= PhysiVals.MIN_SQARE;
-			loc.y *= PhysiVals.MIN_SQARE;
-			loc.x -= 30;
-			loc.y -= 30;
-			costume.x = loc.x;
-			costume.y = loc.y;
-			var k:int = 1 + mask.width / (costume.width * 0.8);
-			var l:int = 1 + mask.height / (costume.height * 0.5);
-			for (var i:int = 0; i <= l; i++) {
-				for (var j:int = 0; j <= k; j++) {
-					var undergr:MovieClip = new ug2();
-					loc1.x = undergr.width * 0.8 * j;
-					loc1.y = undergr.height * 0.5 * i;
-					undergr.x = loc1.x;
-					undergr.y = loc1.y;
-					costume.addChild(undergr);
+			var scaleRate:Number = 3;
+			var bitmapData:BitmapData = new BitmapData(width * 20 * scaleRate, height * 20 * scaleRate, false, 0x00000000);
+			var u:MovieClip = new ug2();
+			for (var j:int = 0; j < height * 20 / 43 + 1; j++) {
+				for (var i:int = 0; i < width * 20 / 92 + 1; i++) {
+					var m:Matrix = new Matrix();
+					m.translate( -10 * scaleRate + i * 92, -22 * scaleRate + j * 43);
+					m.scale(scaleRate, scaleRate);
+					bitmapData.draw(u, m);
 				}
 			}
-			costume.mask = mask;
-			costume.x = location.x - 30;
-			costume.y = location.y - 30;
-			offsetCostumeFromMask = new Point(costume.x - mask.x, costume.y - mask.y);
+			var bitmap:Bitmap = new Bitmap(bitmapData);
+			bitmap.scaleX = 1 / scaleRate;
+			bitmap.scaleY = bitmap.scaleX;
+			costume = new MovieClip();
+			costume.x = location.x / PhysiVals.RATIO;
+			costume.y = location.y / PhysiVals.RATIO;
+			costume.addChild(bitmap);
+			CameraManager._staticLayer.addChildAt(costume, 0);
 		}
 		
 		override protected function removeCostumes():void {
@@ -92,9 +81,6 @@ package
 					costume.parent.removeChild(costume);
 				}
 				PhysiVals.cleanChildren(costume);
-				/*while (costume.numChildren) {
-					costume.removeChildAt(0);
-				}*/
 			}
 			if (bounds) {
 				bounds.remove();
@@ -114,8 +100,6 @@ package
 			}
 			if (costume) {
 				costume.rotation = angle;
-				costume.x = mask.x - 30;
-				costume.y = mask.y - 30;
 			}
 		}
 		

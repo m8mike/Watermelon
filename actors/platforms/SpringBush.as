@@ -41,6 +41,11 @@ package {
 				costume.play();
 				SoundMusic.playBoink();
 			}
+			var angle:Number = body.GetAngle(); 
+			var x:Number = 0.3 * Math.sin(angle);
+			var y:Number = -0.3 * Math.cos(angle);
+			var playerBody:b2Body = Platformer._player.getBody();
+			playerBody.ApplyImpulse(new b2Vec2(x, y), playerBody.GetWorldCenter());
 		}
 		
 		override protected function createShapes():void {

@@ -79,6 +79,9 @@ package {
 		public static function cacheItems():void {
 			cacheAnimation("bazookaHands");
 			cacheAnimation("bazookaSnowHands");
+			/*for (var i:int = 1; i < 15; i++) {
+				cacheAnimation("hat" + (i<10?("0"+i):i));
+			}*/
 		}
 		
 		public static function getAnimation(id):Animation {

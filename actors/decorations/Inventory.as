@@ -18,6 +18,8 @@ package {
 		private var diamondIcon:AnimationCostume;
 		private var diamondText:TextField;
 		
+		private var jetpackText:TextField;
+		
 		public function Inventory() {
 		
 		}
@@ -92,6 +94,47 @@ package {
 					}
 				}
 				_keys.splice(_keys.length - 1, 1);
+			}
+		}
+		
+		public function addJetpackTime():void {
+			if (jetpackText) {
+				jetpackText.visible = true;
+				return void;
+			}
+			jetpackText = new TextField();
+			jetpackText.x = 490;
+			jetpackText.y = 10;
+			jetpackText.visible = true;
+			jetpackText.selectable = false;
+			jetpackText.text = "Jetpack: 100";
+			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			mytf.size = 22;
+			jetpackText.setTextFormat(mytf);
+			jetpackText.defaultTextFormat = mytf;
+			jetpackText.width = 200;
+			jetpackText.height = 60;
+			jetpackText.textColor = 0x004080;
+			CameraManager.hud.addChild(jetpackText);
+		}
+		
+		public function setJetpackTime(time:int):void {
+			jetpackText.text = "Jetpack: " + time.toString();
+		}
+		
+		public function removeJetpackTime():void {
+			if (jetpackText) {
+				if (jetpackText.parent) {	
+					jetpackText.parent.removeChild(jetpackText);
+				}
+			}
+		}
+		
+		public function hideJetpackTime():void {
+			if (jetpackText) {
+				jetpackText.visible = false;
+			} else {
+				trace("error jetpack time removing while there is no jetpack time");
 			}
 		}
 	}

@@ -86,7 +86,8 @@ package {
 		
 		public function selectLevel(e:MouseEvent):void {
 			clearLevel(null);
-			LevelSelectionMC.add(33);
+			CarbonMenu.carbonMenu.show();
+			//LevelSelectionMC.add(33);
 			//LevelLoader.loadLevel();
 		}
 		
@@ -125,7 +126,9 @@ package {
 		private function createActor(e:MouseEvent):void {
 			var x:Number = 1 / CameraManager.zoomKoef * (e.stageX - CameraManager.pLayer.x) / 72;
 			var y:Number = 1 / CameraManager.zoomKoef * (e.stageY - CameraManager.pLayer.y) / 72;
-			switch (HUD.actorTypeTF.text) {
+			x = Math.round(x);
+			y = Math.round(y);
+			switch (HUD.getActorText()) {
 				case "Cloud": 
 					new Cloud(x, y);
 					break;

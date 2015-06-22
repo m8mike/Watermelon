@@ -35,17 +35,21 @@ package {
 		public static const EDIT:int = 1;
 		public static const CREATE:int = 2;
 		private static var editorStateTF:TextField;
-		public static var actorTypeTF:TextField;
-		
+		static private var actorType:DropDownMenu;
+		/*
 		private static const characterList:Array = ["CrateBox", "Diminishing", "Dummy", "DummyCircle", 
 														"DummySplitter", "Ghost", "Player"];
 		private static const collectableList:Array = ["BazookaBonus", "BubbleBonus", "JetpackBonus", "Key", 
 														"SnowGunBonus", "UmbrellaBonus", "DiamondBonus"];
 		public static const platformList:Array = ["Cloud", "Door", "JumpThrough", "Spikes", "SpringBush", 
 													"Standard", "Teleproter", "EndLevel", "TopHat", "Wooden", "Fan"];
-		
+		*/
 		public function HUD() {
 			
+		}
+		
+		public static function getActorText():String {
+			return actorType.selectedItem.getText();
 		}
 		
 		public static function toggleInfo(e:MouseEvent = null):void {
@@ -72,7 +76,7 @@ package {
 				break;
 				case CREATE:
 					setInfoVisibility(false);
-					actorTypeTF.visible = false;
+					actorType.visible = false;
 				break;
 				default:
 			}
@@ -95,7 +99,7 @@ package {
 				break;
 				case CREATE:
 					editorStateTF.text = "CREATE";
-					actorTypeTF.visible = true;
+					actorType.visible = true;
 					invisibleCreateButton.visible = true;
 					for each (var tf3:TextField in _spawn) {
 						tf3.visible = true;
@@ -183,22 +187,6 @@ package {
 			reloadPlatformButton.visible = true;
 			CameraManager.hud.addChild(reloadPlatformButton);
 			reloadPlatformButton.addEventListener(MouseEvent.CLICK, reloadPlatform);
-		}
-		
-		private static function selectActor(e:MouseEvent):void {
-			if (actorToAdd < platformList.length-1) {
-				actorToAdd++;
-				actorTypeTF.text = platformList[actorToAdd];
-			} else if (actorToAdd < platformList.length + collectableList.length-1) {
-				actorToAdd++;
-				actorTypeTF.text = collectableList[actorToAdd-platformList.length];
-			} else if (actorToAdd < platformList.length + collectableList.length + characterList.length-1) {
-				actorToAdd++;
-				actorTypeTF.text = characterList[actorToAdd - platformList.length - collectableList.length];
-			} else {
-				actorToAdd = 0;
-				actorTypeTF.text = platformList[actorToAdd];
-			}
 		}
 		
 		public static function addInvisibleButtons():void {
@@ -415,23 +403,34 @@ package {
 		}
 		
 		public static function addActorType():void {
-			actorTypeTF = new TextField();
-			actorTypeTF.x = 450;
-			actorTypeTF.y = 20;
-			actorTypeTF.visible = false;
-			actorTypeTF.selectable = false;
-			actorTypeTF.text = platformList[actorToAdd];
-			var mytf:TextFormat = new TextFormat("Courier New");
-			actorTypeTF.setTextFormat(mytf);
-			actorTypeTF.defaultTextFormat = mytf;
-			actorTypeTF.width = 200;
-			actorTypeTF.height = 20;
-			actorTypeTF.background = true;
-			actorTypeTF.backgroundColor = 0x000000;
-			actorTypeTF.alpha = 0.9;
-			actorTypeTF.textColor = 0xFF0000;
-			actorTypeTF.addEventListener(MouseEvent.CLICK, selectActor);
-			CameraManager.hud.addChild(actorTypeTF);	
+			actorType = new DropDownMenu(new Point(450, 20), CameraManager.hud);
+			actorType.pushItem("CrateBox");
+			actorType.pushItem("Diminishing");
+			actorType.pushItem("Dummy");
+			actorType.pushItem("DummyCircle");
+			actorType.pushItem("DummySplitter");
+			actorType.pushItem("Ghost");
+			actorType.pushItem("Player");
+			
+			actorType.pushItem("BazookaBonus");
+			actorType.pushItem("BubbleBonus");
+			actorType.pushItem("JetpackBonus");
+			actorType.pushItem("Key");
+			actorType.pushItem("SnowGunBonus");
+			actorType.pushItem("UmbrellaBonus");
+			actorType.pushItem("DiamondBonus");
+			
+			actorType.pushItem("Cloud");
+			actorType.pushItem("Door");
+			actorType.pushItem("JumpThrough");
+			actorType.pushItem("Spikes");
+			actorType.pushItem("SpringBush");
+			actorType.pushItem("Standard");
+			actorType.pushItem("Teleproter");
+			actorType.pushItem("EndLevel");
+			actorType.pushItem("TopHat");
+			actorType.pushItem("Fan");
+			actorType.visible = false;
 		}
 	}
 }

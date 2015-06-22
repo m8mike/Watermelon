@@ -48,7 +48,9 @@ package {
 			PhysiVals.setupPhysicsWorld();
 			PhysiVals.setupTimers();
 			new LevelEditor();
-			LevelSelectionMC.add(33);
+			new CarbonMenu();
+			LevelDirector.createLevel(0);
+			//LevelSelectionMC.add(33);
 			//LevelDirector.createLevel(1);
 			addEventListener(Event.ENTER_FRAME, newEventListener);
 			stage.addEventListener(Event.DEACTIVATE, deactivation);

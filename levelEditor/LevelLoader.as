@@ -37,7 +37,7 @@ package {
 			}
 			str += "</characters></actors>";
 			var xml:XML = new XML(str);
-			var file:FileReference = new FileReference;
+			var file:FileReference = new FileReference();
 			file.save(xml.toXMLString(), "test.xml");
 		}
 		

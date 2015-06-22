@@ -1,15 +1,16 @@
 package {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.geom.Matrix;
 	
 	/**
 	* ...
 	* @author Mad Mike
 	*/
 	public class Hills extends Decor {
-		/*private static var fon1:Animation;
-		private static var fon2:Animation;
-		private static var fon3:Animation;
-		private static var fon4:Animation;*/
 		private var line1:Array = [];
 		private var line2:Array = [];
 		private var line3:Array = [];
@@ -18,32 +19,6 @@ package {
 		public function Hills() {
 			addHills(4);
 		}
-		/*
-		public static function addHills(numHills:int = 1):void {
-			var offset:Number = -300;
-			for (var i:int = -2; i < 5; i++) {
-				fon1 = Raster.getAnimation("hillsWithTrees1"); //"fon1");
-				fon1.x = offset;
-				CameraManager._camera01.addChild(fon1);
-				if (numHills > 1) {
-					offset -= fon1.width / 2;
-					fon2 = Raster.getAnimation("hillsWithTrees2"); //"fon6");
-					fon2.x = offset / 2 * 0.75;
-					CameraManager._camera03.addChild(fon2);
-				}
-				if (numHills > 2) {
-					fon3 = Raster.getAnimation("hillsWithTrees3"); //"fon32");
-					fon3.x = offset / 2;
-					CameraManager._camera02.addChild(fon3);
-				}
-				if (numHills > 3) {
-					fon4 = Raster.getAnimation("hillsWithTrees4"); //"fon5");
-					fon4.x = offset / 4;
-					CameraManager._camera04.addChild(fon4);
-				}
-				offset += fon1.width * 4 / 3;
-			}
-		}*/
 		
 		public function addHills(numHills:int = 1):void {
 			var offset:Number = -300;
@@ -70,6 +45,44 @@ package {
 				offset += AnimationCostume(line1[i + 2]).animation.width * 4 / 3;
 			}
 		}
+		/*
+		public function addHills(numHills:int = 1):void {
+			var offset:Number = -300;
+			for (var i:int = -2; i < 5; i++) {
+				line1.push(getNewBitmap(new hillsWithTrees1(), CameraManager._camera01));
+				Bitmap(line1[i + 2]).x = offset;
+				Bitmap(line1[i + 2]).y = 0;
+				if (numHills > 1) {
+					offset -= Bitmap(line1[i + 2]).width / 2;
+					line2.push(getNewBitmap(new hillsWithTrees2(), CameraManager._camera03));
+					Bitmap(line2[i + 2]).x = offset / 2 * 0.75;
+					Bitmap(line2[i + 2]).y = 0;
+				}
+				if (numHills > 2) {
+					line3.push(getNewBitmap(new hillsWithTrees3(), CameraManager._camera02));
+					Bitmap(line3[i + 2]).x = offset / 2;
+					Bitmap(line3[i + 2]).y = 0;
+				}
+				if (numHills > 3) {
+					line4.push(getNewBitmap(new hillsWithTrees4(), CameraManager._camera04));
+					Bitmap(line4[i + 2]).x = offset / 4;
+					Bitmap(line4[i + 2]).y = 0;
+				}
+				offset += Bitmap(line1[i + 2]).width * 4 / 3;
+			}
+		}
+		
+		private function getNewBitmap(clip:MovieClip, parent:DisplayObjectContainer, scaleRate:Number = 1):Bitmap {
+			var bitmapData:BitmapData = new BitmapData(clip.width * scaleRate, clip.height * scaleRate, true);
+			var m:Matrix = new Matrix();
+			m.scale(scaleRate, scaleRate);
+			bitmapData.draw(clip, m);
+			var bitmap:Bitmap = new Bitmap(bitmapData);
+			bitmap.scaleX = 1 / scaleRate;
+			bitmap.scaleY = bitmap.scaleX;
+			parent.addChild(bitmap);
+			return bitmap;
+		}*/
 		
 		override protected function removeCostumes():void {
 			for each (var hill:AnimationCostume in line1) {
