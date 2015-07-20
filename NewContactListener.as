@@ -169,7 +169,9 @@ package {
 			
 			if (vel > 10) {
 				//new Lightning(vel, new Point(point.position.x, point.position.y));
-				new Dust(vel, new Point(point.position.x, point.position.y));
+				if (point.normal.y < -0.7) {
+					new Dust(vel, new Point(point.position.x, point.position.y));
+				}
 				/*var shape:CircleShape = new CircleShape(vel);
 				var sprite:Sprite = shape.getSimpleSprite(new Point(point.position.x, point.position.y));
 				sprite.x = point.position.x * 30;

@@ -1,4 +1,5 @@
 package {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
@@ -7,7 +8,7 @@ package {
 	* @author Mad Mike
 	*/
 	public class LevelState {
-		protected var sprite:MovieClip;
+		protected var costume:AnimationCostume;
 		public static const SIZE:int = 60;
 		public static const STROKE:int = 10;
 		
@@ -16,16 +17,15 @@ package {
 			
 		}
 		
-		public function getSprite(x:int, y:int):MovieClip {
-			return null;
+		public function addCostume(x:int, y:int, parent:DisplayObjectContainer, listener:Function):void {
 		}
 		
 		public function remove():void {
-			sprite.parent.removeChild(sprite);
+			costume.remove();
 		}
 		
 		public function moveUp():void {
-			sprite.y -= LevelList.OFFSET_BETWEEN_LEVELS;
+			costume.animation.y -= LevelList.OFFSET_BETWEEN_LEVELS;
 		}
 	}
 }

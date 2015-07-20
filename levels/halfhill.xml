@@ -1,0 +1,20 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="0" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
+    <Standard x="200" y="0" angle="-10" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="395" y="-35" angle="-19.999999999999996" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="580" y="-103" angle="-29.999999999999996" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="755" y="-202" angle="-40" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="907" y="-330" angle="-45" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="1047" y="-470" angle="-40" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="5">Standard</Standard>
+    <Standard x="1105" y="-520" angle="-29.999999999999996" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="5">Standard</Standard>
+    <Standard x="1175" y="-560" angle="-20" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="5">Standard</Standard>
+    <Standard x="1250" y="-585" angle="-10" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="5">Standard</Standard>
+    <Standard x="1330" y="-598" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="5">Standard</Standard>
+  </platforms>
+  <collectables/>
+  <characters>
+    <Player x="6" y="-2">Player</Player>
+  </characters>
+</actors>

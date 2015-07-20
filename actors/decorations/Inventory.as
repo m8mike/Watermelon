@@ -130,6 +130,18 @@ package {
 			}
 		}
 		
+		public function removeDiamonds():void {
+			diamondCount = 0;
+			if (diamondIcon) {
+				diamondIcon.remove();
+			}
+			if (diamondText) {
+				if (diamondText.parent) {	
+					diamondText.parent.removeChild(diamondText);
+				}
+			}
+		}
+		
 		public function hideJetpackTime():void {
 			if (jetpackText) {
 				jetpackText.visible = false;

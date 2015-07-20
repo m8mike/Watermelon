@@ -192,6 +192,7 @@ package
 				inventory.removeLife();
 			}
 			inventory.removeJetpackTime();
+			inventory.removeDiamonds();
 			controls.player = null;
 			controls = null;
 			Controls.allowControls();

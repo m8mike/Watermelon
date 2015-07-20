@@ -1,8 +1,4 @@
 package {
-	import Box2D.Dynamics.b2Body;
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import flash.geom.Point;
 	
 	/**
 	* ...

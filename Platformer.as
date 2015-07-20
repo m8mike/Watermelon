@@ -203,12 +203,12 @@ package {
 			_bodiesToRemove = [];
 		}
 		
-		private function activation(e:Event):void {
+		public static function activation(e:Event):void {
 			PhysiVals.fps = 30.0;
 			Controls.allowControls();
 		}
 		
-		private function deactivation(e:Event):void {
+		public static function deactivation(e:Event):void {
 			PhysiVals.fps = Infinity;
 			Controls.disallowControls();
 		}

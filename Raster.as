@@ -30,6 +30,7 @@ package {
 			cacheAnimation("ghost1");
 			cacheAnimation("bubbleBonus");
 			cacheAnimation("diamond_bonus");
+			cacheAnimation("heart");
 			cacheAnimation("GrassBackground");
 			cacheAnimation("GroundBackground");
 			cacheAnimation("hatFinish");
@@ -48,6 +49,9 @@ package {
 			cacheAnimation("spikes_2");
 			cacheAnimation("loadingBackground");
 			cacheAnimation("fan_working");
+			cacheAnimation("level_finished");
+			cacheAnimation("level_not_completed");
+			cacheAnimation("level_closed");
 			cacheItems();
 		}
 		// вызывать перед созданием игрока

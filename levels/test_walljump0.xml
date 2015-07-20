@@ -1,0 +1,116 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="-200" y="-200" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <Standard x="200" y="-80" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="9">Standard</Standard>
+    <Standard x="100" y="-260" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="400" y="-440" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="20">Standard</Standard>
+    <Standard x="-80" y="-440" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="-300" y="-380" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="7">Standard</Standard>
+    <Standard x="-420" y="-240" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="7" h="5">Standard</Standard>
+    <Standard x="-500" y="-80" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="15" h="5">Standard</Standard>
+    <Standard x="-520" y="-380" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="20">Standard</Standard>
+    <Standard x="-500" y="-1000" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="33">Standard</Standard>
+    <Standard x="-280" y="-380" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Standard</Standard>
+    <Standard x="120" y="-700" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="14" h="13">Standard</Standard>
+    <Standard x="-420" y="-560" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="12" h="3">Standard</Standard>
+    <Standard x="-180" y="-620" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="8" h="4">Standard</Standard>
+    <Standard x="-320" y="-800" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="-20" y="-800" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="8" h="5">Standard</Standard>
+    <Standard x="-20" y="-620" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="6">Standard</Standard>
+    <Standard x="500" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="500" y="-660" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="800" y="-620" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="12" h="5">Standard</Standard>
+    <Standard x="960" y="-840" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="7">Standard</Standard>
+    <Standard x="700" y="-420" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="21" h="4">Standard</Standard>
+    <Standard x="1120" y="-580" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="20" h="8">Standard</Standard>
+    <Standard x="1020" y="-700" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="4">Standard</Standard>
+    <Standard x="1520" y="-880" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="15">Standard</Standard>
+    <TopHat x="1340" y="-580" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+  </platforms>
+  <collectables>
+    <BubbleBonus x="40" y="-160">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="60" y="-180">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="60" y="-220">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="20" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="160" y="-80">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="200" y="-120">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="260" y="-120">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="320" y="-220">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="380" y="-420">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="320" y="-420">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-360">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="220" y="-380">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="280" y="-320">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="160" y="-420">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="340" y="-200">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-180">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="380" y="-160">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-140">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="340" y="-120">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="340" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-260">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="380" y="-280">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-300">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="320" y="-320">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="240" y="-300">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-180" y="-300">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-140" y="-280">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-240" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-480" y="-120">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-440" y="-160">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-480" y="-200">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-440" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-340" y="-280">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-340" y="-340">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-340" y="-420">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="100" y="-520">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="100" y="-600">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="100" y="-560">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-80" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-360" y="-620">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-360" y="-660">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-360" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-380" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-340" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-360" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-320" y="-820">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-140" y="-840">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-80" y="-860">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="-40" y="-860">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="0" y="-820">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="160" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="160" y="-760">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="220" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="420" y="-460">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="440" y="-500">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="480" y="-480">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="580" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="640" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="520" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="980" y="-640">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1000" y="-660">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="940" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="620" y="-540">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="780" y="-460">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="720" y="-460">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="980" y="-880">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1000" y="-900">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1020" y="-880">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1000" y="-860">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1060" y="-620">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1100" y="-540">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1080" y="-580">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1080" y="-500">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1060" y="-460">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1080" y="-640">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1120" y="-620">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1160" y="-600">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1220" y="-600">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1240" y="-640">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1280" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1320" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1500" y="-620">BubbleBonus</BubbleBonus>
+  </collectables>
+  <characters/>
+</actors>

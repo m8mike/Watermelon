@@ -86,8 +86,10 @@ package {
 					case 8: //backspace
 						if (CarbonMenu.carbonMenu.visible) {
 							CarbonMenu.carbonMenu.hide();
+							Platformer.activation(null);
 						} else {
 							CarbonMenu.carbonMenu.show();
+							Platformer.deactivation(null);
 						}
 						break;
 					case 90: //z

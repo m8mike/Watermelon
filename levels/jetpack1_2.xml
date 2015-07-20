@@ -1,0 +1,108 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="25" h="5">Standard</Standard>
+    <Standard x="0" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
+    <Standard x="20" y="-180" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="15" h="1">Standard</Standard>
+    <Standard x="200" y="-300" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="15" h="1">Standard</Standard>
+    <Standard x="20" y="-620" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="20" h="7">Standard</Standard>
+    <Standard x="600" y="-440" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="4">Standard</Standard>
+    <Standard x="780" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="4">Standard</Standard>
+    <Standard x="960" y="-360" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="4">Standard</Standard>
+    <Standard x="720" y="-240" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="4">Standard</Standard>
+    <Standard x="320" y="-1120" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
+    <Standard x="340" y="-1120" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="50" h="1">Standard</Standard>
+    <Standard x="580" y="-700" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="10">Standard</Standard>
+    <Standard x="600" y="-700" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Standard</Standard>
+    <Standard x="800" y="-800" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="1340" y="-1120" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="54">Standard</Standard>
+    <Standard x="1000" y="-620" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="17" h="1">Standard</Standard>
+    <Standard x="1120" y="-480" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="3">Standard</Standard>
+    <Standard x="900" y="-160" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="3">Standard</Standard>
+    <Standard x="1200" y="-220" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="3">Standard</Standard>
+    <TopHat x="1240" y="-220" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+    <Standard x="600" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="25" h="5">Standard</Standard>
+    <Standard x="1100" y="-40" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="13" h="5">Standard</Standard>
+    <Spikes x="20" y="-200" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Spikes</Spikes>
+    <Spikes x="200" y="-320" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Spikes</Spikes>
+    <Spikes x="420" y="-460" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="20" h="1">Spikes</Spikes>
+    <Spikes x="480" y="-80" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Spikes</Spikes>
+    <Standard x="500" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="28">Standard</Standard>
+    <Spikes x="560" y="-500" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="1">Spikes</Spikes>
+    <Spikes x="780" y="-700" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="1">Spikes</Spikes>
+    <Spikes x="780" y="-520" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="960" y="-380" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="600" y="-460" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="720" y="-260" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="900" y="-180" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="1100" y="-60" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="12" h="1">Spikes</Spikes>
+    <Spikes x="1120" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="1">Spikes</Spikes>
+    <Spikes x="1120" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="700" y="-440" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="880" y="-500" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="1060" y="-360" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="820" y="-240" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="980" y="-160" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="1200" y="-480" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="680" y="-340" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="860" y="-400" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="760" y="-420" angle="270" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="1040" y="-260" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="940" y="-280" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="960" y="-80" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="880" y="-100" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="800" y="-140" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="700" y="-160" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+    <Spikes x="1180" y="-400" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="1100" y="-420" angle="-90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="1">Spikes</Spikes>
+    <Spikes x="1280" y="-140" angle="180" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="1">Spikes</Spikes>
+  </platforms>
+  <collectables>
+    <JetpackBonus x="400" y="-40">JetpackBonus</JetpackBonus>
+    <BubbleBonus x="480" y="-40">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="440" y="-100">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="460" y="-160">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="440" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-240">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="280" y="-200">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="180" y="-260">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="80" y="-220">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="120" y="-320">BubbleBonus</BubbleBonus>
+    <DiamondBonus x="40" y="-220">DiamondBonus</DiamondBonus>
+    <BubbleBonus x="220" y="-380">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="340" y="-380">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-340">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="420" y="-380">BubbleBonus</BubbleBonus>
+    <DiamondBonus x="40" y="-440">DiamondBonus</DiamondBonus>
+    <BubbleBonus x="500" y="-520">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="520" y="-580">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="380" y="-660">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-640">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="420" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="520" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="360" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="440" y="-820">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="520" y="-940">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="620" y="-800">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="700" y="-980">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="580" y="-900">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="680" y="-880">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="720" y="-740">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="860" y="-940">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="940" y="-1020">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1060" y="-880">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="920" y="-860">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1120" y="-980">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="960" y="-920">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1140" y="-920">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1120" y="-720">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1240" y="-700">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1240" y="-820">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1140" y="-780">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1280" y="-960">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1280" y="-660">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1000" y="-680">BubbleBonus</BubbleBonus>
+    <BubbleBonus x="1080" y="-640">BubbleBonus</BubbleBonus>
+    <DiamondBonus x="820" y="-560">DiamondBonus</DiamondBonus>
+  </collectables>
+  <characters/>
+</actors>

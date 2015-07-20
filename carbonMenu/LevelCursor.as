@@ -20,7 +20,7 @@ package {
 			moveTo(0, 0);
 			sprite.graphics.beginFill(0x00FF00, 0);
 			sprite.graphics.lineStyle(LevelState.STROKE, 0xFFFF00);
-			sprite.graphics.drawRoundRect(0, 0, LevelState.SIZE, LevelState.SIZE, 0.1 * LevelState.SIZE);
+			sprite.graphics.drawRoundRect(0, 0, LevelState.SIZE, LevelState.SIZE, 0.4 * LevelState.SIZE);
 			sprite.graphics.endFill();
 			levelList.addChild(sprite);
 		}

@@ -419,6 +419,7 @@ package {
 			actorType.pushItem("SnowGunBonus");
 			actorType.pushItem("UmbrellaBonus");
 			actorType.pushItem("DiamondBonus");
+			actorType.pushItem("Heart");
 			
 			actorType.pushItem("Cloud");
 			actorType.pushItem("Door");

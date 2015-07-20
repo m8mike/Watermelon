@@ -18,9 +18,9 @@ package
 		public function levelSelectMc(n:Number, solved:Boolean):void {
 			level = n;
 			if (!solved) {
-				icon = new lockedMc();
+				icon = new level_closed();
 			} else {
-				icon = new homeButtonMc();
+				icon = new level_not_completed();
 				addEventListener(MouseEvent.CLICK, clicked);
 				buttonMode=true;
 			}

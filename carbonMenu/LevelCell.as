@@ -20,9 +20,9 @@ package {
 		public function LevelCell(state:LevelState, location:Point, parent:DisplayObjectContainer) {
 			_state = state;
 			_location = location;
-			var icon:MovieClip = _state.getSprite(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS, LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS);
-			icon.addEventListener(MouseEvent.CLICK, moveCursor);
-			parent.addChild(icon);
+			var iconX:Number = LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS;
+			var iconY:Number = LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS;
+			_state.addCostume(iconX, iconY, parent, moveCursor);
 		}
 		
 		private function moveCursor(e:MouseEvent):void {

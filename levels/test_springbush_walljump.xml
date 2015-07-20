@@ -1,0 +1,33 @@
+<actors>
+  <platforms>
+    <Standard x="0" y="0" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="0" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
+    <Standard x="200" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <Standard x="600" y="-40" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <SpringBush x="520" y="15" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="400" y="40" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
+    <SpringBush x="700" y="-65" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="800" y="60" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="1000" y="140" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+    <Standard x="1080" y="-120" angle="90" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="2">Standard</Standard>
+    <Standard x="1200" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="10">Standard</Standard>
+    <SpringBush x="1140" y="115" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="900" y="35" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="1105" y="-60" angle="90" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="1300" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="6" h="4">Standard</Standard>
+    <Standard x="1420" y="-80" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="10">Standard</Standard>
+    <SpringBush x="1360" y="-5" angle="0" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="1720" y="-180" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="10">Standard</Standard>
+    <Standard x="1620" y="100" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="13" h="1">Standard</Standard>
+    <Standard x="1880" y="-140" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="14">Standard</Standard>
+    <SpringBush x="1850" y="60" angle="-45" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="1750" y="-20" angle="45" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="1850" y="-100" angle="-45" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <SpringBush x="1750" y="-140" angle="45" density="0" friction="0.2" restitution="0.7" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">SpringBush</SpringBush>
+    <Standard x="1980" y="-120" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="4">Standard</Standard>
+  </platforms>
+  <collectables/>
+  <characters>
+    <Player x="90" y="0">Player</Player>
+  </characters>
+</actors>

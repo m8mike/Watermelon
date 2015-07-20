@@ -1,0 +1,157 @@
+<levelsInfo>
+  <levels>
+    <row>
+      <level>
+        <fileName>test_intro0</fileName>
+        <levelName>Intro</levelName>
+        <comment>1bubbles</comment>
+      </level>
+      <level>
+        <fileName>test_intro1</fileName>
+        <levelName>Intro</levelName>
+        <comment>1bubbles</comment>
+      </level>
+      <level>
+        <fileName>test_intro2</fileName>
+        <levelName>Intro</levelName>
+        <comment>1bubbles</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test_springbush_walljump1</fileName>
+        <levelName>springbush walljump</levelName>
+        <comment>2easy, nice</comment>
+      </level>
+      <level>
+        <fileName>test_springbush1</fileName>
+        <levelName>springbush</levelName>
+        <comment>2easy, nice</comment>
+      </level>
+      <level>
+        <fileName>test_springbush2</fileName>
+        <levelName>springbush</levelName>
+        <comment>2easy, nice</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test_jumpthrough_diamond2</fileName>
+        <levelName>jumpthrough diamond</levelName>
+        <comment>3nice jumpthrough introduction</comment>
+      </level>
+      <level>
+        <fileName>test_jumpthrough_diamond3</fileName>
+        <levelName>jumpthrough diamond</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>test_hills_jumpthrough</fileName>
+        <levelName>hills</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test_walljump0</fileName>
+        <levelName>walljump</levelName>
+        <comment>4nice intro to walljumps, adds challenge</comment>
+      </level>
+      <level>
+        <fileName>test_walljump1</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>test_walljump2</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test_hotel</fileName>
+        <levelName>hotel</levelName>
+        <comment>5no limits, easy</comment>
+      </level>
+      <level>
+        <fileName>test_spikes0</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>test_springbush_spikes0</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test10_2</fileName>
+        <levelName>jet life</levelName>
+        <comment>8jetpack intro</comment>
+      </level>
+      <level>
+        <fileName>jetpack1_2</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>default</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test5_2</fileName>
+        <levelName>dungeon</levelName>
+        <comment>тесный уровень, 2 секрета</comment>
+      </level>
+      <level>
+        <fileName>hardcore_dungeon</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>dungeon1</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>test7_4</fileName>
+        <levelName>spiral</levelName>
+        <comment>странный подъём по спирали, тесный проход, walljump, clouds, bonus level</comment>
+      </level>
+      <level>
+        <fileName>test8</fileName>
+        <levelName>house</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>test9_3</fileName>
+        <levelName>bigger spiral</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+    <row>
+      <level>
+        <fileName>umbrella1</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>umbrella2_2</fileName>
+        <levelName>default</levelName>
+        <comment>default</comment>
+      </level>
+      <level>
+        <fileName>test4_2</fileName>
+        <levelName>around the world</levelName>
+        <comment>default</comment>
+      </level>
+    </row>
+  </levels>
+</levelsInfo>

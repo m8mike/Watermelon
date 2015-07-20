@@ -6,6 +6,7 @@ package {
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.TimerEvent;
 	import flash.text.TextField;
@@ -26,9 +27,12 @@ package {
 		public static var removeLiveTime:int = 0;
 		public static var myTimer:Timer;
 		private static var time:int;
+		static public var timeNumbText:TextField;
 		public static var spriteToDebugDraw:Sprite;
 		public static var periods:int = 0;
 		public static var objectCounter:int = 0;
+		
+		public static var str:String = "";
 		
 		public function PhysiVals() {
 		
@@ -83,8 +87,18 @@ package {
 			} else if (object is Bitmap) {
 				pixelCounter += Bitmap(object).bitmapData.height * Bitmap(object).bitmapData.width;
 			}
-			trace(object.toString());
+			/*if (object is Shape || object is Camera || object is JetpackBonus || object is BubbleBonus || object is TextField || object is DropDownMenu) {
+				pixelCounter += 1;
+			}*/
 			objectCounter++;
+			if (pixelCounter.toString() != "0") {
+				str += object.toString() +": " + pixelCounter.toString() + "\n";
+			}
+			/*if (pixelCounter.toString() == "0") {
+				if (object.parent) {	
+					object.parent.removeChild(object);
+				}
+			}*/
 			return pixelCounter;
 		}
 		
@@ -109,7 +123,7 @@ package {
 				}
 			}
 			
-			var timeNumbText:TextField = new TextField();
+			timeNumbText = new TextField();
 			timeNumbText.x = 0;
 			timeNumbText.y = 0;
 			timeNumbText.visible = true;
@@ -122,7 +136,8 @@ package {
 			
 			var timer:Timer = new Timer(1000);
 			timer.addEventListener(TimerEvent.TIMER, function(... args):void {
-					timeNumbText.text = periods.toString();
+					//timeNumbText.text = periods.toString();
+					
 					//timeNumbText.text = PlayerCanJump.toString();
 					//timeNumbText.text = jetpackTime.toString();
 					//timeNumbText.text = CircleStaticActor.keysCount.toString();

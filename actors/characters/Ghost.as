@@ -2,6 +2,7 @@ package {
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import flash.geom.Point;
+	import flash.net.FileReference;
 	
 	/**
 	* ...
@@ -39,6 +40,9 @@ package {
 		override public function destroy():void {
 			var wc:b2Vec2 = getBody().GetWorldCenter();
 			Item.addRandomItem(wc.x * 1.5, wc.y * 1.5);
+			/*PhysiVals.timeNumbText.text = PhysiVals.countPixels(Platformer.thisIs).toString();
+			var file:FileReference = new FileReference();
+			file.save(PhysiVals.str, "pixels.txt");*/
 			super.destroy();
 		}
 	}

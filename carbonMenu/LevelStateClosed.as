@@ -1,5 +1,7 @@
 package {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	
 	/**
 	* ...
@@ -8,18 +10,14 @@ package {
 	public class LevelStateClosed extends LevelState {
 		
 		public function LevelStateClosed() {
-		
+			
 		}
 		
-		override public function getSprite(x:int, y:int):MovieClip {
-			sprite = new MovieClip();
-			sprite.x = x;
-			sprite.y = y;
-			sprite.graphics.beginFill(0x008080);
-			sprite.graphics.lineStyle(LevelState.STROKE, 0x000000);
-			sprite.graphics.drawRoundRect(0, 0, LevelState.SIZE, LevelState.SIZE, 0.1 * LevelState.SIZE);
-			sprite.graphics.endFill();
-			return sprite;
+		override public function addCostume(x:int, y:int, parent:DisplayObjectContainer, listener:Function):void {
+			costume = new AnimationCostume("level_closed", parent);
+			costume.setCoords(x, y);
+			costume.animation.visible = true;
+			costume.animation.addEventListener(MouseEvent.CLICK, listener);
 		}
 	}
 }

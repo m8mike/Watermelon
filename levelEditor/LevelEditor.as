@@ -183,6 +183,9 @@ package {
 				case "DiamondBonus": 
 					new DiamondBonus(x, y);
 					break;
+				case "Heart": 
+					new Heart(x, y);
+					break;
 				case "CrateBox": 
 					new CrateBox(x, y);
 					break;

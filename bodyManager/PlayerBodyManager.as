@@ -194,7 +194,7 @@ package
 				if (!controls.up) {
 					canOpenUmbrella = true;
 				}
-				if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Umbrella){
+				if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Umbrella && body.GetLinearVelocity().y > 0){
 					controls.useUmbrella = true;
 				} else if (canOpenUmbrella && Player(body.GetUserData()).carryingItem is Jetpack) {
 					controls.useJetpack = true;

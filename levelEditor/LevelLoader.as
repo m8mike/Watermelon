@@ -108,6 +108,10 @@ package {
 				var y:Number = parseFloat(collectable.attribute("y")) / 20;
 				var newCollectable:Collectable = new (getDefinitionByName(collectable.text()))(x, y);
 			}
+			new TutorialBoard(100, 0);
+			new TreeBelow(300, 0);
+			new TreeZero(400, 0);
+			new Arrow(500, -50);
 		}
 		
 		private static function createCharacters(characters:XMLList):void {
