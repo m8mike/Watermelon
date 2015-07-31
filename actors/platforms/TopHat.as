@@ -16,7 +16,32 @@ package {
 		private var shape2:RectShape;
 		private var shape3:RectShape;
 		
+		private var costumeId:String;
+		private var costumeIdTop:String;
+		
+		private var endLevel:EndLevel;
+		
 		public function TopHat(x:int, y:int) {
+			endLevel = new EndLevel(x, y);
+			switch (int(Math.random()*4)) {
+				case 0:
+					costumeId = "hatFinish";
+					costumeIdTop = "hatFinishTop1";
+				break;
+				case 1:
+					costumeId = "hatFinish1";
+					costumeIdTop = "hatFinishTop";
+				break;
+				case 2:
+					costumeId = "hatFinish2";
+					costumeIdTop = "hatFinishTop2";
+				break;
+				case 3:
+					costumeId = "hatFinish3";
+					costumeIdTop = "hatFinishTop3";
+				break;
+				default:
+			}
 			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
 			super.reload();
@@ -26,6 +51,10 @@ package {
 		override public function reload():void {
 			super.reload();
 			super.init(body, shape.getSimpleSprite(location));
+			
+			endLevel.location = new Point((location.x / PhysiVals.MIN_SQARE - 1.4) * PhysiVals.MIN_SQARE, 
+										  (location.y / PhysiVals.MIN_SQARE - 1) * PhysiVals.MIN_SQARE);
+			endLevel.reload()
 		}
 		
 		override protected function createShapes():void {
@@ -38,11 +67,12 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			var clipDef:MovieClip = new (getDefinitionByName("hatFinish"))();
-			hat = new AnimationCostume("hatFinish", CameraManager._dynamicLayer, 0.2, 0.2);
-			hat.setCoords(location.x - 0.01 * clipDef.width, location.y - 0.018 * clipDef.height);
+			var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
+			hat = new AnimationCostume(costumeId, CameraManager._dynamicLayer, 0.2, 0.2);
+			hat.setCoords(location.x, location.y);
+			//hat.setCoords(location.x - 0.01 * clipDef.width, location.y - 0.018 * clipDef.height);
 			hat.play();
-			topHat = new AnimationCostume("hatFinishTop", CameraManager.belowLayer, 0.2, 0.2);
+			topHat = new AnimationCostume(costumeIdTop, CameraManager.belowLayer, 0.2, 0.2);
 			topHat.setCoords(location.x, location.y);
 			topHat.play();
 		}
@@ -53,9 +83,10 @@ package {
 			loc.Multiply(PhysiVals.RATIO);
 			loc.x += 2;
 			loc.y += 3.4;
-			var clipDef:MovieClip = new (getDefinitionByName("hatFinish"))();
+			var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
 			topHat.setCoords(loc.x, loc.y);
-			hat.setCoords(loc.x - 0.01 * clipDef.width, loc.y - 0.018 * clipDef.height);
+			hat.setCoords(loc.x, loc.y);
+			//hat.setCoords(loc.x - 0.01 * clipDef.width, loc.y - 0.018 * clipDef.height);
 			topHat.animation.rotation = angle;
 			hat.animation.rotation = angle;
 			super.updateCostumes();

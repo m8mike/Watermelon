@@ -160,8 +160,7 @@ package {
 			new Ghost(4, -6, new Point(1, 0));
 			new Ghost(6, -2);
 			
-			var controls:Controls = new Controls();
-			Platformer._player = new Player(2, -6, controls);
+			Platformer._player = new Player(2, -6, Platformer.controls);
 			
 			//new LevelEditor();
 			//loader.setLoaded();

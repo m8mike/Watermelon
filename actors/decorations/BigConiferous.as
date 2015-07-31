@@ -5,7 +5,7 @@ package {
 	* @author Mad Mike
 	*/
 	public class BigConiferous extends Decor {
-		private static var coniferous:Array = [];
+		public static var coniferous:Array = [];
 		
 		public function BigConiferous() {
 			for (var i:int = -2; i < 5; i++) {

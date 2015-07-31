@@ -17,6 +17,7 @@ package {
 		public static var _changes:Array = [];
 		public static var _spawn:Array = [];
 		public static var _simpleButtons:Array = [];
+		public static var _numScrollers:Array = [];
 		public static var _teleportTo:Array = [];
 		public static var _moveTo:Array = [];
 		
@@ -50,6 +51,12 @@ package {
 		
 		public static function getActorText():String {
 			return actorType.selectedItem.getText();
+		}
+		
+		public static function setToPlayState():void {
+			hide();
+			condition = PLAY;
+			show();
 		}
 		
 		public static function toggleInfo(e:MouseEvent = null):void {
@@ -107,6 +114,9 @@ package {
 					for each (var tf2:TextField in _simpleButtons) {
 						tf2.visible = true;
 					}
+					for each (var numScroller:NumScroller in _numScrollers) {
+						numScroller.visible = true;
+					}
 					for each (var tf1:TextField in _moveTo) {
 						tf1.visible = false;
 					}
@@ -132,6 +142,9 @@ package {
 			for each (var tf4:TextField in _simpleButtons) {
 				tf4.visible = vis;
 			}
+			for each (var numScroller:NumScroller in _numScrollers) {
+				numScroller.visible = vis;
+			}
 			for each (var tf5:TextField in _moveTo) {
 				tf5.visible = vis;
 			}
@@ -145,6 +158,15 @@ package {
 			invisibleCreateButton.visible = vis;
 			reloadPlatformButton.visible = vis;
 			respawnButton.visible = vis;
+		}
+		
+		public static function addNumScrollers():void {
+			_numScrollers.push(new NumScroller(CameraManager.hud, Hills.line1, "hills01"));
+			_numScrollers.push(new NumScroller(CameraManager.hud, Hills.line2, "hills02"));
+			_numScrollers.push(new NumScroller(CameraManager.hud, Hills.line3, "hills03"));
+			_numScrollers.push(new NumScroller(CameraManager.hud, Hills.line4, "hills04"));
+			_numScrollers.push(new NumScroller(CameraManager.hud, BigConiferous.coniferous, "coniferous"));
+			_numScrollers.push(new NumScroller(CameraManager.hud, BigMountains.funkyMountains, "mountains"));
 		}
 		
 		public static function addSimpleButton(x:Number, y:Number, text:String, onClick:Function):void {

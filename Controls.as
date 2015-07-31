@@ -83,6 +83,9 @@ package {
 			//for each (var c:Controls in controls)	
 			if (_player) {
 				switch (e.keyCode) {
+					case 27: //escape
+						Platformer.menu.onEscape();
+						break;
 					case 8: //backspace
 						if (CarbonMenu.carbonMenu.visible) {
 							CarbonMenu.carbonMenu.hide();

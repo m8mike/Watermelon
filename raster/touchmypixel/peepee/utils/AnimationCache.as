@@ -1,12 +1,10 @@
-﻿package
-{
+﻿package {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.setTimeout;
 	import raster.touchmypixel.events.ProcessEvent;
 	
-	public class AnimationCache extends EventDispatcher
-	{
+	public class AnimationCache extends EventDispatcher {
 		public var cacheQueue:Array = [];
 		public var currentlyProcessingItem:uint = 0;
 		public var replaceExisting:Boolean = false;
@@ -16,18 +14,18 @@
 		private static var instance:AnimationCache;
 		
 		public function AnimationCache() {
-			if(AnimationCache.instance) throw(new Error("AnimationCache is a Singleton. Don't Instantiate!"));
+			if (AnimationCache.instance)
+				throw(new Error("AnimationCache is a Singleton. Don't Instantiate!"));
 			instance = this;
-		}	
-		public static function getInstance():AnimationCache
-		{
+		}
+		
+		public static function getInstance():AnimationCache {
 			return !instance ? new AnimationCache() : instance;
 		}
 		
-		public function cacheAnimation(identifier:String, useSpriteSheet:Boolean = false):Animation
-		{
+		public function cacheAnimation(identifier:String, useSpriteSheet:Boolean = false):Animation {
 			var animation:Animation
-			if(!animations[identifier] || replaceExisting){
+			if (!animations[identifier] || replaceExisting) {
 				animation = new Animation();
 				animation.useSpriteSheet = useSpriteSheet;
 				animation.buildCacheFromLibrary(identifier);
@@ -38,10 +36,9 @@
 			return animation;
 		}
 		
-		public function getAnimation(id):Animation
-		{
+		public function getAnimation(id):Animation {
 			if (!animations[id]) {
-				trace("MISSING ANIMATION :"+ id);
+				trace("MISSING ANIMATION :" + id);
 				return null;
 			}
 			
@@ -55,30 +52,26 @@
 			animation.r = animations[id].r;
 			animation.clip = animations[id].clip;
 			animation.useSpriteSheet = animations[id].useSpriteSheet;
-			animation.gotoAndStop(1);	
+			animation.gotoAndStop(1);
 			return animation;
 		}
 		
-		public function addToBulkCache(items:Array)
-		{
-			for each( var item in items)
+		public function addToBulkCache(items:Array) {
+			for each (var item in items)
 				cacheQueue.push(item);
 		}
 		
-		public function processQueue()
-		{
+		public function processQueue() {
 			currentlyProcessingItem = 0;
 			dispatchEvent(new ProcessEvent(ProcessEvent.START));
 			process();
 		}
 		
-		private function process():void
-		{
+		private function process():void {
 			var id = cacheQueue[currentlyProcessingItem++];
-			if (id != null)
-			{
+			if (id != null) {
 				cacheAnimation(id);
-				dispatchEvent(new ProcessEvent(ProcessEvent.PROGRESS,currentlyProcessingItem/cacheQueue.length));
+				dispatchEvent(new ProcessEvent(ProcessEvent.PROGRESS, currentlyProcessingItem / cacheQueue.length));
 				setTimeout(process, 1);
 			} else {
 				dispatchEvent(new ProcessEvent(ProcessEvent.COMPLETE));

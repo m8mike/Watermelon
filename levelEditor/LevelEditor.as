@@ -42,6 +42,7 @@ package {
 			HUD.addSimpleButton(20, 120, "Сохранить", saveToFile);
 			HUD.addSimpleButton(20, 145, "Выбор уровня", selectLevel);
 			HUD.addSimpleButton(20, 170, "Очистить", clearLevel);
+			HUD.addNumScrollers();
 			HUD.addActorType();
 			HUD.addInfoText("type = ");
 			HUD.addInfoText("x = ");
@@ -78,6 +79,7 @@ package {
 			HUD.addMoveToText("");
 			HUD.addTeleportToText("");
 			HUD.addTeleportToText("");
+			HUD.setToPlayState();
 		}
 		
 		public function saveToFile(e:MouseEvent):void {

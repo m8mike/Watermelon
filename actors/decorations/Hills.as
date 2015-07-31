@@ -11,10 +11,10 @@ package {
 	* @author Mad Mike
 	*/
 	public class Hills extends Decor {
-		private var line1:Array = [];
-		private var line2:Array = [];
-		private var line3:Array = [];
-		private var line4:Array = [];
+		public static var line1:Array = [];
+		public static var line2:Array = [];
+		public static var line3:Array = [];
+		public static var line4:Array = [];
 		
 		public function Hills() {
 			addHills(4);
@@ -22,6 +22,10 @@ package {
 		
 		public function addHills(numHills:int = 1):void {
 			var offset:Number = -300;
+			line1 = [];
+			line2 = [];
+			line3 = [];
+			line4 = [];
 			for (var i:int = -2; i < 5; i++) {
 				line1.push(new AnimationCostume("hillsWithTrees1", CameraManager._camera01));
 				AnimationCostume(line1[i + 2]).setCoords(offset, 0);
@@ -44,6 +48,10 @@ package {
 				}
 				offset += AnimationCostume(line1[i + 2]).animation.width * 4 / 3;
 			}
+			NumScroller(HUD._numScrollers[0]).asset = line1;
+			NumScroller(HUD._numScrollers[1]).asset = line2;
+			NumScroller(HUD._numScrollers[2]).asset = line3;
+			NumScroller(HUD._numScrollers[3]).asset = line4;
 		}
 		/*
 		public function addHills(numHills:int = 1):void {

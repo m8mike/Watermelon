@@ -4,6 +4,7 @@ package {
 	import flash.net.FileReference;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
 	import flash.utils.getDefinitionByName;
 	
 	/**
@@ -35,7 +36,10 @@ package {
 			for each (var character:Character in Platformer.characters) {
 				str += character.getXML().toXMLString();
 			}
-			str += "</characters></actors>";
+			str += "</characters>";
+			str += "<spawn>" +"<x>" + int(parseInt(TextField(HUD._spawn[0]).text) / PhysiVals.MIN_SQARE) + "</x>";
+			str += "<y>" + int(parseInt(TextField(HUD._spawn[1]).text) / PhysiVals.MIN_SQARE) + "</y>" + "</spawn>";
+			str += "</actors>"
 			var xml:XML = new XML(str);
 			var file:FileReference = new FileReference();
 			file.save(xml.toXMLString(), "test.xml");
@@ -55,9 +59,20 @@ package {
 				createPlatforms(xmlToLoad.platforms);
 				createCollectables(xmlToLoad.collectables);
 				createCharacters(xmlToLoad.characters);
+				spawnPlayer(xmlToLoad.spawn);
 				loading = false;
 				xmlToLoad = null;
 			}
+		}
+		
+		private static function spawnPlayer(spawn:XMLList):void {
+			var x:Number = parseInt(spawn.x);
+			var y:Number = parseInt(spawn.y);
+			if (x == 0 && y == 0) {
+				x = 2;
+				y = -6;
+			}
+			Platformer._player = new Player(x, y, Platformer.controls);
 		}
 		
 		private static function createPlatforms(platforms:XMLList):void {
@@ -108,10 +123,6 @@ package {
 				var y:Number = parseFloat(collectable.attribute("y")) / 20;
 				var newCollectable:Collectable = new (getDefinitionByName(collectable.text()))(x, y);
 			}
-			new TutorialBoard(100, 0);
-			new TreeBelow(300, 0);
-			new TreeZero(400, 0);
-			new Arrow(500, -50);
 		}
 		
 		private static function createCharacters(characters:XMLList):void {

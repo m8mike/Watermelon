@@ -12,7 +12,7 @@ package {
 	public class DropDownMenu extends MovieClip {
 		private var items:Array = [];
 		private var location:Point;
-		public var selectedItem:MenuItem;
+		public var selectedItem:DropItem;
 		
 		public function DropDownMenu(loc:Point, parent:DisplayObjectContainer) {
 			location = loc;
@@ -22,7 +22,7 @@ package {
 		
 		public function pushItem(text:String) {
 			var loc:Point = new Point(location.x, location.y + items.length * 20);
-			var item:MenuItem = new MenuItem(text, loc, this);
+			var item:DropItem = new DropItem(text, loc, this);
 			if (items.length == 0) {
 				selectedItem = item;
 			} else {
@@ -40,7 +40,7 @@ package {
 		}
 		
 		private function setVisible(vis:Boolean):void {
-			for each (var item:MenuItem in items) {
+			for each (var item:DropItem in items) {
 				if (selectedItem != item) {
 					item.visible = vis;
 				}
@@ -51,7 +51,7 @@ package {
 		}
 		
 		private function select(e:MouseEvent):void {
-			selectedItem = MenuItem(DisplayObject(e.target).parent);
+			selectedItem = DropItem(DisplayObject(e.target).parent);
 			selectedItem.select(location);
 			setVisible(false);
 			removeEventListener(MouseEvent.ROLL_OUT, rollOut);
@@ -68,7 +68,7 @@ package {
 		}
 		
 		public function remove():void {
-			for each (var item:MenuItem in items) {
+			for each (var item:DropItem in items) {
 				item.remove();
 				items.splice(items.indexOf(item), 1);
 			}

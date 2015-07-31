@@ -34,7 +34,13 @@ package {
 			cacheAnimation("GrassBackground");
 			cacheAnimation("GroundBackground");
 			cacheAnimation("hatFinish");
+			cacheAnimation("hatFinish1");
+			cacheAnimation("hatFinish2");
+			cacheAnimation("hatFinish3");
 			cacheAnimation("hatFinishTop");
+			cacheAnimation("hatFinishTop1");
+			cacheAnimation("hatFinishTop2");
+			cacheAnimation("hatFinishTop3");
 			cacheAnimation("dustBlow");
 			cacheAnimation("lightBlow");
 			cacheAnimation("flinders");
@@ -49,9 +55,9 @@ package {
 			cacheAnimation("spikes_2");
 			cacheAnimation("loadingBackground");
 			cacheAnimation("fan_working");
-			cacheAnimation("level_finished");
+			/*cacheAnimation("level_completed");
 			cacheAnimation("level_not_completed");
-			cacheAnimation("level_closed");
+			cacheAnimation("level_closed");*/
 			cacheItems();
 		}
 		// вызывать перед созданием игрока

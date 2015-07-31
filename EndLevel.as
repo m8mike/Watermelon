@@ -28,7 +28,9 @@ package {
 		}
 		
 		public function finish(player:Player):void {
-			player.remove();
+			Controls.disallowControls();
+			//player.remove();
+			//Platformer.menu.complete(null);
 		}
 		
 		override protected function createShapes():void {

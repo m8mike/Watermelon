@@ -5,7 +5,7 @@ package {
 	* @author Mad Mike
 	*/
 	public class BigMountains extends Decor {
-		private static var funkyMountains:Array = [];
+		public static var funkyMountains:Array = [];
 		
 		public function BigMountains() {
 			for (var i:int = -2; i < 5; i++) {

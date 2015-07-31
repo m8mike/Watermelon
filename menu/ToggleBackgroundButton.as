@@ -13,6 +13,10 @@ package {
 		public var enabled:Boolean = false;
 		
 		public function ToggleBackgroundButton() {
+			addButton();
+		}
+		
+		private function addButton():void {
 			buttonTF = new TextField();
 			buttonTF.x = 150;
 			buttonTF.y = 20;
@@ -32,42 +36,38 @@ package {
 			CameraManager.hud.addChild(buttonTF);
 		}
 		
+		public static function addBackground():void {
+			if (!LevelDirector.coniferous) {
+				LevelDirector.coniferous = new BigConiferous();
+			}
+			if (!LevelDirector.mountains) {
+				LevelDirector.mountains = new BigMountains();
+			}
+			if (!LevelDirector.hills) {
+				LevelDirector.hills = new Hills();
+			}
+		}
+		
+		private function removeBackground():void {
+			if (LevelDirector.coniferous) {
+				LevelDirector.coniferous.remove();
+				LevelDirector.coniferous = null;
+			}
+			if (LevelDirector.mountains) {
+				LevelDirector.mountains.remove();
+				LevelDirector.mountains = null;
+			}
+			if (LevelDirector.hills) {
+				LevelDirector.hills.remove();
+				LevelDirector.hills = null;
+			}
+		}
+		
 		private function toggleBackground(e:Event):void {
 			if (enabled) {
-				if (LevelDirector.coniferous) {
-					LevelDirector.coniferous.remove();
-					LevelDirector.coniferous = null;
-				} else {
-					return void;
-				}
-				if (LevelDirector.mountains) {
-					LevelDirector.mountains.remove();
-					LevelDirector.mountains = null;
-				} else {
-					return void;
-				}
-				if (LevelDirector.hills) {
-					LevelDirector.hills.remove();
-					LevelDirector.hills = null;
-				} else {
-					return void;
-				}
+				removeBackground();
 			} else {
-				if (!LevelDirector.coniferous) {
-					LevelDirector.coniferous = new BigConiferous();
-				} else {
-					return void;
-				}
-				if (!LevelDirector.mountains) {
-					LevelDirector.mountains = new BigMountains();
-				} else {
-					return void;
-				}
-				if (!LevelDirector.hills) {
-					LevelDirector.hills = new Hills();
-				} else {
-					return void;
-				}
+				addBackground();
 			}
 			enabled = !enabled;
 			if (enabled) {

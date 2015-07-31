@@ -1,28 +1,60 @@
 package {
 	import Box2D.Dynamics.b2Body;
+	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.geom.Point;
 	
 	/**
 	* ...
 	* @author Mad Mike
 	*/
-	public class Addable extends Decor {
-		public var bodyBuilder:StaticBodyBuilder;
+	public class Addable extends Platform {
 		private var body:b2Body;
+		private var costume:DisplayObject;
 		
-		public function Addable(location:Point) {
+		public function Addable(location:Point, costume:DisplayObject) {
+			super();
+			super.location = location;
+			super.reload();
+			super.init(body, costume);
+		}
+		
+		override public function reload():void {
+			super.reload();
+			super.init(body, costume);
+		}
+		
+		override public function updateCostumes():void {
+			super.updateCostumes();
+			var angle:Number = body.GetAngle() / Math.PI * 180;
+			if (costume) {
+				costume.rotation = angle;
+			}
+		}
+		
+		override protected function removeCostumes():void {
+			if (costume.parent) {
+				costume.parent.removeChild(costume);
+			}
+			if (costume is Bitmap) {
+				Bitmap(costume).bitmapData.dispose();
+			}
+			super.removeCostumes();
+		}
+		
+		override protected function createShapes():void {
+			shape = new RectShape(PhysiVals.MIN_SQARE, PhysiVals.MIN_SQARE);
+		}
+		
+		override protected function createBodies():void {
 			if (!bodyBuilder) {
 				bodyBuilder = new StaticBodyBuilder();
-				bodyBuilder.density = 0;
-				bodyBuilder.friction = 0.2;
-				bodyBuilder.restitution = 0.7;
 			}
-			bodyBuilder.x = location.x;
-			bodyBuilder.y = location.y;
-			bodyBuilder.isSensor = true;
-			var shape:RectShape = new RectShape(PhysiVals.MIN_SQARE, PhysiVals.MIN_SQARE);
+			StaticBodyBuilder(bodyBuilder).x = location.x;
+			StaticBodyBuilder(bodyBuilder).y = location.y;
+			StaticBodyBuilder(bodyBuilder).isSensor = true;
 			body = bodyBuilder.getBody(new Array(shape));
-			body.SetUserData(this);
 		}
 	}
 }

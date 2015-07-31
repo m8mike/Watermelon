@@ -39,7 +39,8 @@ package {
 		
 		public static var deleteAll:Boolean = false;
 		
-		//public static var controls:Controls;
+		public static var controls:Controls;
+		public static var menu:MainMenu;
 		
 		public function Platformer() {
 			thisIs = this;
@@ -48,14 +49,15 @@ package {
 			PhysiVals.setupPhysicsWorld();
 			PhysiVals.setupTimers();
 			new LevelEditor();
-			new CarbonMenu();
-			LevelDirector.createLevel(0);
+			menu = new MainMenu(this);
+			//LevelDirector.createLevel(0);
 			//LevelSelectionMC.add(33);
 			//LevelDirector.createLevel(1);
 			addEventListener(Event.ENTER_FRAME, newEventListener);
 			stage.addEventListener(Event.DEACTIVATE, deactivation);
 			stage.addEventListener(Event.ACTIVATE, activation);
 			//setupDebugDraw();
+			controls = new Controls();
 		}
 		
 		private function newEventListener(e:Event):void {
@@ -75,6 +77,7 @@ package {
 					deleteAll = false;
 					if (LevelLoader.xmlToLoad) {
 						LevelLoader.loadXml();
+						ToggleBackgroundButton.addBackground();
 					}
 				}
 			}
