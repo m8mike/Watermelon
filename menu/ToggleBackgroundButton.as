@@ -9,8 +9,8 @@ package {
 	* @author Mad Mike
 	*/
 	public class ToggleBackgroundButton {
-		private var buttonTF:TextField;
-		public var enabled:Boolean = false;
+		private static var buttonTF:TextField;
+		public static var enabled:Boolean = false;
 		
 		public function ToggleBackgroundButton() {
 			addButton();
@@ -48,7 +48,7 @@ package {
 			}
 		}
 		
-		private function removeBackground():void {
+		private static function removeBackground():void {
 			if (LevelDirector.coniferous) {
 				LevelDirector.coniferous.remove();
 				LevelDirector.coniferous = null;
@@ -63,7 +63,7 @@ package {
 			}
 		}
 		
-		private function toggleBackground(e:Event):void {
+		public static function toggleBackground(e:Event):void {
 			if (enabled) {
 				removeBackground();
 			} else {

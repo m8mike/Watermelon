@@ -396,6 +396,12 @@ package {
 				Teleporter(LevelEditor.currentPlatform).height = h;
 				Teleporter(LevelEditor.currentPlatform).setSpawnPoint(Number(TextField(_teleportTo[0]).text) * 20, 
 																	(Number(TextField(_teleportTo[1]).text) - 3) * 20);
+			} else if (LevelEditor.currentPlatform is GroundBelow) {
+				GroundBelow(LevelEditor.currentPlatform).width = w;
+				GroundBelow(LevelEditor.currentPlatform).height = h;
+			} else if (LevelEditor.currentPlatform is GroundZero) {
+				GroundZero(LevelEditor.currentPlatform).width = w;
+				GroundZero(LevelEditor.currentPlatform).height = h;
 			}
 			if (TextField(_moveTo[0]).text != "") {
 				LevelEditor.currentPlatform.setMovingTo(parseFloat(TextField(_moveTo[0]).text), parseFloat(TextField(_moveTo[1]).text));
@@ -425,34 +431,42 @@ package {
 		}
 		
 		public static function addActorType():void {
-			actorType = new DropDownMenu(new Point(450, 20), CameraManager.hud);
-			actorType.pushItem("CrateBox");
+			actorType = new DropDownMenu(new Point(450, 0), CameraManager.hud);
+			actorType.pushItem("Standard");
+			
+			actorType.pushItem("TreeZero");
+			actorType.pushItem("TreeBelow");
+			actorType.pushItem("GroundZero");
+			actorType.pushItem("GroundBelow");
+			actorType.pushItem("TutorialBoard");
+			
+			/*actorType.pushItem("CrateBox");
 			actorType.pushItem("Diminishing");
 			actorType.pushItem("Dummy");
 			actorType.pushItem("DummyCircle");
-			actorType.pushItem("DummySplitter");
+			actorType.pushItem("DummySplitter");*/
 			actorType.pushItem("Ghost");
 			actorType.pushItem("Player");
 			
-			actorType.pushItem("BazookaBonus");
+			//actorType.pushItem("BazookaBonus");
 			actorType.pushItem("BubbleBonus");
 			actorType.pushItem("JetpackBonus");
-			actorType.pushItem("Key");
-			actorType.pushItem("SnowGunBonus");
+			//actorType.pushItem("Key");
+			//actorType.pushItem("SnowGunBonus");
 			actorType.pushItem("UmbrellaBonus");
 			actorType.pushItem("DiamondBonus");
 			actorType.pushItem("Heart");
 			
 			actorType.pushItem("Cloud");
-			actorType.pushItem("Door");
+			//actorType.pushItem("Door");
 			actorType.pushItem("JumpThrough");
 			actorType.pushItem("Spikes");
 			actorType.pushItem("SpringBush");
-			actorType.pushItem("Standard");
 			actorType.pushItem("Teleproter");
 			actorType.pushItem("EndLevel");
 			actorType.pushItem("TopHat");
 			actorType.pushItem("Fan");
+			
 			actorType.visible = false;
 		}
 	}

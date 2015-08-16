@@ -35,14 +35,18 @@ package {
 		public static var collectables:Array = [];
 		public static var decorations:Array = [];
 		
+		public static var levelsToComplete:Array = [];
+		
 		public static var _bodiesToRemove:Array = [];
 		
 		public static var deleteAll:Boolean = false;
+		public static var removeCollectables:Boolean = false;
 		
 		public static var controls:Controls;
 		public static var menu:MainMenu;
 		
 		public function Platformer() {
+			new MyFont();
 			thisIs = this;
 			CameraManager.initCameras();
 			Raster.cacheBackground();
@@ -63,7 +67,17 @@ package {
 		private function newEventListener(e:Event):void {
 			++PhysiVals.periods;
 			PhysiVals.world.Step(1 / PhysiVals.fps, 10);
-			if (deleteAll) {
+			if (removeCollectables) {
+				if (collectables.length) {
+					Collectable(collectables[0]).remove();
+				} else {
+					_player.remove();
+					removeCollectables = false;
+					if (LevelLoader.xmlToLoad) {
+						LevelLoader.reloadXml();
+					}
+				}
+			} else if (deleteAll) {
 				if (platforms.length) {
 					Platform(platforms[0]).remove();
 				} else if (collectables.length) {
@@ -77,7 +91,9 @@ package {
 					deleteAll = false;
 					if (LevelLoader.xmlToLoad) {
 						LevelLoader.loadXml();
-						ToggleBackgroundButton.addBackground();
+						do {	
+							ToggleBackgroundButton.toggleBackground(null);
+						} while (!ToggleBackgroundButton.enabled)
 					}
 				}
 			}
@@ -144,10 +160,10 @@ package {
 							_player.carryingItem.remove();
 							_player.carryingItem = null;
 						}
-						while (_player.inventory._lifes.length < 3) {	
+						/*while (_player.inventory._lifes.length < 3) {	
 							_player.inventory.addLife();
-						}
-						_player.spawn();
+						}*/
+						LevelLoader.reloadLevel(CarbonMenu.levelList.getLevelAt(CarbonMenu.levelCursor.location).fileName);
 					}
 				}
 			} else {

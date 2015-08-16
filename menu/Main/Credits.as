@@ -2,6 +2,7 @@ package {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -10,17 +11,20 @@ package {
 	* ...
 	* @author Mad Mike
 	*/
-	public class Credits extends MovieClip {
-		private var bigWM:MovieClip;
-		private var letItOut:Boolean = false;
+	public class Credits extends BigWM {
 		private var itemText:TextField;
 		private var itemShadow:TextField;
 		
 		public function Credits(parent:DisplayObjectContainer) {
-			bigWM = new loadingBackground();
-			parent.addChild(this);
-			addChild(bigWM);
-			addEventListener(Event.ENTER_FRAME, update);
+			super(parent);
+		}
+		
+		override public function onIn():void {
+			addScreen();
+		}
+		
+		override public function onOut():void {
+			removeScreen();
 		}
 		
 		private function addScreen():void {
@@ -28,57 +32,13 @@ package {
 				itemText.visible = true;
 				itemShadow.visible = true;
 			} else {
-				addText("lal");
+				addText("Author: Mike\nm8m8ke@gmail.com\nFeel free to email me");
 			}
 		}
 		
-		private function update(e:Event):void {
-			trace("updating");
-			if (bigWM) {
-				trace(bigWM.currentFrame);
-				if (bigWM.currentFrame == 51) {
-					bigWM.gotoAndStop(52);
-					addScreen();
-				} else if (bigWM.currentFrame == 52) {
-					if (letItOut) {
-						bigWM.gotoAndPlay(53);
-					}
-				} else if (bigWM.currentFrame >= 70) {
-					letItOut = false;
-					bigWM.stop();
-					bigWM.visible = false;
-					remove();
-				}
-			}
-		}
-		
-		private function remove():void {
-			removeEventListener(Event.ENTER_FRAME, update);
+		private function removeScreen():void {
 			itemText.visible = false;
 			itemShadow.visible = false;
-		}
-		
-		public function hide():void {
-			for (var i:int = 0; i < numChildren; i++) {
-				getChildAt(i).visible = false;
-			}
-			bigWM.visible = true;
-			letItOut = true;
-		}
-		
-		public function show():void {
-			for (var i:int = 0; i < numChildren; i++) {
-				getChildAt(i).visible = true;
-			}
-			itemText.visible = false;
-			itemShadow.visible = false;
-			bigWM.gotoAndPlay(1);
-			bigWM.visible = true;
-			visible = true;
-			letItOut = false;
-			if (!hasEventListener(Event.ENTER_FRAME)) {
-				addEventListener(Event.ENTER_FRAME, update);
-			}
 		}
 		
 		public function addText(text:String):void {
@@ -88,13 +48,18 @@ package {
 			itemText.y = 120 + 30 * this.numChildren;
 			itemText.visible = true;
 			itemText.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 40;
 			mytf.align = TextFormatAlign.CENTER;
 			itemText.setTextFormat(mytf);
 			itemText.defaultTextFormat = mytf;
+			itemText.embedFonts = true;
 			itemText.width = 600;
-			itemText.height = 100;
+			itemText.height = 200;
 			itemText.textColor = 0xFFFFFF;
 			itemText.multiline = true;
 			itemText.wordWrap = true;
@@ -106,8 +71,9 @@ package {
 			itemShadow.selectable = false;
 			itemShadow.setTextFormat(mytf);
 			itemShadow.defaultTextFormat = mytf;
+			itemShadow.embedFonts = true;
 			itemShadow.width = 600;
-			itemShadow.height = 100;
+			itemShadow.height = 200;
 			itemShadow.textColor = 0x000000;
 			itemShadow.multiline = true;
 			itemShadow.wordWrap = true;

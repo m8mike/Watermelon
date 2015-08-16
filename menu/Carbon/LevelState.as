@@ -20,8 +20,14 @@ package {
 			return null;
 		}
 		
+		public function getAnimation(x:int, y:int):MovieClip {
+			return null;
+		}
+		
 		public function remove():void {
-			costume.parent.removeChild(costume);
+			if (costume.parent) {
+				costume.parent.removeChild(costume);
+			}
 		}
 		
 		public function moveUp():void {

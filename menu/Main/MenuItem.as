@@ -1,6 +1,7 @@
 package {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.MouseEvent;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -23,7 +24,12 @@ package {
 			itemText.y = 100 + 60 * menuList.items.length;
 			itemText.visible = true;
 			itemText.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			trace(fk.fontName);
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			if (text == "Play") {
 				mytf.size = 80;
 				itemText.y = 100 + 60 * menuList.items.length;
@@ -34,6 +40,7 @@ package {
 			mytf.align = TextFormatAlign.CENTER;
 			itemText.setTextFormat(mytf);
 			itemText.defaultTextFormat = mytf;
+			itemText.embedFonts = true;
 			itemText.width = 600;
 			itemText.height = 100;
 			itemText.textColor = 0xFFFFFF;
@@ -47,6 +54,7 @@ package {
 			itemShadow.selectable = false;
 			itemShadow.setTextFormat(mytf);
 			itemShadow.defaultTextFormat = mytf;
+			itemShadow.embedFonts = true;
 			itemShadow.width = 600;
 			itemShadow.height = 100;
 			itemShadow.textColor = 0x000000;

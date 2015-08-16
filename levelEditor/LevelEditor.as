@@ -209,6 +209,21 @@ package {
 				case "Player": 
 					new Player(x, y, new Controls());
 					break;
+				case "TreeZero": 
+					new TreeZero(x, y);
+					break;
+				case "GroundZero": 
+					new GroundZero(x, y);
+					break;
+				case "TreeBelow": 
+					new TreeBelow(x, y);
+					break;
+				case "GroundBelow": 
+					new GroundBelow(x, y);
+					break;
+				case "TutorialBoard": 
+					new TutorialBoard(x, y);
+					break;
 				default: 
 			}
 		}

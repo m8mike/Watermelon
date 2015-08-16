@@ -6,6 +6,7 @@ package {
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.geom.Point;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
@@ -25,6 +26,11 @@ package {
 		private var loadButtonTF:TextField;
 		private var playButton:MovieClip;
 		private var index:Point;
+		
+		public static var numBubbles:int = 0;
+		public static var bubblesPopped:int = 0;
+		public static var numDiamonds:int = 0;
+		public static var diamondsCollected:int = 0;
 		
 		public function LevelInfo(parent:DisplayObjectContainer) {
 			this.parent = parent;
@@ -52,11 +58,14 @@ package {
 			fileNameTF.visible = true;
 			fileNameTF.selectable = true;
 			fileNameTF.type = TextFieldType.INPUT;
-			var mytf:TextFormat = new TextFormat("Arial");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
 			mytf.size = 18;
 			mytf.align = TextFormatAlign.CENTER;
 			fileNameTF.setTextFormat(mytf);
 			fileNameTF.defaultTextFormat = mytf;
+			fileNameTF.embedFonts = true;
 			fileNameTF.width = 240;
 			fileNameTF.height = 40;
 			fileNameTF.textColor = 0x80FFFF;
@@ -78,11 +87,16 @@ package {
 			levelNameTF.visible = true;
 			levelNameTF.selectable = true;
 			levelNameTF.type = TextFieldType.INPUT;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 22;
 			mytf.align = TextFormatAlign.CENTER;
 			levelNameTF.setTextFormat(mytf);
 			levelNameTF.defaultTextFormat = mytf;
+			levelNameTF.embedFonts = true;
 			levelNameTF.width = 240;
 			levelNameTF.height = 100;
 			//levelNameTF.alpha = 0.7;
@@ -104,6 +118,7 @@ package {
 			levelNameShadow.selectable = false;
 			levelNameShadow.setTextFormat(mytf);
 			levelNameShadow.defaultTextFormat = mytf;
+			levelNameShadow.embedFonts = true;
 			levelNameShadow.width = 240;
 			levelNameShadow.height = 100;
 			levelNameShadow.textColor = 0x000000;
@@ -142,11 +157,14 @@ package {
 			levelCommentTF.visible = true;
 			levelCommentTF.selectable = true;
 			levelCommentTF.type = TextFieldType.INPUT;
-			var mytf:TextFormat = new TextFormat("Arial");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
 			mytf.size = 18;
 			mytf.align = TextFormatAlign.CENTER;
 			levelCommentTF.setTextFormat(mytf);
 			levelCommentTF.defaultTextFormat = mytf;
+			levelCommentTF.embedFonts = true;
 			levelCommentTF.width = 240;
 			levelCommentTF.height = 160;
 			levelCommentTF.textColor = 0x000000;
@@ -165,11 +183,16 @@ package {
 			saveButtonTF.y = 440;
 			saveButtonTF.visible = true;
 			saveButtonTF.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 22;
 			mytf.align = TextFormatAlign.CENTER;
 			saveButtonTF.setTextFormat(mytf);
 			saveButtonTF.defaultTextFormat = mytf;
+			saveButtonTF.embedFonts = true;
 			saveButtonTF.width = 100;
 			saveButtonTF.height = 30;
 			saveButtonTF.textColor = 0x80FF80;
@@ -189,11 +212,16 @@ package {
 			loadButtonTF.y = 440;
 			loadButtonTF.visible = true;
 			loadButtonTF.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 22;
 			mytf.align = TextFormatAlign.CENTER;
 			loadButtonTF.setTextFormat(mytf);
 			loadButtonTF.defaultTextFormat = mytf;
+			loadButtonTF.embedFonts = true;
 			loadButtonTF.width = 100;
 			loadButtonTF.height = 30;
 			loadButtonTF.textColor = 0x80FF80;

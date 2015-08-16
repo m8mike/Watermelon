@@ -1,4 +1,5 @@
 package {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	
 	/**
@@ -11,13 +12,15 @@ package {
 		private var leftBound:AnimationCostume;
 		private var rightBound:AnimationCostume;
 		private var verticals:MovieClip;
-		private var horisontals:MovieClip;
+		private var hGrass:MovieClip;
+		private var hCeiling:MovieClip;
 		
-		public function Bounds(x:Number, y:Number, w:Number, h:Number) {
+		public function Bounds(x:Number, y:Number, w:Number, h:Number, parent:DisplayObjectContainer) {
 			var m:int = 1;
 			var sectionWidth:Number = 0;
 			verticals = new MovieClip();
-			horisontals = new MovieClip();
+			hGrass = new MovieClip();
+			hCeiling = new MovieClip();
 			while (sectionWidth < h * PhysiVals.MIN_SQARE) {
 				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
 				leftBound = new AnimationCostume("GroundBackground", verticals, 0.15, 0.15);
@@ -34,10 +37,10 @@ package {
 			sectionWidth = 0;
 			while (sectionWidth < w * PhysiVals.MIN_SQARE) {
 				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
-				grass = new AnimationCostume("GrassBackground", horisontals, 0.15, 0.15);
+				grass = new AnimationCostume("GrassBackground", hGrass, 0.15, 0.15);
 				grass.setCoords(40 * m - 11 * (m - 1) - 21, 0);
 				grass.animation.visible = true;
-				ceiling = new AnimationCostume("GroundBackground", horisontals, 0.15, 0.15);
+				ceiling = new AnimationCostume("GroundBackground", hCeiling, 0.15, 0.15);
 				ceiling.setCoords(40 * m - 11 * (m - 1) - 21, h * PhysiVals.MIN_SQARE);
 				ceiling.animation.rotation = 180;
 				ceiling.animation.visible = true;
@@ -45,12 +48,16 @@ package {
 			}
 			verticals.x = x * PhysiVals.MIN_SQARE;
 			verticals.y = y * PhysiVals.MIN_SQARE;
-			horisontals.x = x * PhysiVals.MIN_SQARE;
-			horisontals.y = y * PhysiVals.MIN_SQARE;
-			verticals.height = h * PhysiVals.MIN_SQARE;
-			horisontals.width = w * PhysiVals.MIN_SQARE;
-			CameraManager._staticLayer.addChild(verticals);
-			CameraManager._staticLayer.addChild(horisontals);
+			hGrass.x = x * PhysiVals.MIN_SQARE;
+			hGrass.y = y * PhysiVals.MIN_SQARE;
+			hCeiling.x = x * PhysiVals.MIN_SQARE;
+			hCeiling.y = y * PhysiVals.MIN_SQARE;
+			verticals.height = (h+0.5) * PhysiVals.MIN_SQARE;
+			hGrass.width = (w+0.5) * PhysiVals.MIN_SQARE;
+			hCeiling.width = w * PhysiVals.MIN_SQARE;
+			parent.parent.addChild(verticals);
+			parent.parent.addChild(hGrass);
+			parent.parent.addChild(hCeiling);
 		}
 		
 		public function setAngle(angle:Number):void {
@@ -63,8 +70,11 @@ package {
 			if (verticals) {
 				verticals.rotation = angle;
 			}
-			if (horisontals) {
-				horisontals.rotation = angle;
+			if (hGrass) {
+				hGrass.rotation = angle;
+			}
+			if (hCeiling) {
+				hCeiling.rotation = angle;
 			}
 		}
 		
@@ -73,9 +83,13 @@ package {
 				verticals.x = x;
 				verticals.y = y;
 			}
-			if (horisontals) {
-				horisontals.x = x;
-				horisontals.y = y;
+			if (hCeiling) {
+				hCeiling.x = x;
+				hCeiling.y = y;
+			}
+			if (hGrass) {
+				hGrass.x = x;
+				hGrass.y = y;
 			}
 		}
 		
@@ -85,9 +99,14 @@ package {
 					verticals.parent.removeChild(verticals);
 				}
 			}
-			if (horisontals) {
-				if (horisontals.parent) {
-					horisontals.parent.removeChild(horisontals);
+			if (hGrass) {
+				if (hGrass.parent) {
+					hGrass.parent.removeChild(hGrass);
+				}
+			}
+			if (hCeiling) {
+				if (hCeiling.parent) {
+					hCeiling.parent.removeChild(hCeiling);
 				}
 			}
 			super.removeCostumes();

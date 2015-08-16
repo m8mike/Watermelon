@@ -91,6 +91,9 @@ package {
 		
 		public static function zoomCameras(section:Point):void {
 			if (_camera) {
+				if (Platformer._player) {
+					freePoint = section;
+				}
 				_camera.zoomTo(section, 0.3 * zoomKoef); //0.9
 				pLayer.zoomTo(section, 0.3 * zoomKoef);
 				belowLayer.zoomTo(section, 0.3 * zoomKoef);

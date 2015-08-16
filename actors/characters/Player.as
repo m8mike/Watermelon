@@ -55,7 +55,7 @@ package
 			PlayerCostumeManager(costumeManager).show();
 			this.controls = controls;
 			controls.player = this;
-			inventory = new Inventory();
+			inventory = Inventory.getInstance();
 			inventory.addLife();
 			inventory.addLife();
 			inventory.addLife();
@@ -102,6 +102,7 @@ package
 		}
 		
 		public function kill():void {
+			inventory.clear();
 			invincibilityKoef = 2;
 			//invincibilityTime = 0;
 			Controls.disallowControls();

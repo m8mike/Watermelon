@@ -29,13 +29,13 @@ package
 			width = w;
 			height = h;
 			super.reload();
-			bounds = new Bounds(x, y, w, h);
+			bounds = new Bounds(x, y, w, h, costume);
 			super.init(body, costume);
 		}
 		
 		override public function reload():void {
 			super.reload();
-			bounds = new Bounds(location.x / PhysiVals.MIN_SQARE, location.y / PhysiVals.MIN_SQARE, width, height);
+			bounds = new Bounds(location.x / PhysiVals.MIN_SQARE, location.y / PhysiVals.MIN_SQARE, width, height, costume);
 			super.init(body, costume);
 		}
 		
@@ -66,7 +66,7 @@ package
 			costume.x = location.x / PhysiVals.RATIO;
 			costume.y = location.y / PhysiVals.RATIO;
 			costume.addChild(bitmap);
-			CameraManager._staticLayer.addChildAt(costume, 0);
+			CameraManager._staticLayer.addChild(costume);
 		}
 		
 		override protected function removeCostumes():void {

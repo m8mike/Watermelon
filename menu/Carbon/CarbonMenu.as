@@ -63,12 +63,23 @@ package {
 		}
 		
 		public static function playLevel():void {
-			carbonMenu.hide();
 			carbonMenu.disallowControls();
 			playingLevel = levelCursor.location.clone();
-			LevelLoader.loadLevel(levelList.getLevelAt(levelCursor.location).fileName);
+			Platformer.menu.clouds.visible = true;
+			Platformer.menu.clouds.appear(load);
+		}
+		
+		private static function load():void {
+			LevelLoader.loadLevel(levelList.getLevelAt(levelCursor.location).fileName, onLoad);
+		}
+		
+		private static function onLoad():void {
 			ButtonBack.hide();
+			carbonMenu.hide();
 			Platformer.menu.resume(null);
+			Platformer.activation(null);
+			SoundMusic.stopMenu();
+			Platformer.menu.clouds.disappear(SoundMusic.playInGame);
 		}
 		
 		private function keyDown(e:KeyboardEvent):void {
@@ -90,7 +101,8 @@ package {
 					down = true;
 					break;
 				case 189: //-
-					levelCursor.removeCurrentRow();
+					//levelList.getLevelAt(levelCursor.location).advance();
+					//levelCursor.removeCurrentRow();
 					break;
 				case 187: //+=
 					levelList.addRow();

@@ -4,6 +4,7 @@ package {
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -19,6 +20,7 @@ package {
 		private var itemText:TextField;
 		private var itemShadow:TextField;
 		private var _selected:Boolean = false;
+		private var onChange:Function;
 		
 		public function ScrollBar(parent:DisplayObjectContainer, x:Number, y:Number, text:String) {
 			this.x = x;
@@ -33,12 +35,25 @@ package {
 			bar.scaleY = 0.2;
 			parent.addChild(bar);
 			point = new scroll_point();
-			point.x = x;
+			point.x = x + 309;
 			point.y = y + 10;
 			point.scaleX = 0.15;
 			point.scaleY = 0.15;
 			parent.addChild(point);
 			show();
+			if (text == "Music") {
+				onChange = SoundMusic.setVolume;
+			} else if (text == "Sound") {
+				onChange = SoundMusic.setSoundVolume;
+			}
+		}
+		
+		private function getValue():Number {
+			var val:Number = (point.x - (x + 10)) / (x + 310 - (x + 10));
+			if (val < 0) {
+				val = 0;	
+			}
+			return val;
 		}
 		
 		private function moveOnArrows(e:KeyboardEvent):void {
@@ -46,11 +61,13 @@ package {
 				case 37: //left
 					if (point.x > x + 10) {
 						point.x -= 10;
+						onChange(getValue());
 					}
 					break;
 				case 39: //right
 					if (point.x < x + 301) {
 						point.x += 10;
+						onChange(getValue());
 					}
 					break;
 			}
@@ -83,10 +100,13 @@ package {
 		private function scroll(e:MouseEvent):void {
 			if (e.stageX > x && e.stageX < x + 310) {	
 				point.x = e.stageX;
+				onChange(getValue());
 			} else if (e.stageX >= x + 310) {
 				point.x = x + 309;
+				onChange(getValue());
 			} else if (e.stageX <= x) {
 				point.x = x + 1;
+				onChange(getValue());
 			}
 		}
 		
@@ -97,10 +117,15 @@ package {
 			itemText.y = y;
 			itemText.visible = true;
 			itemText.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 40;
 			itemText.setTextFormat(mytf);
 			itemText.defaultTextFormat = mytf;
+			itemText.embedFonts = true;
 			itemText.width = 600;
 			itemText.height = 100;
 			itemText.textColor = 0xFFFFFF;
@@ -108,12 +133,13 @@ package {
 			itemText.wordWrap = true;
 			itemShadow = new TextField();
 			itemShadow.text = text;
-			itemShadow.x = itemText.x + 5;
-			itemShadow.y = itemText.y + 5;
+			itemShadow.x = itemText.x + 4;
+			itemShadow.y = itemText.y + 4;
 			itemShadow.visible = true;
 			itemShadow.selectable = false;
 			itemShadow.setTextFormat(mytf);
 			itemShadow.defaultTextFormat = mytf;
+			itemShadow.embedFonts = true;
 			itemShadow.width = 600;
 			itemShadow.height = 100;
 			itemShadow.textColor = 0x000000;

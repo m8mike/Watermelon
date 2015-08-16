@@ -1,5 +1,6 @@
 package {
 	import flash.display.MovieClip;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -19,9 +20,21 @@ package {
 		private var diamondText:TextField;
 		
 		private var jetpackText:TextField;
+		private var jetpackShadow:TextField;
+		
+		private static var instance:Inventory;
 		
 		public function Inventory() {
+			
+		}
 		
+		public static function getInstance():Inventory {
+			if (instance) {
+				return instance;
+			} else {
+				instance = new Inventory();
+				return instance;
+			}
 		}
 		
 		public function addDiamond():void {
@@ -36,7 +49,9 @@ package {
 				diamondText.visible = true;
 				diamondText.selectable = false;
 				diamondText.text = "x " + diamondCount.toString();
-				var mytf:TextFormat = new TextFormat("Zorque-Regular");
+				//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+				var mytf:TextFormat = new TextFormat("Arial");
+				mytf.bold = true;
 				mytf.size = 22;
 				diamondText.setTextFormat(mytf);
 				diamondText.defaultTextFormat = mytf;
@@ -100,32 +115,53 @@ package {
 		public function addJetpackTime():void {
 			if (jetpackText) {
 				jetpackText.visible = true;
+				jetpackShadow.visible = true;
 				return void;
 			}
 			jetpackText = new TextField();
-			jetpackText.x = 490;
+			jetpackText.x = 400;
 			jetpackText.y = 10;
 			jetpackText.visible = true;
 			jetpackText.selectable = false;
 			jetpackText.text = "Jetpack: 100";
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 22;
 			jetpackText.setTextFormat(mytf);
 			jetpackText.defaultTextFormat = mytf;
+			jetpackText.embedFonts = true;
 			jetpackText.width = 200;
 			jetpackText.height = 60;
-			jetpackText.textColor = 0x004080;
+			jetpackText.textColor = 0xFFFFFF;
+			jetpackShadow = new TextField();
+			jetpackShadow.x = 403;
+			jetpackShadow.y = 13;
+			jetpackShadow.visible = true;
+			jetpackShadow.selectable = false;
+			jetpackShadow.text = "Jetpack: 100";
+			jetpackShadow.setTextFormat(mytf);
+			jetpackShadow.defaultTextFormat = mytf;
+			jetpackShadow.embedFonts = true;
+			jetpackShadow.width = 200;
+			jetpackShadow.height = 60;
+			jetpackShadow.textColor = 0x000000;
+			CameraManager.hud.addChild(jetpackShadow);
 			CameraManager.hud.addChild(jetpackText);
 		}
 		
 		public function setJetpackTime(time:int):void {
 			jetpackText.text = "Jetpack: " + time.toString();
+			jetpackShadow.text = jetpackText.text;
 		}
 		
 		public function removeJetpackTime():void {
 			if (jetpackText) {
 				if (jetpackText.parent) {	
 					jetpackText.parent.removeChild(jetpackText);
+					jetpackShadow.parent.removeChild(jetpackShadow);
 				}
 			}
 		}
@@ -142,9 +178,24 @@ package {
 			}
 		}
 		
+		public function clear():void {
+			removeJetpackTime();
+			removeDiamonds();
+			removeLifes();
+			LevelInfo.numBubbles = 0;
+			LevelInfo.numDiamonds = 0;
+		}
+		
+		private function removeLifes():void {
+			while (_lifes.length) {
+				removeLife();
+			}
+		}
+		
 		public function hideJetpackTime():void {
 			if (jetpackText) {
 				jetpackText.visible = false;
+				jetpackShadow.visible = false;
 			} else {
 				trace("error jetpack time removing while there is no jetpack time");
 			}

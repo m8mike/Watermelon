@@ -17,6 +17,7 @@ package {
 		override public function pick(player:Player):void {
 			player.diamondGet();
 			super.pick(player);
+			LevelInfo.diamondsCollected++;
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {

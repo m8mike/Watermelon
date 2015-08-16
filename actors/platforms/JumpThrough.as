@@ -9,7 +9,7 @@ package {
 	* @author Mad Mike
 	*/
 	public class JumpThrough extends Platform {
-		public var mask:Sprite;
+		public var costume:MovieClip;
 		private var body:b2Body;
 		public var width:Number;
 		public var height:Number;
@@ -20,22 +20,22 @@ package {
 			width = w;
 			height = h;
 			super.reload();
-			super.init(body, mask);
+			super.init(body, costume);
 		}
 		
 		override public function reload():void {
 			super.reload();
-			super.init(body, mask);
+			super.init(body, costume);
 		}
 		
 		override protected function createShapes():void {
 			shape = new RectShape(width * PhysiVals.MIN_SQARE, height * PhysiVals.MIN_SQARE);
-			mask = shape.getSimpleSprite(location);
-			CameraManager._staticLayer.addChild(mask);
+			/*mask = shape.getSimpleSprite(location);
+			CameraManager._staticLayer.addChild(mask);*/
 		}
 		
 		override protected function createCostumes():void {
-			var loc:Point = location.clone();
+			/*var loc:Point = location.clone();
 			var loc1:Point = new Point(0, 0);
 			var row:MovieClip = new ug2();
 			CameraManager._staticLayer.addChildAt(row, 0);
@@ -55,7 +55,24 @@ package {
 					row.addChild(undergr);
 				}
 			}
-			row.mask = mask;
+			row.mask = mask;*/
+			
+			var m:int = 1;
+			var sectionWidth:Number = 0;
+			costume = new MovieClip();
+			m = 1;
+			sectionWidth = 0;
+			while (sectionWidth < width * PhysiVals.MIN_SQARE) {
+				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
+				var ceiling:AnimationCostume = new AnimationCostume("GroundBackground", costume, 0.15, 0.15);
+				ceiling.setCoords(40 * m - 11 * (m - 1) - 18, 0);
+				ceiling.animation.visible = true;
+				m++;
+			}
+			costume.x = location.x;
+			costume.y = location.y;
+			costume.width = (width+0.3) * PhysiVals.MIN_SQARE;
+			CameraManager._staticLayer.addChild(costume);
 		}
 		
 		override protected function createBodies():void {

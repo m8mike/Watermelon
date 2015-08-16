@@ -61,7 +61,7 @@ package {
 			menu.initAsMainMenu(toLevelSelect, toSettings, achieve, toCredits);
 			menu.show();
 			escapeMenu = new MenuList(menuLayer);
-			escapeMenu.initAsEscapeMenu(resume, toSettings, achieve, resume, fromEscapeToMain);
+			escapeMenu.initAsEscapeMenu(resume, toSettings, achieve, restart, fromEscapeToMain);
 			escapeMenu.hide();
 			currentMenu = menu;
 			
@@ -74,6 +74,8 @@ package {
 			addChild(menuLayer);
 			addChild(completedLayer);
 			parent.addChild(this);
+			SoundMusic.stopInGame();
+			SoundMusic.playMenu();
 		}
 		
 		public function onEscape():void {
@@ -91,15 +93,35 @@ package {
 			clouds.appear(escapeMenu.show);
 			currentMenu = escapeMenu;
 			showed = true;
+			SoundMusic.stopInGame();
+			SoundMusic.playMenu();
+		}
+		
+		public function restart(e:MouseEvent):void {
+			SoundMusic.stopMenu();
+			currentMenu = escapeMenu;
+			showed = false;
+			escapeMenu.hide();
+			LevelLoader.reloadLevel(CarbonMenu.levelList.getLevelAt(CarbonMenu.levelCursor.location).fileName, whenLoaded);
+		}
+		
+		private function whenLoaded():void {
+			clouds.disappear(SoundMusic.playInGame);
 		}
 		
 		public function resume(e:MouseEvent):void {
 			escapeMenu.hide();
 			clouds.disappear();
 			showed = false;
+			SoundMusic.stopMenu();
+			SoundMusic.playInGame();
+			Platformer.activation(null);
+			ButtonMute.hide();
+			ButtonMute.show(CameraManager.hud);
 		}
 		
 		public function achieve(e:MouseEvent):void {
+			new AchievementUnlocked(this);
 			achievementsLayer.visible = true;
 			hats.stop();
 			currentMenu.hide();
@@ -111,6 +133,8 @@ package {
 				getStage().addEventListener(KeyboardEvent.KEY_DOWN, achievementSection.control);
 			}
 			ButtonBack.show(achievementsLayer, fromAchievementsToMain);
+			ButtonMute.hide();
+			ButtonMute.show(achievementsLayer);
 		}
 		
 		public function toCredits(e:MouseEvent):void {
@@ -123,6 +147,8 @@ package {
 				credits = new Credits(creditsLayer);
 			}
 			ButtonBack.show(credits, fromCreditsToMain);
+			ButtonMute.hide();
+			ButtonMute.show(creditsLayer);
 		}
 		
 		public function complete(e:MouseEvent):void {
@@ -130,12 +156,13 @@ package {
 			hats.stop();
 			currentMenu.hide();
 			new CompletedScreen(completedLayer);
+			ButtonMute.hide();
+			ButtonMute.show(completedLayer);
 		}
 		
 		public function toSettings(e:MouseEvent):void {
 			hats.stop();
 			currentMenu.hide();
-			new AchievementUnlocked(this);
 			if (settings) {
 				settings.show();
 			} else {	
@@ -143,6 +170,8 @@ package {
 			}
 			ButtonBack.show(settingsLayer, fromSettingsToMain);
 			settings.allowControls();
+			ButtonMute.hide();
+			ButtonMute.show(settingsLayer);
 		}
 		
 		public function toLevelSelect(e:MouseEvent):void {
@@ -155,6 +184,8 @@ package {
 				carbonMenu = new CarbonMenu(carbonLayer);
 			}
 			ButtonBack.show(carbonLayer, toMainMenu);
+			ButtonMute.hide();
+			ButtonMute.show(carbonLayer);
 		}
 		
 		public function fromEscapeToMain(e:MouseEvent):void {
@@ -163,6 +194,8 @@ package {
 			hats.drop();
 			currentMenu = menu;
 			ButtonBack.hide();
+			ButtonMute.hide();
+			ButtonMute.show(menuLayer);
 		}
 		
 		public function fromSettingsToMain(e:MouseEvent):void {
@@ -173,6 +206,8 @@ package {
 			}
 			currentMenu.show();
 			ButtonBack.hide();
+			ButtonMute.hide();
+			ButtonMute.show(menuLayer);
 		}
 		
 		public function fromAchievementsToMain(e:MouseEvent):void {
@@ -183,6 +218,8 @@ package {
 			}
 			currentMenu.show();
 			ButtonBack.hide();
+			ButtonMute.hide();
+			ButtonMute.show(menuLayer);
 		}
 		
 		public function fromCreditsToMain(e:MouseEvent):void {
@@ -190,6 +227,8 @@ package {
 			hats.drop();
 			menu.show();
 			ButtonBack.hide();
+			ButtonMute.hide();
+			ButtonMute.show(menuLayer);
 		}
 		
 		public function toMainMenu(e:MouseEvent):void {
@@ -205,6 +244,8 @@ package {
 				settings.hide();
 			}
 			ButtonBack.hide();
+			ButtonMute.hide();
+			ButtonMute.show(menuLayer);
 		}
 		
 		public static function getStage():Stage {

@@ -49,6 +49,7 @@ package {
 			if (!bubble.deleted) {	
 				bubble.pop();
 			}
+			LevelInfo.bubblesPopped++;
 			super.cleanUpBeforeRemoving();
 		}
 		

@@ -127,6 +127,12 @@ package {
 			} else if (this is Standard) {
 				xml.@w = Standard(this).width;
 				xml.@h = Standard(this).height;
+			} else if (this is GroundBelow) {
+				xml.@w = GroundBelow(this).width;
+				xml.@h = GroundBelow(this).height;
+			} else if (this is GroundZero) {
+				xml.@w = GroundZero(this).width;
+				xml.@h = GroundZero(this).height;
 			}
 			return xml;
 		}

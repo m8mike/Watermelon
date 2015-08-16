@@ -28,9 +28,21 @@ package {
 		}
 		
 		public function finish(player:Player):void {
-			Controls.disallowControls();
 			//player.remove();
-			//Platformer.menu.complete(null);
+			if (Platformer.menu.clouds.visible) {
+				Platformer.menu.clouds.visible = false;
+				Platformer.menu.clouds.appear(finishHim);
+			} else {
+				trace("clouds are invisible! make them visible before completed screen");
+			}
+		}
+		
+		private function finishHim():void {
+			trace("finish him!");
+			if (Platformer._player) {	
+				Platformer._player.remove();
+			}
+			Platformer.menu.complete(null);
 		}
 		
 		override protected function createShapes():void {

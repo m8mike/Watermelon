@@ -86,7 +86,7 @@ package {
 					case 27: //escape
 						Platformer.menu.onEscape();
 						break;
-					case 8: //backspace
+					/*case 8: //backspace
 						if (CarbonMenu.carbonMenu.visible) {
 							CarbonMenu.carbonMenu.hide();
 							Platformer.activation(null);
@@ -94,19 +94,19 @@ package {
 							CarbonMenu.carbonMenu.show();
 							Platformer.deactivation(null);
 						}
-						break;
+						break;*/
 					case 90: //z
 						//useUmbrella = true;
 						HUD.toggleInfo();
 						break;
 					case 81: //q
-						unzoom = true;
+						///unzoom = true;
 						//CameraManager.zoomKoef /= 1.1;
 						//Left = true;
 						//Up = true;
 						break;
 					case 69: //e
-						zoom = true;
+						///zoom = true;
 						//CameraManager.zoomKoef *= 1.1;
 						//Right = true;
 						//Up = true;
@@ -115,28 +115,32 @@ package {
 						left = true;
 						break;
 					case 65: //a
-						_player.itemGet("Bazooka");
+						left = true;
+						//_player.itemGet("Bazooka");
 						//Controls(controls[1]).left = true;
 						break;
 					case 38: //Up
 						up = true;
 						break;
 					case 87: //w
-						_player.itemGet("Umbrella");
+						up = true;
+						//_player.itemGet("Umbrella");
 						//Controls(controls[1]).up = true;
 						break;
 					case 39: //Right
 						right = true;
 						break;
 					case 68: //d
+						right = true;
 						//Controls(controls[1]).right = true;
 						break;
 					case 40: //Down
 						down = true;
 						break;
 					case 83: //s
+						down = true;
 						//Platformer._player = new Player(2, -6, this);
-						_player.itemGet("SnowGun");
+						//_player.itemGet("SnowGun");
 						//Controls(controls[1]).down = true;
 						break;
 					case 70: //Fly //83

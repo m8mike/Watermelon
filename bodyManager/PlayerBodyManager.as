@@ -106,11 +106,6 @@ package
 					body.ApplyForce(new b2Vec2(2.0, 0.0), body.GetWorldCenter()); //1.0 0.0
 				}
 			}
-			if (controls.up) {
-				jump();
-			} else {
-				dontJump();
-			}
 			if (controls.down) {
 				if (jumpThrough) {
 					parent.hide();
@@ -120,6 +115,10 @@ package
 					jumpThrough = null;
 				}
 				body.ApplyImpulse(new b2Vec2(0.0, 0.25), body.GetWorldCenter());
+			} else if (controls.up) {
+				jump();
+			} else {
+				dontJump();
 			}
 			if (controls.useJetpack) {
 				if (PhysiVals.fps > 0 && PhysiVals.fps != Infinity) {

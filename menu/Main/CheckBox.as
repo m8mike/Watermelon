@@ -4,6 +4,7 @@ package {
 	import flash.display.StageDisplayState;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -75,10 +76,15 @@ package {
 			itemText.y = y;
 			itemText.visible = true;
 			itemText.selectable = false;
-			var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
+			var mytf:TextFormat = new TextFormat();
+			var fk:Font = new Kavoon();
+			mytf.font = fk.fontName;
+			mytf.bold = true;
 			mytf.size = 40;
 			itemText.setTextFormat(mytf);
 			itemText.defaultTextFormat = mytf;
+			itemText.embedFonts = true;
 			itemText.width = 600;
 			itemText.height = 100;
 			itemText.textColor = 0xFFFFFF;
@@ -86,12 +92,13 @@ package {
 			itemText.wordWrap = true;
 			itemShadow = new TextField();
 			itemShadow.text = text;
-			itemShadow.x = itemText.x + 5;
-			itemShadow.y = itemText.y + 5;
+			itemShadow.x = itemText.x + 4;
+			itemShadow.y = itemText.y + 4;
 			itemShadow.visible = true;
 			itemShadow.selectable = false;
 			itemShadow.setTextFormat(mytf);
 			itemShadow.defaultTextFormat = mytf;
+			itemShadow.embedFonts = true;
 			itemShadow.width = 600;
 			itemShadow.height = 100;
 			itemShadow.textColor = 0x000000;

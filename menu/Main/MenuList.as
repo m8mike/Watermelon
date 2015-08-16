@@ -20,7 +20,7 @@ package {
 		public function initAsMainMenu(levelSelect:Function, settings:Function, achievements:Function, complete:Function):void {
 			items.push(new MenuItem("Play", this, levelSelect));
 			items.push(new MenuItem("Settings", this, settings));
-			items.push(new MenuItem("Achievements", this, achievements));
+			//items.push(new MenuItem("Achievements", this, achievements));
 			items.push(new MenuItem("Credits", this, complete));
 			setCurrent(0);
 		}
@@ -29,7 +29,7 @@ package {
 			y -= 40;
 			items.push(new MenuItem("Resume", this, resume)); // remove escape menu
 			items.push(new MenuItem("Settings", this, settings));
-			items.push(new MenuItem("Achievements", this, achievements));
+			//items.push(new MenuItem("Achievements", this, achievements));
 			items.push(new MenuItem("Restart", this, restart)); //remove escape menu
 			items.push(new MenuItem("Quit", this, quit)); // go to main
 			setCurrent(0);
@@ -110,6 +110,8 @@ package {
 				item.show();
 			}
 			allowControls();
+			ButtonMute.hide();
+			ButtonMute.show(parent);
 		}
 		
 		public function remove():void {

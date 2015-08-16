@@ -12,6 +12,8 @@ package {
 	public class LevelCell {
 		private var _state:LevelState;
 		private var _location:Point;
+		private var _parent:DisplayObjectContainer;
+		private var icon:MovieClip;
 		
 		public var fileName:String = "default";
 		public var name:String = "default";
@@ -20,19 +22,68 @@ package {
 		public function LevelCell(state:LevelState, location:Point, parent:DisplayObjectContainer) {
 			_state = state;
 			_location = location;
-			var icon:MovieClip = _state.getSprite(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS, 
+			_parent = parent;
+			icon = _state.getSprite(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS, 
 												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS);
 			var shadow:MovieClip = new MovieClip();
 			shadow.graphics.beginFill(0x00FF80, 0.6);
 			shadow.graphics.drawRoundRect(0, 0, 200, 200, 80);
 			shadow.graphics.endFill();
-			shadow.x = location.x-30;
-			shadow.y = location.y-30;
+			shadow.x = location.x - 30;
+			shadow.y = location.y - 30;
 			icon.addChildAt(shadow, 0);
 			icon.addEventListener(MouseEvent.CLICK, moveCursor);
 			parent.addChild(icon);
 		}
 		
+		public function open():void {
+			if (_state is LevelStateClosed) {
+				icon.removeChildAt(icon.numChildren - 1);
+				//icon.removeChildAt(icon.numChildren - 1);
+				_state.remove();
+				_state = new LevelStateOpen();
+				icon.addChildAt(LevelStateOpen(_state).getAnotherSprite(), 1);
+				icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
+												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
+				_parent.addChild(icon);
+			}
+		}
+		
+		public function complete():void {
+			if (_state is LevelStateOpen) {
+				icon.removeChildAt(icon.numChildren - 1);
+				//icon.removeChildAt(icon.numChildren - 1);
+				_state.remove();
+				_state = new LevelStateFinished();
+				icon.addChildAt(LevelStateFinished(_state).getAnotherSprite(), 1);
+				icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
+												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
+				_parent.addChild(icon);
+			}
+		}
+		/*
+		public function advance():void {
+			if (_state is LevelStateClosed) {
+				icon.removeChildAt(icon.numChildren - 1);
+				//icon.removeChildAt(icon.numChildren - 1);
+				_state.remove();
+				_state = new LevelStateOpen();
+				icon.addChildAt(LevelStateOpen(_state).getAnotherSprite(), 1);
+				icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
+												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
+				_parent.addChild(icon);
+			} else if (_state is LevelStateOpen) {
+				icon.removeChildAt(icon.numChildren - 1);
+				//icon.removeChildAt(icon.numChildren - 1);
+				_state.remove();
+				_state = new LevelStateFinished();
+				icon.addChildAt(LevelStateFinished(_state).getAnotherSprite(), 1);
+				icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
+												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
+				_parent.addChild(icon);
+			}
+		}
+		*/
 		private function moveCursor(e:MouseEvent):void {
 			CarbonMenu.levelCursor.allowMoving();
 			CarbonMenu.levelCursor.moveTo(_location.x, _location.y);
@@ -66,6 +117,10 @@ package {
 			str += comment;
 			str += "</comment></level>";
 			return str;
+		}
+		
+		public function get location():Point {
+			return _location;
 		}
 	}
 }

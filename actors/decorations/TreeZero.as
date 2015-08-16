@@ -15,7 +15,7 @@ package {
 		
 		public function TreeZero(x:Number, y:Number) {
 			super();
-			super.location = new Point(x, y);
+			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
 			super.reload();
 			super.init(body, costume);
 		}

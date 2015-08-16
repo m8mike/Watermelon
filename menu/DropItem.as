@@ -25,6 +25,7 @@ package {
 			mytf.size = 12;
 			textField.setTextFormat(mytf);
 			textField.defaultTextFormat = mytf;
+			textField.embedFonts = true;
 			textField.width = 10 + text.length * 7;
 			textField.height = 20;
 			textField.background = true;

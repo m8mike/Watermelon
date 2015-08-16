@@ -117,6 +117,13 @@ package {
 		}
 		
 		private function playerHitsPlatform(player:Player, platform:Platform, point:b2ContactPoint):void {
+			/*if (!player) {
+				trace("where he is?");	
+			}*/
+			if (platform is GroundBelow || platform is GroundZero || platform is TreeBelow || 
+			platform is TreeZero || platform is Arrow || platform is TutorialBoard) {
+				return void;
+			}
 			if (!player.isOnGround()) {
 				if ((platform is TopHat || platform is Cloud || platform is Spikes) || Platformer._player.carryingItem is Jetpack) {
 					player.allowJumps(point.normal, false);
@@ -139,7 +146,13 @@ package {
 				}
 				return void;
 			} else if (platform is EndLevel) {
-				EndLevel(platform).finish(player);
+				if (HUD.condition == HUD.PLAY) {
+					if (Controls.allowed) {
+						Controls.allowed = false;
+						Controls.disallowControls();
+						EndLevel(platform).finish(player);
+					}
+				}
 				return void;
 			} else if (platform is Wooden) {
 				if (vel > 10) {
