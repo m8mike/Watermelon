@@ -62,9 +62,13 @@ package {
 				menuMusicPlaying = true;
 				if (!menuChannel) {
 					menuChannel = new SoundChannel();
-					st = new SoundTransform();
+					if (!st) {	
+						st = new SoundTransform();
+					}
 					menuChannel.soundTransform = st;
-					stSound = new SoundTransform();
+					if (!stSound) {	
+						stSound = new SoundTransform();
+					}
 				}
 				menuChannel = menuMusic.play(0, 1000000, st);
 			}
@@ -119,10 +123,16 @@ package {
 		}
 		
 		public static function setSoundVolume(volume:Number):void {
+			if (!stSound) {
+				stSound = new SoundTransform();
+			}
 			stSound.volume = volume;
 		}
 		
 		public static function setVolume(volume:Number):void {
+			if (!st) {
+				st = new SoundTransform();
+			}
 			st.volume = volume;
 			if (menuChannel) {
 				menuChannel.soundTransform = st;

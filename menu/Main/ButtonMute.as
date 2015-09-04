@@ -47,7 +47,7 @@ package {
 			if (costumeOff.hasEventListener(MouseEvent.CLICK)) {
 				costumeOff.removeEventListener(MouseEvent.CLICK, musicOn);
 			}
-			costumeOn.visible = true;
+			//costumeOn.visible = true;
 			parent.addChild(costumeOn);
 			parent.addChild(costumeOff);
 			costumeOn.addEventListener(MouseEvent.CLICK, musicOff);

@@ -12,6 +12,8 @@ package {
 		private var hatsFalling:Boolean = false;
 		private var parent:DisplayObjectContainer;
 		
+		public static var maxHats:int = 1;
+		
 		public function HatsFalling(parent:DisplayObjectContainer) {
 			this.parent = parent;
 			parent.addEventListener(Event.ENTER_FRAME, update);
@@ -19,7 +21,7 @@ package {
 		
 		private function update(e:Event):void {
 			if (allowHats) {
-				if (hatz.length < 1) {
+				if (hatz.length < maxHats) {
 					hatz.push(new Hat(parent));
 					hatsFalling = true;
 				}

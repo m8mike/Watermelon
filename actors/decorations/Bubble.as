@@ -8,7 +8,7 @@ package {
 	public class Bubble extends Decor {
 		var bubble:MovieClip;
 		public function Bubble(x:Number, y:Number) {
-			bubble = new bubbleBonus()
+			bubble = new bubbleBonus();
 			bubble.x = x;
 			bubble.y = y;
 			bubble.scaleX = 0.17;
@@ -18,17 +18,20 @@ package {
 		}
 		
 		override public function updateNow():void {
-			if (bubble.currentFrame == 13) {
+			if (bubble.currentFrame >= 12) {
 				destroy();
+				return void;
 			}
 			super.updateNow();
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {
-			bubble.stop();
-			bubble.parent.removeChild(bubble);
-			bubble = null;
-			super.cleanUpBeforeRemoving();
+			if (bubble) {	
+				bubble.stop();
+				bubble.parent.removeChild(bubble);
+				bubble = null;
+				super.cleanUpBeforeRemoving();
+			}
 		}
 		
 		public function pop() {

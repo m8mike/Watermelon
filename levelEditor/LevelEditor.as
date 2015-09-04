@@ -37,7 +37,7 @@ package {
 			HUD.addRespawnText("-120");
 			HUD.invisibleEditButton.addEventListener(MouseEvent.CLICK, selectActor);
 			HUD.invisibleCreateButton.addEventListener(MouseEvent.CLICK, createActor);
-			HUD.invisibleCreateButton.addEventListener(MouseEvent.RIGHT_CLICK, removeActor);
+			HUD.invisibleCreateButton.addEventListener(MouseEvent.CLICK, removeActor);
 			HUD.addEditorState();
 			HUD.addSimpleButton(20, 120, "Сохранить", saveToFile);
 			HUD.addSimpleButton(20, 145, "Выбор уровня", selectLevel);
@@ -98,6 +98,7 @@ package {
 		}
 		
 		private function removeActor(e:MouseEvent):void {
+			if (!e.ctrlKey) return void;
 			var x1:Number = 1 / CameraManager.zoomKoef * (e.stageX - CameraManager.pLayer.x) / 108;
 			var y1:Number = 1 / CameraManager.zoomKoef * (e.stageY - CameraManager.pLayer.y) / 108;
 			
@@ -126,6 +127,9 @@ package {
 		}
 		
 		private function createActor(e:MouseEvent):void {
+			if (e.ctrlKey) {
+				return void;
+			}
 			var x:Number = 1 / CameraManager.zoomKoef * (e.stageX - CameraManager.pLayer.x) / 72;
 			var y:Number = 1 / CameraManager.zoomKoef * (e.stageY - CameraManager.pLayer.y) / 72;
 			x = Math.round(x);
@@ -223,6 +227,18 @@ package {
 					break;
 				case "TutorialBoard": 
 					new TutorialBoard(x, y);
+					break;
+				case "TutorialSponsor": 
+					new TutorialSponsor(x, y);
+					break;
+				case "TutorialDown": 
+					new TutorialDown(x, y);
+					break;
+				case "TutorialUp": 
+					new TutorialUp(x, y);
+					break;
+				case "TutorialWall": 
+					new TutorialWall(x, y);
 					break;
 				default: 
 			}

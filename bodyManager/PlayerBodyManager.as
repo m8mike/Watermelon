@@ -13,6 +13,7 @@ package
 		private var ballBodyBuilder:DynamicBodyBuilder;
 		
 		private static const JUMP_TIME:int = 2; //10//true 2
+		public var jumpIterations:int = 0;
 		public var jumpTimeLeft:int = 0;
 		public var impulseReducer:int = 0;
 		public var jetpackTime:int = 0;
@@ -113,8 +114,9 @@ package
 					parent.changeSpawnPoint(0, 10);
 					parent.spawn();
 					jumpThrough = null;
+				} else if (!canJump) {
+					body.ApplyImpulse(new b2Vec2(0.0, 0.15), body.GetWorldCenter());
 				}
-				body.ApplyImpulse(new b2Vec2(0.0, 0.25), body.GetWorldCenter());
 			} else if (controls.up) {
 				jump();
 			} else {
@@ -145,7 +147,10 @@ package
 					new RocketSmoke(smokePoint2);
 				}
 			} else {
-				if (Player(body.GetUserData()).carryingItem is Jetpack) {
+				/*if (Player(body.GetUserData()).carryingItem is Jetpack) {
+					body.m_linearDamping = 0;
+				}*/
+				if (body.m_linearDamping) {
 					body.m_linearDamping = 0;
 				}
 			}
@@ -157,9 +162,14 @@ package
 				}
 			}
 			var notPressedAnyButton:Boolean = !controls.up && !controls.left && !controls.right && !controls.down && !controls.useJetpack;
-			var speedIsSmall:Boolean = (body.GetLinearVelocity().x < 9) && (body.GetLinearVelocity().x > -9);
-			if (notPressedAnyButton && canJump && speedIsSmall && !parent.inCloud) {
-				body.PutToSleep();
+			var speedIsSmall:Boolean = (body.GetLinearVelocity().x < 4) && (body.GetLinearVelocity().x > -4);
+			var speedIsAverage:Boolean = (body.GetLinearVelocity().x < 9) && (body.GetLinearVelocity().x > -9);
+			if (notPressedAnyButton && canJump && !parent.inCloud) {
+				if (speedIsSmall) {
+					body.PutToSleep();
+				} else if (speedIsAverage) {
+					body.m_linearDamping = 2;
+				}
 			}
 			if (!controls.up) {
 				controls.useUmbrella = false;
@@ -187,9 +197,15 @@ package
 		private function jump():void {
 			if (canJump) {
 				shortJump();
-			} else if (jumpTimeLeft) {
+				//trace("short");
+				jumpIterations = 7;
+			} else if (jumpIterations > 0) {
 				longJump();
+				jumpIterations--;
+				//trace("i " + jumpIterations);
 			} else {
+				jumpIterations = 0;
+				//trace("no jump time left");
 				if (!controls.up) {
 					canOpenUmbrella = true;
 				}
@@ -199,9 +215,9 @@ package
 					controls.useJetpack = true;
 				}
 			}
-			if (leftWallJump) {
+			if (leftWallJump && !canJump && jumpIterations < 3) {
 				body.ApplyImpulse(LEFT_WALL_IMPULSE, body.GetWorldCenter()); //-0.2 -0.27
-			} else if (rightWallJump) {
+			} else if (rightWallJump && !canJump && jumpIterations < 3) {
 				body.ApplyImpulse(RIGHT_WALL_IMPULSE, body.GetWorldCenter()); //0.2 -0.27
 			}
 		}

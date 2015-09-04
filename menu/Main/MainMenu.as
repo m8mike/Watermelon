@@ -73,7 +73,7 @@ package {
 			addChild(hatzLayer);
 			addChild(menuLayer);
 			addChild(completedLayer);
-			parent.addChild(this);
+			CameraManager.menu.addChild(this);
 			SoundMusic.stopInGame();
 			SoundMusic.playMenu();
 		}
@@ -117,7 +117,7 @@ package {
 			SoundMusic.playInGame();
 			Platformer.activation(null);
 			ButtonMute.hide();
-			ButtonMute.show(CameraManager.hud);
+			ButtonMute.show(CameraManager.inventory);
 		}
 		
 		public function achieve(e:MouseEvent):void {
@@ -196,6 +196,7 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			CompletedScreen.checkComplete();
 		}
 		
 		public function fromSettingsToMain(e:MouseEvent):void {

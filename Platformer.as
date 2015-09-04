@@ -1,26 +1,10 @@
 package {
-	import actors.Character;
-	import actors.Collectable;
-	import actors.Decor;
-	import Box2D.Collision.b2AABB;
 	import Box2D.Dynamics.b2Body;
-	import Box2D.Dynamics.b2BodyDef;
-	import Box2D.Dynamics.b2DebugDraw;
-	import Box2D.Dynamics.b2World;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
 	import flash.system.System;
 	import flash.text.TextField;
-	import flash.utils.Timer;
-	import menu.LevelSelectionMC;
 	/**
 	* ...
 	* @author Mad Mike
@@ -46,21 +30,32 @@ package {
 		public static var menu:MainMenu;
 		
 		public function Platformer() {
-			new MyFont();
-			thisIs = this;
-			CameraManager.initCameras();
+			/*var url:String=stage.loaderInfo.url;
+			var goodPattern:RegExp=/^(https:\/\/)(www\.)?flashgamelicense\.com/;
+			var goodPattern2:RegExp=/^(http:\/\/)(www\.)?flashgamelicense\.com/;
+			if (goodPattern.test(url)||goodPattern2.test(url)) {*/
+				new MyFont();
+				thisIs = this;
+				CameraManager.initCameras();
+				new StartScreen();
+				
+			//}
+		}
+		
+		public static function startGame():void {
 			Raster.cacheBackground();
 			PhysiVals.setupPhysicsWorld();
 			PhysiVals.setupTimers();
+			CameraManager.hud.visible = false;
 			new LevelEditor();
-			menu = new MainMenu(this);
+			menu = new MainMenu(thisIs);
 			//LevelDirector.createLevel(0);
 			//LevelSelectionMC.add(33);
 			//LevelDirector.createLevel(1);
-			addEventListener(Event.ENTER_FRAME, newEventListener);
-			stage.addEventListener(Event.DEACTIVATE, deactivation);
-			stage.addEventListener(Event.ACTIVATE, activation);
 			//setupDebugDraw();
+			thisIs.addEventListener(Event.ENTER_FRAME, thisIs.newEventListener);
+			thisIs.stage.addEventListener(Event.DEACTIVATE, deactivation);
+			thisIs.stage.addEventListener(Event.ACTIVATE, activation);
 			controls = new Controls();
 		}
 		
@@ -71,7 +66,9 @@ package {
 				if (collectables.length) {
 					Collectable(collectables[0]).remove();
 				} else {
-					_player.remove();
+					if (_player) {	
+						_player.remove();
+					}
 					removeCollectables = false;
 					if (LevelLoader.xmlToLoad) {
 						LevelLoader.reloadXml();
@@ -148,8 +145,11 @@ package {
 			if (_player) {
 				if (!_player.deleted){
 					CameraManager.zoomCameras(CameraUpdater.getCameraSection());
-					if (_player.getSpriteLoc().y > 5000) {
+					if (_player.getSpriteLoc().y > 3000) {
 						CameraManager.freePoint = CameraUpdater.getCameraSection();
+						_player.hide();
+						_player.changeSpawnPoint(10, -10);
+						_player.spawn();
 						//_player.startSplash();
 					}
 				} else {
@@ -180,32 +180,6 @@ package {
 				CameraManager.zoomCameras(CameraManager.freePoint);
 			}
 		}
-		
-		/*private static function deleteAll():void {
-			//trace(System.totalMemory / 1024);
-			NewContactListener.handleContacts = false;
-			controls.disallowControls();
-			for each (var a:Actor in _allActors) {
-				if (a is ArbiStaticActor) {
-					safeRemoveActor(a);
-				}
-			}
-			CameraManager.cleanCameras();
-			//needToStartLevel = 2;
-			for each (var b:Bitmap in Raster._levelPieces) {
-				b.bitmapData.dispose();
-				if (b.parent) {
-					b.parent.removeChild(b);
-				}
-				b = null;
-			}
-			Raster._levelPieces = [];
-			//PhysiVals.world.GetBodyList().
-			trace(PhysiVals.world.GetBodyCount().toString()+ " bodies");
-			//System.gc();
-			thisIs.countChildren(thisIs);
-			LevelSelectionMC.add(++Platformer.levelsOpen);
-		}*/
 		
 		// Mark an actor to be removed later
 		public static function safeRemoveBody(bodyToRemove:b2Body):void {

@@ -290,7 +290,7 @@
 					bitmapData = new BitmapData(r.width * 1.2, r.height * 1.1, true, 0x00000000);
 				}
 				var m:Matrix = new Matrix();
-				if (clipDef is Zombie || clipDef is Mountains) {
+				if (clipDef is Mountains) {
 					m.translate(-r.x * 1.2, -r.y * 1.1);
 				} else if (clipDef is red_splash) {
 					m.translate(-r.x * 2, -r.y * 2);

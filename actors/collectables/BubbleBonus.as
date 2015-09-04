@@ -48,7 +48,12 @@ package {
 		override protected function cleanUpBeforeRemoving():void {
 			if (!bubble.deleted) {	
 				bubble.pop();
+			} else {
+				bubble.destroy();
 			}
+			/*if (deleted) {
+				bubble.destroy();
+			}*/
 			LevelInfo.bubblesPopped++;
 			super.cleanUpBeforeRemoving();
 		}

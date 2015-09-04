@@ -121,7 +121,8 @@ package {
 				trace("where he is?");	
 			}*/
 			if (platform is GroundBelow || platform is GroundZero || platform is TreeBelow || 
-			platform is TreeZero || platform is Arrow || platform is TutorialBoard) {
+			platform is TreeZero || platform is Arrow || platform is TutorialBoard || platform is TutorialSponsor || 
+			platform is TutorialDown || platform is TutorialUp || platform is TutorialWall) {
 				return void;
 			}
 			if (!player.isOnGround()) {

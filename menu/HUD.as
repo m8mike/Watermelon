@@ -277,8 +277,8 @@ package {
 			tf.x = 20;
 			tf.y = 80 + 20 * _spawn.length;
 			tf.visible = true;
-			tf.selectable = true;
-			tf.type = TextFieldType.INPUT;
+			//tf.selectable = true;
+			//tf.type = TextFieldType.INPUT;
 			tf.text = text;
 			var mytf:TextFormat = new TextFormat("Courier New");
 			tf.setTextFormat(mytf);
@@ -298,8 +298,8 @@ package {
 			tf.x = 520;
 			tf.y = 20 * (16 + _moveTo.length);
 			tf.visible = true;
-			tf.selectable = true;
-			tf.type = TextFieldType.INPUT;
+			//tf.selectable = true;
+			//tf.type = TextFieldType.INPUT;
 			tf.text = text;
 			var mytf:TextFormat = new TextFormat("Courier New");
 			tf.setTextFormat(mytf);
@@ -319,8 +319,8 @@ package {
 			tf.x = 520;
 			tf.y = 20 * (19 + _teleportTo.length);
 			tf.visible = false;
-			tf.selectable = true;
-			tf.type = TextFieldType.INPUT;
+			//tf.selectable = true;
+			//tf.type = TextFieldType.INPUT;
 			tf.text = text;
 			var mytf:TextFormat = new TextFormat("Courier New");
 			tf.setTextFormat(mytf);
@@ -439,6 +439,10 @@ package {
 			actorType.pushItem("GroundZero");
 			actorType.pushItem("GroundBelow");
 			actorType.pushItem("TutorialBoard");
+			actorType.pushItem("TutorialDown");
+			actorType.pushItem("TutorialUp");
+			actorType.pushItem("TutorialSponsor");
+			actorType.pushItem("TutorialWall");
 			
 			/*actorType.pushItem("CrateBox");
 			actorType.pushItem("Diminishing");

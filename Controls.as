@@ -3,6 +3,7 @@ package {
 	import flash.display.StageDisplayState;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.ui.Keyboard;
 	
 	/**
 	 * ...
@@ -77,6 +78,7 @@ package {
 		
 		private function keyDown(e:KeyboardEvent):void {
 			//trace(e.keyCode);
+			CheatCode.check(e);
 			if (!allowed) {
 				return void;
 			}
@@ -97,7 +99,7 @@ package {
 						break;*/
 					case 90: //z
 						//useUmbrella = true;
-						HUD.toggleInfo();
+						///HUD.toggleInfo();
 						break;
 					case 81: //q
 						///unzoom = true;
@@ -118,6 +120,16 @@ package {
 						left = true;
 						//_player.itemGet("Bazooka");
 						//Controls(controls[1]).left = true;
+						break;
+					case Keyboard.X:
+						if (PhysiVals.fps != Infinity) {	
+							up = true;
+						}
+						break;
+					case Keyboard.SPACE:
+						if (PhysiVals.fps != Infinity) {	
+							up = true;
+						}
 						break;
 					case 38: //Up
 						up = true;
@@ -145,9 +157,9 @@ package {
 						break;
 					case 70: //Fly //83
 						//Fly = true;
-						_player.hide();
-						_player.changeSpawnPoint(10, -10);
-						_player.spawn();
+						///_player.hide();
+						///_player.changeSpawnPoint(10, -10);
+						///_player.spawn();
 						break;
 					/*case 83 ://Shoot Cannon
 					   ShootCannon = true;
@@ -159,7 +171,7 @@ package {
 			} else {
 				switch (e.keyCode) {
 					case 90: //z
-						HUD.toggleInfo();
+						///HUD.toggleInfo();
 						break;
 					case 13: //enter
 						if (!Platformer._player) {
@@ -169,11 +181,11 @@ package {
 						}
 						break;
 					case 81: //q
-						unzoom = true;
+						///unzoom = true;
 						//CameraManager.zoomKoef /= 1.1;
 						break;
 					case 69: //e
-						zoom = true;
+						///zoom = true;
 						//CameraManager.zoomKoef *= 1.1;
 						break;
 					case 37: //Left
@@ -243,14 +255,36 @@ package {
 						c.left = false;
 						freeLeft = false;
 						break;
+					case Keyboard.X:
+						c.up = false;
+						c.useJetpack = false;
+						freeUp = false;
+						if (Platformer._player) {	
+							Platformer._player.clearJumps();
+						}
+						break;
+					case Keyboard.SPACE:
+						c.up = false;
+						c.useJetpack = false;
+						freeUp = false;
+						if (Platformer._player) {	
+							Platformer._player.clearJumps();
+						}
+						break;
 					case 38: //Up
 						c.up = false;
 						c.useJetpack = false;
 						freeUp = false;
+						if (Platformer._player) {	
+							Platformer._player.clearJumps();
+						}
 						break;
 					case 87: //w
 						c.up = false;
 						freeUp = false;
+						if (Platformer._player) {	
+							Platformer._player.clearJumps();
+						}
 						break;
 					case 39: //Right
 						c.right = false;

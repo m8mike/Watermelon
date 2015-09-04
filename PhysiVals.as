@@ -17,17 +17,18 @@ package {
 	* @author Mad Mike
 	*/
 	public class PhysiVals {
+		private static var _world:b2World;
+		private static var time:int;
+		
 		public static const RATIO:Number = 30;
 		public static const MIN_SQARE:int = 20; //размер минимального квадрата
 		public static var fps:Number = 30.0;
-		private static var _world:b2World;
-		public static var gravity:b2Vec2 = new b2Vec2(0.0, 10);
+		public static const gravity:b2Vec2 = new b2Vec2(0.0, 10);
 		
 		public static var jetpackTime:int = 0;
 		public static var removeLiveTime:int = 0;
 		public static var myTimer:Timer;
-		private static var time:int;
-		static public var timeNumbText:TextField;
+		public static var timeNumbText:TextField;
 		public static var spriteToDebugDraw:Sprite;
 		public static var periods:int = 0;
 		public static var objectCounter:int = 0;

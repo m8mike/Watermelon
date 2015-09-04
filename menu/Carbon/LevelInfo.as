@@ -37,8 +37,8 @@ package {
 			addFileName("fileName");
 			addLevelName("Just a level name");
 			addLevelComment("Comment");
-			addSaveButton();
-			addLoadButton();
+			//addSaveButton();
+			//addLoadButton();
 			addPlayButton();
 		}
 		
@@ -52,12 +52,13 @@ package {
 		
 		private function addFileName(name:String):void {
 			fileNameTF = new TextField();
+			fileNameTF.visible = false;
 			fileNameTF.text = name;
 			fileNameTF.x = 350;
 			fileNameTF.y = 50;
-			fileNameTF.visible = true;
-			fileNameTF.selectable = true;
-			fileNameTF.type = TextFieldType.INPUT;
+			fileNameTF.visible = false;
+			//fileNameTF.selectable = true;
+			//fileNameTF.type = TextFieldType.INPUT;
 			var mytf:TextFormat = new TextFormat();
 			var fk:Font = new Kavoon();
 			mytf.font = fk.fontName;
@@ -85,8 +86,8 @@ package {
 			levelNameTF.x = 350;
 			levelNameTF.y = 100;
 			levelNameTF.visible = true;
-			levelNameTF.selectable = true;
-			levelNameTF.type = TextFieldType.INPUT;
+			//levelNameTF.selectable = true;
+			//levelNameTF.type = TextFieldType.INPUT;
 			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
 			var mytf:TextFormat = new TextFormat();
 			var fk:Font = new Kavoon();
@@ -155,8 +156,8 @@ package {
 			levelCommentTF.x = 350;
 			levelCommentTF.y = 210;
 			levelCommentTF.visible = true;
-			levelCommentTF.selectable = true;
-			levelCommentTF.type = TextFieldType.INPUT;
+			//levelCommentTF.selectable = true;
+			//levelCommentTF.type = TextFieldType.INPUT;
 			var mytf:TextFormat = new TextFormat();
 			var fk:Font = new Kavoon();
 			mytf.font = fk.fontName;

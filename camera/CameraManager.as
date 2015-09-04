@@ -24,6 +24,7 @@ package {
 		
 		public static var loadingScreen:Sprite;
 		public static var menu:Sprite;
+		public static var inventory:Sprite;
 		public static var hud:Sprite;
 		public static var invisibleButtons:Sprite;
 		public static var nearLayers:Sprite;
@@ -120,6 +121,7 @@ package {
 		public static function initCameras():void {
 			loadingScreen = new Sprite();
 			menu = new Sprite();
+			inventory = new Sprite();
 			hud = new Sprite();
 			invisibleButtons = new Sprite();
 			nearLayers = new Sprite();
@@ -165,6 +167,7 @@ package {
 			Platformer.thisIs.addChild(belowLayer); //belowLayer.visible = false;
 			Platformer.thisIs.addChild(nearLayers); //nearLayers.visible = false;
 			Platformer.thisIs.addChild(invisibleButtons);
+			Platformer.thisIs.addChild(inventory);
 			Platformer.thisIs.addChild(hud);
 			Platformer.thisIs.addChild(menu);
 			Platformer.thisIs.addChild(loadingScreen);
@@ -199,6 +202,7 @@ package {
 			cleanLayer(CameraManager.zeroLayer);*/
 			cleanLayer(belowLayer);
 			cleanLayer(pLayer);
+			cleanLayer(inventory);
 			cleanLayer(hud);
 			cleanLayer(_camera01);
 			cleanLayer(_camera02);

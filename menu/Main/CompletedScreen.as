@@ -28,12 +28,16 @@ package {
 		}
 		
 		private function addScreen():void {
-			addText("Level " + (CarbonMenu.levelCursor.location.y + 1) + "-" +
-							   (CarbonMenu.levelCursor.location.x + 1) + ": " + 
-							   CarbonMenu.levelList.getLevelAt(CarbonMenu.levelCursor.location).name + " completed");
+			var loc:Point = CarbonMenu.levelCursor.location.clone();
+			addText("Level " + (loc.y + 1) + "-" +
+							   (loc.x + 1) + ": " + 
+							   CarbonMenu.levelList.getLevelAt(loc).name + " completed");
 			addText("");
-			addText("Popped " + LevelInfo.bubblesPopped + "/" + LevelInfo.numBubbles + " bubbles");
-			addText("Collected " + LevelInfo.diamondsCollected + "/" + LevelInfo.numDiamonds + " diamonds");
+			var popped:String = "Popped " + LevelInfo.bubblesPopped + "/" + LevelInfo.numBubbles + " bubbles";
+			var collected:String = "Collected " + LevelInfo.diamondsCollected + "/" + LevelInfo.numDiamonds + " diamonds";
+			CarbonMenu.levelList.getLevelAt(loc).comment = popped + "\n" + collected;
+			addText(popped);
+			addText(collected);
 			//addText("Found 0/3 secrets");
 			addButtons();
 			if (Platformer._player) {
@@ -43,6 +47,18 @@ package {
 			SoundMusic.stopInGame();
 			SoundMusic.playMenu();
 			MainMenu.getStage().addEventListener(KeyboardEvent.KEY_DOWN, handler);
+			var loc:Point = CarbonMenu.levelCursor.location.clone();
+			if (loc.x == 2) {
+				loc.y++;
+				loc.x = 0;
+			} else {
+				loc.x++;
+			}
+			if (loc.y < 9) {
+				CarbonMenu.levelList.getLevelAt(loc).open();
+			}
+			checkComplete();
+			BigXML.save();
 		}
 		
 		private function handler(e:KeyboardEvent):void {
@@ -107,7 +123,7 @@ package {
 		}
 		
 		private function removeScreen():void {
-			if (next.parent) {	
+			if (next.parent) {
 				next.removeEventListener(MouseEvent.CLICK, toNextLevel);
 				reload.removeEventListener(MouseEvent.CLICK, toReloadLevel);
 				levelSelect.removeEventListener(MouseEvent.CLICK, toLevelSelect);
@@ -141,18 +157,14 @@ package {
 		private function toLevelSelect(e:MouseEvent):void {
 			hide();
 			Platformer.menu.toLevelSelect(null);
+			checkComplete();
+		}
+		
+		public static function checkComplete():void {
 			while (Platformer.levelsToComplete.length) {
 				CarbonMenu.levelList.getLevelAt(Platformer.levelsToComplete[0]).complete();
 				Platformer.levelsToComplete.splice(0, 1);
 			}
-			var loc:Point = Platformer.levelsToComplete[Platformer.levelsToComplete.length].clone();
-			if (loc.x == 2) {
-				loc.y++;
-				loc.x = 0;
-			} else {
-				loc.x++;
-			}
-			CarbonMenu.levelList.getLevelAt(loc).open();
 		}
 		
 		public function addText(text:String):void {

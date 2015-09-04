@@ -39,7 +39,8 @@ package {
 		public function open():void {
 			if (_state is LevelStateClosed) {
 				icon.removeChildAt(icon.numChildren - 1);
-				//icon.removeChildAt(icon.numChildren - 1);
+				icon.removeChildAt(icon.numChildren - 1);
+				icon.removeChildAt(icon.numChildren - 1);
 				_state.remove();
 				_state = new LevelStateOpen();
 				icon.addChildAt(LevelStateOpen(_state).getAnotherSprite(), 1);
@@ -53,13 +54,19 @@ package {
 			if (_state is LevelStateOpen) {
 				icon.removeChildAt(icon.numChildren - 1);
 				//icon.removeChildAt(icon.numChildren - 1);
-				_state.remove();
-				_state = new LevelStateFinished();
-				icon.addChildAt(LevelStateFinished(_state).getAnotherSprite(), 1);
-				icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
-												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
-				_parent.addChild(icon);
+			} else if (_state is LevelStateClosed) {
+				icon.removeChildAt(icon.numChildren - 1);
+				icon.removeChildAt(icon.numChildren - 1);
+				icon.removeChildAt(icon.numChildren - 1);
+			} else {
+				return void;
 			}
+			_state.remove();
+			_state = new LevelStateFinished();
+			icon.addChildAt(LevelStateFinished(_state).getAnotherSprite(), 1);
+			icon.addChild(_state.getAnimation(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS,
+											  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS));
+			_parent.addChild(icon);
 		}
 		/*
 		public function advance():void {
@@ -107,6 +114,14 @@ package {
 		}
 		
 		public function getXMLStr():String {
+			var stateID:int;
+			if (_state is LevelStateFinished) {
+				stateID = 0;
+			} else if (_state is LevelStateOpen) {
+				stateID = 1;
+			} else if (_state is LevelStateClosed) {
+				stateID = 2;
+			}
 			var str:String = "<level><fileName>";
 			str += fileName;
 			str += "</fileName>";
@@ -115,7 +130,10 @@ package {
 			str += "</levelName>";
 			str += "<comment>";
 			str += comment;
-			str += "</comment></level>";
+			str += "</comment>";
+			str += "<state>";
+			str += stateID;
+			str += "</state></level>";
 			return str;
 		}
 		

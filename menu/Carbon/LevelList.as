@@ -41,7 +41,7 @@ package {
 			row[2] = addNewLevel(2, index);
 		}
 		
-		private function addNewLevel(i:Number, j:int, stateIndex:int = 1):LevelCell {
+		private function addNewLevel(i:Number, j:int, stateIndex:int = 2):LevelCell {
 			var state:LevelState;
 			//Math.round(Math.random() * 3)
 			switch (stateIndex) {
@@ -86,6 +86,14 @@ package {
 				LevelCell(levels[i][0]).moveUp();
 				LevelCell(levels[i][1]).moveUp();
 				LevelCell(levels[i][2]).moveUp();
+			}
+		}
+		
+		public function unlockAll():void {
+			for (var i:int = 0; i < levels.length; i++) {
+				LevelCell(levels[i][0]).complete();
+				LevelCell(levels[i][1]).complete();
+				LevelCell(levels[i][2]).complete();
 			}
 		}
 		

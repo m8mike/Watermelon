@@ -17,12 +17,7 @@ package
 	public class Player extends Character {
 		public var invincibilityTime:int = 0;
 		private var invincibilityKoef:Number = 2;
-		/*
-		private const LAUNCH_POINT:Point = new Point(500, 100);
-		private const LAUNCH_POINT2:Point = new Point(1000, 100);
-		public static var LAUNCH_POINT_PLAYER:Point = new Point(80, -50); //300, 100);//16*30
-		private const LAUNCH_POINT_PLAYER2:Point = new Point(200, 10);
-		*/
+		
 		public var direction:Boolean = false; //направление (вправо - true)
 		
 		public var carryingItem:Item;
@@ -71,6 +66,8 @@ package
 					}
 					carryingItem.remove();
 					carryingItem = new (getDefinitionByName(id))();
+				} else if (getQualifiedClassName(carryingItem) == "Jetpack") {
+					inventory.addJetpackTime();
 				}
 			} else {
 				carryingItem = new (getDefinitionByName(id))();
@@ -102,7 +99,6 @@ package
 		}
 		
 		public function kill():void {
-			inventory.clear();
 			invincibilityKoef = 2;
 			//invincibilityTime = 0;
 			Controls.disallowControls();
@@ -143,6 +139,10 @@ package
 		
 		public function getBody():b2Body {
 			return bodyManager.body;
+		}
+		
+		public function clearJumps():void {
+			PlayerBodyManager(bodyManager).jumpIterations = 0;
 		}
 		
 		public function cloudJump():void {
@@ -189,7 +189,7 @@ package
 			if (Platformer._player == this) {
 				Platformer._player = null;
 			}
-			while (inventory._lifes.length) {
+			for (var i:int = 0; i < 5; i++) {
 				inventory.removeLife();
 			}
 			inventory.removeJetpackTime();

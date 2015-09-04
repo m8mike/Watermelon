@@ -40,7 +40,7 @@ package {
 		public function addDiamond():void {
 			diamondCount++;
 			if (!diamondIcon) {
-				diamondIcon = new AnimationCostume("diamond_bonus", CameraManager.hud, 0.5, 0.5);
+				diamondIcon = new AnimationCostume("diamond_bonus", CameraManager.inventory, 0.5, 0.5);
 				diamondIcon.setCoords(50, 50);
 				diamondIcon.animation.visible = true;
 				diamondText = new TextField();
@@ -58,7 +58,7 @@ package {
 				diamondText.width = 200;
 				diamondText.height = 60;
 				diamondText.textColor = 0x004080;
-				CameraManager.hud.addChild(diamondText);
+				CameraManager.inventory.addChild(diamondText);
 			} else {
 				diamondText.text = "x " + diamondCount.toString();
 			}
@@ -71,20 +71,17 @@ package {
 				hpHeart.y = 420;
 				hpHeart.scaleX = 0.5;
 				hpHeart.scaleY = 0.5;
-				CameraManager.hud.addChild(hpHeart);
+				CameraManager.inventory.addChild(hpHeart);
 				_lifes.push(hpHeart);
 			}
 		}
 		
 		public function removeLife():void {
 			if (_lifes.length > 0) {
-				for (var i:int = CameraManager.hud.numChildren - 1; i > 0; i--) {
-					if (CameraManager.hud.getChildAt(i) is heart) {
-						CameraManager.hud.removeChildAt(i);
-						break;
-					}
-				}
-				_lifes.splice(_lifes.length - 1, 1);
+				var i:int = _lifes.length - 1;
+				var heartHP:MovieClip = _lifes[i];
+				heartHP.parent.removeChild(heartHP);
+				_lifes.splice(i, 1);
 			}
 		}
 		
@@ -95,16 +92,16 @@ package {
 				key.y = 40;
 				key.scaleX = 0.5;
 				key.scaleY = 0.5;
-				CameraManager.hud.addChild(key);
+				CameraManager.inventory.addChild(key);
 				_keys.push(key);
 			}
 		}
 		
 		public function removeKey():void {
 			if (_keys.length > 0) {
-				for (var i:int = CameraManager.hud.numChildren - 1; i > 0; i--) {
-					if (CameraManager.hud.getChildAt(i) is key1) {
-						CameraManager.hud.removeChildAt(i);
+				for (var i:int = CameraManager.inventory.numChildren - 1; i > 0; i--) {
+					if (CameraManager.inventory.getChildAt(i) is key1) {
+						CameraManager.inventory.removeChildAt(i);
 						break;
 					}
 				}
@@ -148,8 +145,8 @@ package {
 			jetpackShadow.width = 200;
 			jetpackShadow.height = 60;
 			jetpackShadow.textColor = 0x000000;
-			CameraManager.hud.addChild(jetpackShadow);
-			CameraManager.hud.addChild(jetpackText);
+			CameraManager.inventory.addChild(jetpackShadow);
+			CameraManager.inventory.addChild(jetpackText);
 		}
 		
 		public function setJetpackTime(time:int):void {
@@ -170,11 +167,13 @@ package {
 			diamondCount = 0;
 			if (diamondIcon) {
 				diamondIcon.remove();
+				diamondIcon = null;
 			}
 			if (diamondText) {
 				if (diamondText.parent) {	
 					diamondText.parent.removeChild(diamondText);
 				}
+				diamondText = null;
 			}
 		}
 		

@@ -15,8 +15,8 @@ package {
 	public class CheckBox {
 		private var parent:DisplayObjectContainer;
 		private var _checked:Boolean;
-		private var itemText:TextField;
-		private var itemShadow:TextField;
+		public var itemText:TextField;
+		public var itemShadow:TextField;
 		public var checkedMC:MovieClip;
 		public var uncheckedMC:MovieClip;
 		private var _selected:Boolean = false;
@@ -115,10 +115,20 @@ package {
 		public function changeTo(enabled):void {
 			checkedMC.visible = enabled;
 			uncheckedMC.visible = !enabled;
-			if (enabled) {
-				MainMenu.getStage().displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-			} else {
-				MainMenu.getStage().displayState = StageDisplayState.NORMAL;
+			if (itemText.text == "Full Screen") {	
+				if (enabled) {
+					MainMenu.getStage().displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				} else {
+					MainMenu.getStage().displayState = StageDisplayState.NORMAL;
+				}
+			} else if (itemText.text == "Play muted") {
+				if (enabled) {
+					SoundMusic.setVolume(0);
+					SoundMusic.setSoundVolume(0);
+				} else {
+					SoundMusic.setVolume(1);
+					SoundMusic.setSoundVolume(1);
+				}
 			}
 		}
 		

@@ -27,7 +27,7 @@ package {
 			//var mytf:TextFormat = new TextFormat("Zorque-Regular");
 			var mytf:TextFormat = new TextFormat();
 			var fk:Font = new Kavoon();
-			trace(fk.fontName);
+			//trace(fk.fontName);
 			mytf.font = fk.fontName;
 			mytf.bold = true;
 			if (text == "Play") {

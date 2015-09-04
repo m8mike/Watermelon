@@ -47,23 +47,25 @@ package {
 		}
 		
 		public static function reloadLevel(name:String, onLoad:Function = null) {
-			ldr = new URLLoader();
+			/*ldr = new URLLoader();
 			ldr.addEventListener(Event.COMPLETE, reloadComplete);
 			ldr.addEventListener(IOErrorEvent.IO_ERROR, loadError);
 			var path:String = "file://localhost/D:/levels/" + name + ".xml";
-			ldr.load(new URLRequest(path));
+			ldr.load(new URLRequest(path));*/
 			Platformer.menu.clouds.visible = true;
 			completeLoading = onLoad;
+			reloadComplete(BigXML.getStr(name));
 		}
 		
 		public static function loadLevel(name:String, onLoad:Function = null) {
-			ldr = new URLLoader();
+			/*ldr = new URLLoader();
 			ldr.addEventListener(Event.COMPLETE, loadComplete);
 			ldr.addEventListener(IOErrorEvent.IO_ERROR, loadError);
 			var path:String = "file://localhost/D:/levels/" + name + ".xml";
-			ldr.load(new URLRequest(path));
+			ldr.load(new URLRequest(path));*/
 			Platformer.menu.clouds.visible = true;
 			completeLoading = onLoad;
+			loadComplete(BigXML.getStr(name));
 		}
 		
 		public static function reloadXml():void {
@@ -192,20 +194,20 @@ package {
 			}
 		}
 		
-		private static function reloadComplete(e:Event):void {
+		private static function reloadComplete(e:XML):void {
 			//PhysiVals.clearLevel();
 			Platformer.removeCollectables = true;
-			xmlToLoad = new XML(ldr.data);
-			ldr.removeEventListener(Event.COMPLETE, reloadComplete);
-			ldr.removeEventListener(IOErrorEvent.IO_ERROR, loadError);
+			xmlToLoad = e;
+			//ldr.removeEventListener(Event.COMPLETE, reloadComplete);
+			//ldr.removeEventListener(IOErrorEvent.IO_ERROR, loadError);
 		}
 		
-		private static function loadComplete(e:Event):void {
+		private static function loadComplete(e:XML):void {
 			//PhysiVals.clearLevel();
 			Platformer.deleteAll = true;
-			xmlToLoad = new XML(ldr.data);
-			ldr.removeEventListener(Event.COMPLETE, loadComplete);
-			ldr.removeEventListener(IOErrorEvent.IO_ERROR, loadError);
+			xmlToLoad = e;
+			//ldr.removeEventListener(Event.COMPLETE, loadComplete);
+			//ldr.removeEventListener(IOErrorEvent.IO_ERROR, loadError);
 		}
 		
 		private static function loadError(e:IOErrorEvent):void {

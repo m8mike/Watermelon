@@ -89,7 +89,7 @@ package {
 				middleY = goldenY + Math.abs(currentY - goldenY) * camKoef;
 			}
 			goldenSection = new Point(spriteLoc.x, middleY);
-			for (var i:int = 15; i > 0; i--) {
+			for (var i:int = 5; i > 0; i--) {
 				if (previousVelocities[i - 1]) {
 					previousVelocities[i] = b2Vec2(previousVelocities[i - 1]).Copy();
 				}
@@ -123,8 +123,10 @@ package {
 			var ariSection:Point = new Point(
 				//greenSection.x*(1-percentage) + lazySection.x * percentage,
 				groveSection.x,
-				greenSection.y*percentage + lazySection.y*(1-percentage));
-			return greenSection;
+				greenSection.y * percentage + lazySection.y * (1 - percentage));
+				
+			purpleSection.y  -= 18.144;
+			return purpleSection;
 			/*if (Platformer._player.getBody().GetLinearVelocity().y >= 0) {
 				return greenSection;
 			} else 
