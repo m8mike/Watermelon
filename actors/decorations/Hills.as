@@ -48,10 +48,10 @@ package {
 				}
 				offset += AnimationCostume(line1[i + 2]).animation.width * 4 / 3;
 			}
-			NumScroller(HUD._numScrollers[0]).asset = line1;
-			NumScroller(HUD._numScrollers[1]).asset = line2;
-			NumScroller(HUD._numScrollers[2]).asset = line3;
-			NumScroller(HUD._numScrollers[3]).asset = line4;
+			NumScroller(EditorBackground._numScrollers[0]).asset = line1;
+			NumScroller(EditorBackground._numScrollers[1]).asset = line2;
+			NumScroller(EditorBackground._numScrollers[2]).asset = line3;
+			NumScroller(EditorBackground._numScrollers[3]).asset = line4;
 		}
 		/*
 		public function addHills(numHills:int = 1):void {

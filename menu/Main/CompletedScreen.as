@@ -35,7 +35,21 @@ package {
 			addText("");
 			var popped:String = "Popped " + LevelInfo.bubblesPopped + "/" + LevelInfo.numBubbles + " bubbles";
 			var collected:String = "Collected " + LevelInfo.diamondsCollected + "/" + LevelInfo.numDiamonds + " diamonds";
-			CarbonMenu.levelList.getLevelAt(loc).comment = popped + "\n" + collected;
+			var newPopped:int;
+			if (LevelInfo.bubblesPopped > CarbonMenu.levelList.getLevelAt(loc).bubblesPopped) {
+				newPopped = LevelInfo.bubblesPopped;
+			} else {
+				newPopped = CarbonMenu.levelList.getLevelAt(loc).bubblesPopped;
+			}
+			var newCollected:int;
+			if (LevelInfo.diamondsCollected > CarbonMenu.levelList.getLevelAt(loc).diamondCollected) {
+				newCollected = LevelInfo.diamondsCollected;
+			} else {
+				newCollected = CarbonMenu.levelList.getLevelAt(loc).diamondCollected;
+			}
+			var bubblesNew:String = "Popped " + newPopped + "/" + LevelInfo.numBubbles + " bubbles";
+			var diamondsNew:String = "Collected " + newCollected + "/" + LevelInfo.numDiamonds + " diamonds";
+			CarbonMenu.levelList.getLevelAt(loc).comment = bubblesNew + "\n" + diamondsNew;
 			addText(popped);
 			addText(collected);
 			//addText("Found 0/3 secrets");
@@ -47,7 +61,6 @@ package {
 			SoundMusic.stopInGame();
 			SoundMusic.playMenu();
 			MainMenu.getStage().addEventListener(KeyboardEvent.KEY_DOWN, handler);
-			var loc:Point = CarbonMenu.levelCursor.location.clone();
 			if (loc.x == 2) {
 				loc.y++;
 				loc.x = 0;
@@ -59,6 +72,7 @@ package {
 			}
 			checkComplete();
 			BigXML.save();
+			CarbonMenu.levelCursor.moveTo(CarbonMenu.levelCursor.location.x, CarbonMenu.levelCursor.location.y);
 		}
 		
 		private function handler(e:KeyboardEvent):void {

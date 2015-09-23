@@ -37,7 +37,7 @@
 		public var cols:Number = 0;
 		public var rows:Number = 0
 		public var r:Rectangle
-		private var _totalFrames;
+		private var _totalFrames:int;
 		
 		private var clipDef;
 		
@@ -169,24 +169,26 @@
 				}
 				headParts(DisplayObjectContainer(clipDef));
 			}
+			var clipChild:DisplayObjectContainer;
 			if (clipDef is go_right || clipDef is go_left || clipDef is stay_right || clipDef is stay_left || 
 				clipDef is jump_right || clipDef is jump_left || clipDef is fall_right || clipDef is fall_left || 
-				clipDef is umbrella_right || clipDef is umbrella_left) {
+				clipDef is umbrella_right || clipDef is umbrella_left || clipDef is walljump_right || clipDef is walljump_left) {
 					
+				clipChild = clipDef.getChildAt(0);
 				if (playerToCache) {
 					if (playerToCache.animationMode != Player.ROCKETS) {
-						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(LEFT_ROCKET)));
-						hideChildren(DisplayObjectContainer(DisplayObjectContainer(clipDef).getChildAt(RIGHT_ROCKET)));
+						hideChildren(DisplayObjectContainer(clipChild.getChildAt(LEFT_ROCKET)));
+						hideChildren(DisplayObjectContainer(clipChild.getChildAt(RIGHT_ROCKET)));
 					}
 				}
-				hideShoes(DisplayObjectContainer(clipDef));
-				hideLeftHand(DisplayObjectContainer(clipDef));
-				showShoes(DisplayObjectContainer(clipDef));
-				headParts(DisplayObjectContainer(clipDef));
+				hideShoes(clipChild);
+				hideLeftHand(clipChild);
+				showShoes(clipChild);
+				headParts(clipChild);
 				if (playerToCache) {
 					if (playerToCache.animationMode == Player.NO_HANDS) {
-						hideChildren(clipDef.getChildAt(RIGHT_HAND));
-						hideChildren(clipDef.getChildAt(LEFT_HAND));
+						hideChildren(DisplayObjectContainer(clipChild.getChildAt(RIGHT_HAND)));
+						hideChildren(DisplayObjectContainer(clipChild.getChildAt(LEFT_HAND)));
 						if (useSpriteSheet) {
 							buildCacheFromClip2(clipDef);
 						} else {
@@ -196,69 +198,112 @@
 					}
 				}
 			}
-			if (clipDef is go_right || clipDef is stay_right || clipDef is jump_right) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsRight(MovieClip(MovieClip(clipDef).getChildAt(RIGHT_HAND)));
-				MovieClip(MovieClip(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+			if (clipDef is go_right || clipDef is stay_right || clipDef is jump_right || clipDef is walljump_right) {
+				hideRightHand(clipChild);
+				umbrellaPartsRight(MovieClip(clipChild.getChildAt(RIGHT_HAND)));
+				MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
 			}
 			if (clipDef is go_right) {
 				
 			} else if (clipDef is go_left) {
-				hideRightHand(DisplayObjectContainer(clipDef));
+				hideRightHand(clipChild);
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(RIGHT_HAND)));
+					umbrellaPartsLeft(MovieClip(clipChild.getChildAt(RIGHT_HAND)));
 				} else {
-					umbrellaPartsRight(MovieClip(go_left(clipDef).getChildAt(RIGHT_HAND)));
+					umbrellaPartsRight(MovieClip(clipChild.getChildAt(RIGHT_HAND)));
 				}
-				umbrellaPartsLeft(MovieClip(go_left(clipDef).getChildAt(LEFT_HAND)));
+				umbrellaPartsLeft(MovieClip(clipChild.getChildAt(LEFT_HAND)));
 			} else if (clipDef is stay_right) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(MovieClip(clipDef).getChildAt(RIGHT_HAND)));
+				hideRightHand(clipChild);
+				umbrellaPartsLeft(MovieClip(clipChild.getChildAt(RIGHT_HAND)));
 			} else if (clipDef is stay_left) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(stay_left(clipDef).getChildAt(LEFT_HAND)));
-				MovieClip(stay_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
-			} else if (clipDef is jump_right) {
+				hideRightHand(clipChild);
+				umbrellaPartsLeft(MovieClip(clipChild.getChildAt(LEFT_HAND)));
+				MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
+			} else if (clipDef is jump_right || clipDef is walljump_right) {
 				
-			} else if (clipDef is jump_left) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				umbrellaPartsLeft(MovieClip(jump_left(clipDef).getChildAt(LEFT_HAND)));
-				MovieClip(jump_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
+			} else if (clipDef is jump_left || clipDef is walljump_left) {
+				hideRightHand(clipChild);
+				umbrellaPartsLeft(MovieClip(clipChild.getChildAt(LEFT_HAND)));
+				MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			} else if (clipDef is fall_right) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(fall_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
-				MovieClip(MovieClip(MovieClip(fall_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+				hideRightHand(clipChild);
+				MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+				MovieClip(MovieClip(MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					MovieClip(fall_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
+					MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(1).visible = true;
 				} else {
-					MovieClip(fall_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
+					MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
 				}
 			} else if (clipDef is fall_left) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+				hideRightHand(clipChild);
+				MovieClip(MovieClip(MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				if (playerToCache.animationMode == Player.UMBRELLA_IN_RIGHT_HAND) {
-					MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
-					MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = true;
+					MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+					MovieClip(MovieClip(MovieClip(clipChild.getChildAt(1)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = true;
 				} else {
-					MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
-					MovieClip(MovieClip(MovieClip(fall_left(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
+					MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+					MovieClip(MovieClip(MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0)).getChildAt(1).visible = false;
 				}
-				MovieClip(fall_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
+				MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(2).visible = true;
 			} else if (clipDef is umbrella_right) {
-				hideRightHand(DisplayObjectContainer(clipDef));
-				MovieClip(umbrella_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
-				MovieClip(MovieClip(umbrella_right(clipDef).getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0).visible = false;
-				MovieClip(umbrella_right(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
+				hideRightHand(clipChild);
+				MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0).visible = true;
+				MovieClip(MovieClip(clipChild.getChildAt(LEFT_HAND)).getChildAt(0)).getChildAt(0).visible = false;
+				MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			} else if (clipDef is umbrella_left) {
-				hideRightHand(DisplayObjectContainer(clipDef));
+				hideRightHand(clipChild);
 				//MovieClip(umbrella_left(clipDef).getChildAt(1)).getChildAt(1).visible = true;
-				MovieClip(umbrella_left(clipDef).getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
+				MovieClip(clipChild.getChildAt(RIGHT_HAND)).getChildAt(0).visible = true;
 			}
 			if (useSpriteSheet) {
 				buildCacheFromClip2(clipDef);
 			} else {
-				buildCacheFromClip(clipDef);
+				if (clipDef is go_right || 
+					clipDef is go_left || 
+					clipDef is stay_right || 
+					clipDef is stay_left || 
+					clipDef is jump_right || 
+					clipDef is jump_left || 
+					clipDef is fall_right || 
+					clipDef is fall_left || 
+					clipDef is umbrella_right || 
+					clipDef is umbrella_left ||
+					clipDef is walljump_right || 
+					clipDef is walljump_left) {
+					
+					buildCacheFromClip3(clipDef);					
+				} else {
+					buildCacheFromClip(clipDef);
+				}
 			}
+		}
+		
+		public function buildCacheFromClip3(_clip:MovieClip):void {
+			clip = _clip;
+			var scaleRate:Number = 0.5;
+			if (clip["e_bounds"] != null) {
+				var c = clip["e_bounds"];
+				r = new Rectangle(c.x, c.y, c.width, c.height);
+				clip["e_bounds"].visible = false;
+			} else {
+				r = clip.getRect(clip);
+			}
+			for (var i = 1; i <= clip.totalFrames; i++) {
+				clip.gotoAndStop(i);
+				makeAllChildrenGoToFrame(clip, i);
+				var bitmapData:BitmapData;
+				bitmapData = new BitmapData(r.width*scaleRate, r.height*scaleRate, true, 0x00000000);
+				var m:Matrix = new Matrix();
+				m.translate(r.width / 2, r.height / 2);
+				m.scale(scaleRate * clip.scaleX, scaleRate * clip.scaleY);
+				bitmapData.draw(clip, m);
+				frames.push(bitmapData);
+			}
+			bitmap.x = r.x;
+			bitmap.y = r.y;
+			bitmap.scaleX = 1/scaleRate;
+			bitmap.scaleY = 1/scaleRate;
 		}
 		
 		public function buildCacheFromClip(_clip:MovieClip):void {
@@ -269,11 +314,11 @@
 				r = new Rectangle(c.x, c.y, c.width, c.height);
 				clip["e_bounds"].visible = false;
 			} else {
-				r = clip.getRect(clip)
+				r = clip.getRect(clip);
 			}
 			
 			for (var i = 1; i <= clip.totalFrames; i++) {
-				clip.gotoAndStop(i)
+				clip.gotoAndStop(i);
 				makeAllChildrenGoToFrame(clip, i);
 				/*if (clipDef is zapped) {
 					makeHeadGoToFrame(clip, i);
@@ -283,7 +328,8 @@
 					bitmapData = new BitmapData(r.width, r.height, true, 0x00000000);
 				} else if (clipDef is red_splash) {
 					bitmapData = new BitmapData(r.width * 2, r.height * 2, true, 0x00000000);
-				} else if (clipDef is hatFinish || clipDef is hatFinish1 || clipDef is hatFinish2 || clipDef is hatFinish3) {
+				} else if (clipDef is hatFinish || clipDef is hatFinish1 || clipDef is hatFinish2 || clipDef is hatFinish3 || 
+							clipDef is hatFinishZebra) {
 					bitmapData = new BitmapData(r.width, r.height, true, 0x00000000);
 				} else {
 					//bitmapData = new BitmapData(r.width, r.height, true, 0x00000000);
@@ -294,7 +340,8 @@
 					m.translate(-r.x * 1.2, -r.y * 1.1);
 				} else if (clipDef is red_splash) {
 					m.translate(-r.x * 2, -r.y * 2);
-				} else if (clipDef is hatFinish || clipDef is hatFinish1 || clipDef is hatFinish2 || clipDef is hatFinish3) {
+				} else if (clipDef is hatFinish || clipDef is hatFinish1 || clipDef is hatFinish2 || clipDef is hatFinish3 || 
+							clipDef is hatFinishZebra) {
 					m.translate(-r.x, -r.y);
 				} else {
 					m.translate(-r.x, -r.y);
@@ -305,6 +352,7 @@
 			}
 			bitmap.x = r.x;
 			bitmap.y = r.y;
+			//trace(clipDef + " w " + frames[0].width + " h " + frames[0].height);
 			//bitmap.smoothing = true;
 		}
 		
@@ -316,7 +364,7 @@
 				r = new Rectangle(c.x, c.y, c.width, c.height);
 				clip["e_bounds"].visible = false;
 			} else {
-				r = clip.getRect(clip)
+				r = clip.getRect(clip);
 			}
 			
 			cols = Math.floor(2880 / r.width);
@@ -325,7 +373,7 @@
 			bigBitmap = new BigAssCanvas(Math.ceil(cols * clip.width), Math.ceil(rows * clip.height), true);
 			
 			for (var i = 0; i <= clip.totalFrames - 1; i++) {
-				clip.gotoAndStop(i + 1)
+				clip.gotoAndStop(i + 1);
 				makeAllChildrenGoToFrame(clip, i + 1);
 				
 				var xx = i % cols * r.width;
@@ -335,7 +383,7 @@
 				m.translate(-r.x, -r.y);
 				
 				m.scale(clip.scaleX, clip.scaleY);
-				m.translate(xx, yy)
+				m.translate(xx, yy);
 				
 				bigBitmap.draw(clip, m, null, null);
 			}
@@ -423,6 +471,7 @@
 					var rect:Rectangle = clipData.getRect(clipData);
 					clipData.x = rect.x;
 					clipData.y = rect.y;
+					scale();
 					addChild(clipData);
 				}
 				clipData.gotoAndStop(frame);
@@ -438,10 +487,34 @@
 					bitmapData = bigBitmap.copyPixelsOut(temp);
 					bitmap.bitmapData = bitmapData;
 					bitmap.smoothing = true;
+					scale();
 				} else {
 					bitmap.bitmapData = frames[currentFrame - 1];
 					bitmap.smoothing = true;
+					scale();
 				}
+			}
+		}
+		
+		private function scale():void {
+			if (clip is go_right || 
+				clip is go_left || 
+				clip is stay_right || 
+				clip is stay_left || 
+				clip is jump_right || 
+				clip is jump_left || 
+				clip is fall_right || 
+				clip is fall_left || 
+				clip is umbrella_right || 
+				clip is umbrella_left || 
+				clip is walljump_right || 
+				clip is walljump_left) {
+					if (bitmap) {
+						bitmap.scaleX = 1 / 0.5;
+						bitmap.scaleY = 1 / 0.5;
+					} else {
+						trace("no bitmap");
+					}
 			}
 		}
 		
@@ -472,6 +545,25 @@
 		
 		public function destroy() {
 			stop();
+			if (clip is go_right || 
+				clip is go_left || 
+				clip is stay_right || 
+				clip is stay_left || 
+				clip is jump_right || 
+				clip is jump_left || 
+				clip is fall_right || 
+				clip is fall_left || 
+				clip is umbrella_right || 
+				clip is umbrella_left || 
+				clip is walljump_right || 
+				clip is walljump_left) {
+				for each (var b:BitmapData in frames) {
+					b.dispose();
+				}
+				if (bitmap) {
+					bitmap.bitmapData.dispose();
+				}
+			}
 			if (parent)
 				parent.removeChild(this);
 		}

@@ -277,25 +277,28 @@ package {
     <Standard x="200" y="20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="8" h="4">Standard</Standard>
     <Standard x="360" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="3" h="5">Standard</Standard>
     <Standard x="420" y="10" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="5" h="6">Standard</Standard>
-    <Standard x="520" y="-50" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="14" h="7">Standard</Standard>
+    <Standard x="520" y="-50" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="7">Standard</Standard>
     <Standard x="-200" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="10" h="5">Standard</Standard>
     <Standard x="-200" y="-520" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="1" h="25">Standard</Standard>
     <Standard x="800" y="-500" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="25" h="26">Standard</Standard>
-    <EndLevel x="732" y="-60" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">EndLevel</EndLevel>
-    <TopHat x="760" y="-40" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
+    <EndLevel x="732" y="-40" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">EndLevel</EndLevel>
+    <TopHat x="760" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TopHat</TopHat>
     <TutorialBoard x="30" y="-115" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TutorialBoard</TutorialBoard>
     <TreeBelow x="-140" y="-145" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="true" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false">TreeBelow</TreeBelow>
+    <Standard x="720" y="-20" angle="0" density="0" friction="0.2" restitution="0.3" groupIndex="-2" isSensor="false" linearDamping="0" angularDamping="0" jumpThrough="false" fixedRotation="false" bullet="false" w="4" h="10">Standard</Standard>
   </platforms>
   <collectables>
     <BubbleBonus x="535.6958887500003" y="-89.20435944444449">BubbleBonus</BubbleBonus>
     <BubbleBonus x="358.4055795833336" y="-46.81663097222226">BubbleBonus</BubbleBonus>
-    <BubbleBonus x="760.4722222222222" y="-144.72222222222223">BubbleBonus</BubbleBonus>
-    <BubbleBonus x="766.875" y="-190.79166666666663">BubbleBonus</BubbleBonus>
-    <BubbleBonus x="735.4722222222223" y="-174.81944444444446">BubbleBonus</BubbleBonus>
     <BubbleBonus x="200" y="-40">BubbleBonus</BubbleBonus>
-    <BubbleBonus x="-100" y="-100">BubbleBonus</BubbleBonus>
+    <DiamondBonus x="-140" y="-80">DiamondBonus</DiamondBonus>
+    <DiamondBonus x="740" y="-180">DiamondBonus</DiamondBonus>
+    <DiamondBonus x="780" y="-200">DiamondBonus</DiamondBonus>
+    <BubbleBonus x="760" y="-140">BubbleBonus</BubbleBonus>
   </collectables>
-  <characters/>
+  <characters>
+    <Player x="2" y="-2">Player</Player>
+  </characters>
   <spawn>
     <x>2</x>
     <y>-2</y>

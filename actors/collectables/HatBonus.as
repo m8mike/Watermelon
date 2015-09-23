@@ -9,11 +9,11 @@ package {
 		private var costume:AnimationCostume;
 		private var hatId:int;
 		
-		public function HatBonus(x:Number, y:Number, index:int) {
+		public function HatBonus(x:Number, y:Number, index:int = 8) {
 			hatId = index;
-			
+			hatId = Math.random() * 6 + 8;
 			var id:String;
-			switch (index) {
+			switch (hatId) {
 				case 8: 
 					id = "hat01";
 					break;
@@ -50,14 +50,20 @@ package {
 				default:
 					trace("error in hatBonus");
 			}
-			costume = new AnimationCostume(id, CameraManager._staticLayer, 0.001, 0.001);
+			costume = new AnimationCostume(id, CameraManager._staticLayer, 0.03, 0.03);
 			costume.setCoords(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			costume.animation.visible = true;
 			super(x, y);
 		}
 	
 		override public function pick(player:Player):void {
-			player.changeHat(hatId);
 			super.pick(player);
+			var x:Number = player.getSpriteLoc().x/20;
+			var y:Number = player.getSpriteLoc().y/20;
+			var controls:Controls = player.controls;
+			//player.remove();
+			//Platformer.dummyPlayer = new DummyPlayer(x, y, controls, hatId);
+			player.changeHat(hatId);
 		}
 		
 		override protected function cleanUpBeforeRemoving():void {

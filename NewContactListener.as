@@ -147,7 +147,7 @@ package {
 				}
 				return void;
 			} else if (platform is EndLevel) {
-				if (HUD.condition == HUD.PLAY) {
+				if (EditorMode.current is PlayMode) {
 					if (Controls.allowed) {
 						Controls.allowed = false;
 						Controls.disallowControls();

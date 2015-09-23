@@ -215,10 +215,19 @@ package
 					controls.useJetpack = true;
 				}
 			}
+			if (body.GetLinearVelocity().y > 0) {
+				return void;
+			}
 			if (leftWallJump && !canJump && jumpIterations < 3) {
-				body.ApplyImpulse(LEFT_WALL_IMPULSE, body.GetWorldCenter()); //-0.2 -0.27
+				var lwi:b2Vec2 = LEFT_WALL_IMPULSE.Copy();
+				lwi.Multiply(15);
+				body.SetLinearVelocity(lwi); //-0.2 -0.27
+				//body.ApplyImpulse(LEFT_WALL_IMPULSE, body.GetWorldCenter()); //-0.2 -0.27
 			} else if (rightWallJump && !canJump && jumpIterations < 3) {
-				body.ApplyImpulse(RIGHT_WALL_IMPULSE, body.GetWorldCenter()); //0.2 -0.27
+				var rwi:b2Vec2 = RIGHT_WALL_IMPULSE.Copy();
+				rwi.Multiply(15);
+				body.SetLinearVelocity(rwi); //0.2 -0.27
+				//body.ApplyImpulse(RIGHT_WALL_IMPULSE, body.GetWorldCenter()); //0.2 -0.27
 			}
 		}
 		

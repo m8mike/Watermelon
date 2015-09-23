@@ -103,6 +103,8 @@ package {
 				item.hide();
 			}
 			disallowControls();
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function show():void {
@@ -119,6 +121,8 @@ package {
 				item.remove();
 			}
 			parent.removeChild(this);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 	}
 }

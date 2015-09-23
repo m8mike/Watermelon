@@ -23,7 +23,13 @@ package {
 		
 		public function TopHat(x:int, y:int) {
 			endLevel = new EndLevel(x, y);
-			switch (int(Math.random()*4)) {
+			var hatID:int;
+			if (x == (2540 / 20) && y == (360 / 20)) {
+				hatID = 4;
+			} else {
+				hatID = int(Math.random() * 4);
+			}
+			switch (hatID) {
 				case 0:
 					costumeId = "hatFinish";
 					costumeIdTop = "hatFinishTop1";
@@ -39,6 +45,10 @@ package {
 				case 3:
 					costumeId = "hatFinish3";
 					costumeIdTop = "hatFinishTop3";
+				break;
+				case 4:
+					costumeId = "hatFinishZebra";
+					costumeIdTop = "hatFinishTopZebra";
 				break;
 				default:
 			}

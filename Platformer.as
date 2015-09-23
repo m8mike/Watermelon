@@ -28,18 +28,14 @@ package {
 		
 		public static var controls:Controls;
 		public static var menu:MainMenu;
+		public static var dummyPlayer:DummyPlayer;
 		
 		public function Platformer() {
-			/*var url:String=stage.loaderInfo.url;
-			var goodPattern:RegExp=/^(https:\/\/)(www\.)?flashgamelicense\.com/;
-			var goodPattern2:RegExp=/^(http:\/\/)(www\.)?flashgamelicense\.com/;
-			if (goodPattern.test(url)||goodPattern2.test(url)) {*/
-				new MyFont();
-				thisIs = this;
-				CameraManager.initCameras();
-				new StartScreen();
-				
-			//}
+			new MyFont();
+			thisIs = this;
+			//new Costumer();
+			CameraManager.initCameras();
+			new StartScreen();
 		}
 		
 		public static function startGame():void {
@@ -77,11 +73,15 @@ package {
 			} else if (deleteAll) {
 				if (platforms.length) {
 					Platform(platforms[0]).remove();
+					trace("removing platforms");
 				} else if (collectables.length) {
+					trace("removing collectables");
 					Collectable(collectables[0]).remove();
 				} else if (characters.length) {
+					trace("removing characters");
 					Character(characters[0]).remove();
 				} else if (decorations.length) {
+					trace("removing decorations");
 					Decor(decorations[0]).remove();
 				} else {
 					trace("deleted");
@@ -89,8 +89,8 @@ package {
 					if (LevelLoader.xmlToLoad) {
 						LevelLoader.loadXml();
 						do {	
-							ToggleBackgroundButton.toggleBackground(null);
-						} while (!ToggleBackgroundButton.enabled)
+							EditorBackground.toggleBackground(null);
+						} while (!EditorBackground.enabled)
 					}
 				}
 			}
@@ -167,6 +167,10 @@ package {
 					}
 				}
 			} else {
+				if (dummyPlayer) {
+					dummyPlayer.init();
+					dummyPlayer = null;
+				}
 				if (Controls.freeDown) {
 					CameraManager.freePoint.y += 10;
 				} else if (Controls.freeUp) {

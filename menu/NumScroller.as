@@ -31,7 +31,7 @@ package {
 		private function addHeightChanger(handler:Function):void {
 			heightChanger = new TextField();
 			heightChanger.x = 150;
-			heightChanger.y = 50 + HUD._numScrollers.length * 20;
+			heightChanger.y = 50 + EditorBackground._numScrollers.length * 20;
 			heightChanger.visible = true;
 			heightChanger.selectable = false;
 			heightChanger.text = text + "00";

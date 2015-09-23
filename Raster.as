@@ -34,6 +34,7 @@ package {
 			cacheAnimation("GrassBackground");
 			cacheAnimation("GroundBackground");
 			cacheAnimation("hatFinish");
+			cacheAnimation("hatFinishZebra");
 			cacheAnimation("hatFinish1");
 			cacheAnimation("hatFinish2");
 			cacheAnimation("hatFinish3");
@@ -41,6 +42,7 @@ package {
 			cacheAnimation("hatFinishTop1");
 			cacheAnimation("hatFinishTop2");
 			cacheAnimation("hatFinishTop3");
+			cacheAnimation("hatFinishTopZebra");
 			cacheAnimation("dustBlow");
 			cacheAnimation("lightBlow");
 			cacheAnimation("flinders");
@@ -55,6 +57,17 @@ package {
 			cacheAnimation("spikes_2");
 			cacheAnimation("loadingBackground");
 			cacheAnimation("fan_working");
+			cacheAnimation("hat01");
+			cacheAnimation("hat02");
+			cacheAnimation("hat03");
+			cacheAnimation("hat04");
+			cacheAnimation("hat05");
+			cacheAnimation("hat06");
+			cacheAnimation("hat08");
+			cacheAnimation("hat10");
+			cacheAnimation("hat11");
+			cacheAnimation("hat12");
+			cacheAnimation("hat14");
 			/*cacheAnimation("level_completed");
 			cacheAnimation("level_not_completed");
 			cacheAnimation("level_closed");*/
@@ -73,6 +86,8 @@ package {
 			cacheAnimation("fall_left");
 			cacheAnimation("umbrella_right");
 			cacheAnimation("umbrella_left");
+			cacheAnimation("walljump_right");
+			cacheAnimation("walljump_left");
 			//cacheAnimation("red_splash");
 			Animation.playerToCache = null;
 		}

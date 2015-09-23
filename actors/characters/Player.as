@@ -38,11 +38,12 @@ package
 		public static const ROCKETS:int = 3;
 		public static const UMBRELLA_GO:int = 4;
 		
-		private var controls:Controls;
+		public var controls:Controls;
 		public var inventory:Inventory;
 		public var spawnPoint:Point;
 		
-		public function Player(x:int, y:int, controls:Controls) {
+		public function Player(x:int, y:int, controls:Controls, hatID = 11) {
+			hatIndex = hatID;
 			bodyManager = new PlayerBodyManager(new Point(x * 20, y * 20), this);
 			PlayerBodyManager(bodyManager).controls = controls;
 			costumeManager = new PlayerCostumeManager(this);
@@ -83,11 +84,14 @@ package
 		}
 		
 		public function changeHat(index:int):void {
-			deleted = true;
-			costumeManager.removeCostumes();
+			//deleted = true;
+			removeCostumes()
+			//costumeManager.removeCostumes();
 			hatIndex = index;
-			setSpawnPoint(new Point(getBody().GetWorldCenter().x * 30, getBody().GetWorldCenter().y * 30));
+			//setSpawnPoint(new Point(getBody().GetWorldCenter().x * 30, getBody().GetWorldCenter().y * 30));
 			costumeManager = new PlayerCostumeManager(this);
+			PlayerCostumeManager(costumeManager).controls = controls;
+			PlayerCostumeManager(costumeManager).show();
 		}
 		
 		public function hit():void {
@@ -131,6 +135,11 @@ package
 		
 		public function isOnGround():Boolean {
 			return PlayerBodyManager(bodyManager).canJump;
+		}
+		
+		public function isOnWall():Boolean {
+			var bm:PlayerBodyManager = PlayerBodyManager(bodyManager);
+			return (bm.rightWallJump || bm.leftWallJump);
 		}
 		
 		public function timer200():void {

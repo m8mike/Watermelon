@@ -38,8 +38,8 @@ package {
 				str += character.getXML().toXMLString();
 			}
 			str += "</characters>";
-			str += "<spawn>" +"<x>" + int(parseInt(TextField(HUD._spawn[0]).text) / PhysiVals.MIN_SQARE) + "</x>";
-			str += "<y>" + int(parseInt(TextField(HUD._spawn[1]).text) / PhysiVals.MIN_SQARE) + "</y>" + "</spawn>";
+			str += "<spawn>" +"<x>" + int(parseInt(TextField(EditorSpawn._spawn[0]).text) / PhysiVals.MIN_SQARE) + "</x>";
+			str += "<y>" + int(parseInt(TextField(EditorSpawn._spawn[1]).text) / PhysiVals.MIN_SQARE) + "</y>" + "</spawn>";
 			str += "</actors>"
 			var xml:XML = new XML(str);
 			var file:FileReference = new FileReference();
@@ -107,8 +107,8 @@ package {
 			}
 			var x1:Number = x * PhysiVals.MIN_SQARE;
 			var y1:Number = y * PhysiVals.MIN_SQARE;
-			TextField(HUD._spawn[0]).text = x1.toString();
-			TextField(HUD._spawn[1]).text = y1.toString();
+			TextField(EditorSpawn._spawn[0]).text = x1.toString();
+			TextField(EditorSpawn._spawn[1]).text = y1.toString();
 			Platformer._player = new Player(x, y, Platformer.controls);
 			Platformer.activation(null);
 		}

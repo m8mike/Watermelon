@@ -17,14 +17,17 @@ package {
 		
 		public var fileName:String = "default";
 		public var name:String = "default";
-		public var comment:String = "default";
+		private var _comment:String = "default";
+		
+		public var bubblesPopped:int;
+		public var diamondCollected:int;
 		
 		public function LevelCell(state:LevelState, location:Point, parent:DisplayObjectContainer) {
 			_state = state;
 			_location = location;
 			_parent = parent;
 			icon = _state.getSprite(LevelList.OFFSET_X + location.x * LevelList.OFFSET_BETWEEN_LEVELS, 
-												  LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS);
+									LevelList.OFFSET_Y + location.y * LevelList.OFFSET_BETWEEN_LEVELS);
 			var shadow:MovieClip = new MovieClip();
 			shadow.graphics.beginFill(0x00FF80, 0.6);
 			shadow.graphics.drawRoundRect(0, 0, 200, 200, 80);
@@ -139,6 +142,24 @@ package {
 		
 		public function get location():Point {
 			return _location;
+		}
+		
+		public function get comment():String {
+			return _comment;
+		}
+		
+		public function set comment(value:String):void {
+			_comment = value;
+			if (value.indexOf("Popped") == 0) {
+				var length:int = value.search("/") - 7;
+				var subPop:String = value.substr(7, length);
+				var col:int = value.indexOf("Collected")
+				var sub:String = value.substr(col);
+				var len:int = sub.search("/") - 10;
+				var subCol:String = sub.substr(10, len);
+				bubblesPopped = parseInt(subPop);
+				diamondCollected = parseInt(subCol);
+			}
 		}
 	}
 }

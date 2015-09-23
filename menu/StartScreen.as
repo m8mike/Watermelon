@@ -1,5 +1,6 @@
 package {
 	import flash.display.Bitmap;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	
@@ -8,12 +9,12 @@ package {
 	* @author Mad Mike
 	*/
 	public class StartScreen extends MovieClip {
-		private var nameLogo:MovieClip;
+		private static var nameLogo:MovieClip;
 		private var next:MovieClip;
 		private var muteLayer:MovieClip;
 		private var hatzLayer:MovieClip;
 		private var clouds:CloudsBG;
-		private var sponsor:MovieClip;
+		private static var sponsor:MovieClip;
 		private var mute:CheckBox;
 		private var hats:HatsFalling;
 		
@@ -21,10 +22,10 @@ package {
 			CameraManager.loadingScreen.addChild(this);
 			addClouds();
 			addHats();
-			addName();
+			addName(this);
 			addNext();
 			addMute();
-			addSponsor();
+			addSponsor(this);
 		}
 		
 		private function addClouds():void {
@@ -34,13 +35,35 @@ package {
 			addChild(clouds);
 		}
 		
-		private function addName():void {
-			nameLogo = new name_logo();
-			nameLogo.x = 320;
-			nameLogo.y = 200;
-			nameLogo.scaleX = 3;
-			nameLogo.scaleY = nameLogo.scaleX;
-			addChild(nameLogo);
+		public static function addName(nParent:DisplayObjectContainer):void {
+			if (!nameLogo) {
+				nameLogo = new name_logo();
+				nameLogo.x = 320;
+				nameLogo.y = 200;
+				nameLogo.scaleX = 3;
+				nameLogo.scaleY = nameLogo.scaleX;
+				if (!nameLogo.parent) {
+					nParent.addChild(nameLogo);
+				}
+			} else {
+				if (nameLogo is name_logo) {
+					removeName();
+					nameLogo = new name_logo2();
+					nameLogo.x = 250;
+					nameLogo.y = 120;
+					nameLogo.scaleX = 1.5;
+					nameLogo.scaleY = nameLogo.scaleX;
+				}
+				if (!nameLogo.parent) {
+					nParent.addChildAt(nameLogo, 0);
+				}
+			}
+		}
+		
+		public static function removeName():void {
+			if (nameLogo.parent) {
+				nameLogo.parent.removeChild(nameLogo);
+			}
 		}
 		
 		private function addNext():void {
@@ -55,7 +78,7 @@ package {
 		
 		private function startGame(e:MouseEvent):void {
 			HatsFalling.maxHats = 1;
-			nameLogo.parent.removeChild(nameLogo);
+			removeName();
 			next.parent.removeChild(next);
 			muteLayer.parent.removeChild(muteLayer);
 			hatzLayer.parent.removeChild(hatzLayer);
@@ -63,7 +86,7 @@ package {
 			hats.remove();
 			clouds.remove();
 			clouds.parent.removeChild(clouds);
-			sponsor.parent.removeChild(sponsor);
+			removeSponsor();
 			mute.hide();
 			Platformer.startGame();
 		}
@@ -93,15 +116,25 @@ package {
 			addChild(hatzLayer);
 		}
 		
-		private function addSponsor():void {
-			sponsor = new sponsors_logo();
-			sponsor.x = 520;
-			sponsor.y = 400;
-			addChild(sponsor);
-			sponsor.addEventListener(MouseEvent.CLICK, sponsorClick);
+		public static function addSponsor(sParent:DisplayObjectContainer):void {
+			if (!sponsor) {	
+				sponsor = new sponsors_logo();
+				sponsor.x = 520;
+				sponsor.y = 400;
+				sponsor.addEventListener(MouseEvent.CLICK, sponsorClick);
+			} else {
+				removeSponsor();
+			}
+			sParent.addChild(sponsor);
 		}
 		
-		private function sponsorClick(e:MouseEvent):void {
+		public static function removeSponsor():void {
+			if (sponsor.parent) {
+				sponsor.parent.removeChild(sponsor);
+			}
+		}
+		
+		private static function sponsorClick(e:MouseEvent):void {
 			HatsFalling.maxHats = 10;
 		}
 	}

@@ -73,6 +73,8 @@ package {
 			addChild(hatzLayer);
 			addChild(menuLayer);
 			addChild(completedLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 			CameraManager.menu.addChild(this);
 			SoundMusic.stopInGame();
 			SoundMusic.playMenu();
@@ -103,6 +105,8 @@ package {
 			showed = false;
 			escapeMenu.hide();
 			LevelLoader.reloadLevel(CarbonMenu.levelList.getLevelAt(CarbonMenu.levelCursor.location).fileName, whenLoaded);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		private function whenLoaded():void {
@@ -118,6 +122,8 @@ package {
 			Platformer.activation(null);
 			ButtonMute.hide();
 			ButtonMute.show(CameraManager.inventory);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function achieve(e:MouseEvent):void {
@@ -135,6 +141,8 @@ package {
 			ButtonBack.show(achievementsLayer, fromAchievementsToMain);
 			ButtonMute.hide();
 			ButtonMute.show(achievementsLayer);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function toCredits(e:MouseEvent):void {
@@ -149,6 +157,8 @@ package {
 			ButtonBack.show(credits, fromCreditsToMain);
 			ButtonMute.hide();
 			ButtonMute.show(creditsLayer);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function complete(e:MouseEvent):void {
@@ -158,6 +168,8 @@ package {
 			new CompletedScreen(completedLayer);
 			ButtonMute.hide();
 			ButtonMute.show(completedLayer);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function toSettings(e:MouseEvent):void {
@@ -172,6 +184,8 @@ package {
 			settings.allowControls();
 			ButtonMute.hide();
 			ButtonMute.show(settingsLayer);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function toLevelSelect(e:MouseEvent):void {
@@ -186,6 +200,8 @@ package {
 			ButtonBack.show(carbonLayer, toMainMenu);
 			ButtonMute.hide();
 			ButtonMute.show(carbonLayer);
+			StartScreen.removeSponsor();
+			StartScreen.removeName();
 		}
 		
 		public function fromEscapeToMain(e:MouseEvent):void {
@@ -196,6 +212,8 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 			CompletedScreen.checkComplete();
 		}
 		
@@ -209,6 +227,8 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 		}
 		
 		public function fromAchievementsToMain(e:MouseEvent):void {
@@ -221,6 +241,8 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 		}
 		
 		public function fromCreditsToMain(e:MouseEvent):void {
@@ -230,6 +252,8 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 		}
 		
 		public function toMainMenu(e:MouseEvent):void {
@@ -247,6 +271,8 @@ package {
 			ButtonBack.hide();
 			ButtonMute.hide();
 			ButtonMute.show(menuLayer);
+			StartScreen.addSponsor(menuLayer);
+			StartScreen.addName(menuLayer);
 		}
 		
 		public static function getStage():Stage {

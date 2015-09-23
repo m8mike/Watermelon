@@ -22,13 +22,15 @@ package {
 		public static const JUMP_LEFT:int = 5;
 		public static const FALL_RIGHT:int = 6;
 		public static const FALL_LEFT:int = 7;
-		public static const UMBRELLA_RIGHT:int = 32;
-		public static const UMBRELLA_LEFT:int = 33;
-		public static const UMBRELLA_GO_RIGHT:int = 34;
-		public static const UMBRELLA_GO_LEFT:int = 35;
-		public static const RED_SPLASH:int = 36;
-		public static const ZAPPED:int = 37;
-		public static const STUNNED:int = 38;
+		public static const WALLJUMP_RIGHT:int = 8;
+		public static const WALLJUMP_LEFT:int = 9;
+		public static const UMBRELLA_RIGHT:int = 40;
+		public static const UMBRELLA_LEFT:int = 41;
+		public static const UMBRELLA_GO_RIGHT:int = 42;
+		public static const UMBRELLA_GO_LEFT:int = 43;
+		public static const RED_SPLASH:int = 44;
+		public static const ZAPPED:int = 45;
+		public static const STUNNED:int = 46;
 		
 		public function PlayerCostumeManager(player:Player) {
 			parent = player;
@@ -93,6 +95,8 @@ package {
 			_costumes.push(new AnimationCostume("jump_left", CameraManager.pLayer, -0.1322314049586777, 0.13913043478260873, 8));
 			_costumes.push(new AnimationCostume("fall_right", CameraManager.pLayer, 0.128, 0.14285714285714288, 5));
 			_costumes.push(new AnimationCostume("fall_left", CameraManager.pLayer, -0.1264822134387352, 0.14092140921409216, 5));
+			_costumes.push(new AnimationCostume("walljump_right", CameraManager.pLayer, 0.128, 0.14285714285714288, 8));
+			_costumes.push(new AnimationCostume("walljump_left", CameraManager.pLayer, -0.1264822134387352, 0.14092140921409216, 8));
 		}
 		
 		public function startSplash():void {
@@ -149,10 +153,10 @@ package {
 			AnimationCostume(_costumes[STUNNED]).animation.visible = true;
 			if (AnimationCostume(_costumes[STUNNED]).animation.currentFrame >= 80) {
 				//parent.setSpawnPoint(parent.getSpriteLoc());
-				if (HUD._spawn.length) {
-					if (TextField(HUD._spawn[0]).text != "" && TextField(HUD._spawn[1]).text != "") {
-						parent.spawnPoint.x = Number(TextField(HUD._spawn[0]).text);
-						parent.spawnPoint.y = Number(TextField(HUD._spawn[1]).text);
+				if (EditorSpawn._spawn.length) {
+					if (TextField(EditorSpawn._spawn[0]).text != "" && TextField(EditorSpawn._spawn[1]).text != "") {
+						parent.spawnPoint.x = Number(TextField(EditorSpawn._spawn[0]).text);
+						parent.spawnPoint.y = Number(TextField(EditorSpawn._spawn[1]).text);
 					} else {
 						parent.spawnPoint.x = 2 * 20;
 						parent.spawnPoint.y = -6 * 20;
@@ -204,15 +208,28 @@ package {
 			} else if (!parent.isOnGround()) {
 				if (parent.getBody().GetLinearVelocity().y < 0) {
 					if (parent.getBody().GetLinearVelocity().x >= 0) {
-						changeCondition(JUMP_RIGHT);
+						if (parent.isOnWall()) {
+							changeCondition(WALLJUMP_RIGHT);
+						} else if (!(condition == WALLJUMP_LEFT || condition == WALLJUMP_RIGHT)) {	
+							changeCondition(JUMP_RIGHT);
+						}
 					} else {
-						changeCondition(JUMP_LEFT);
+						if (parent.isOnWall()) {
+							changeCondition(WALLJUMP_LEFT);
+						} else if (!(condition == WALLJUMP_LEFT || condition == WALLJUMP_RIGHT)) {	
+							changeCondition(JUMP_LEFT);
+						}
 					}
 				} else if (parent.getBody().GetLinearVelocity().x >= 0) {
 					if (AnimationCostume(_costumes[JUMP_RIGHT]).animation.currentFrame == 8 || condition == FALL_LEFT) { //20
 						changeCondition(FALL_RIGHT);
 					}
+					if (AnimationCostume(_costumes[WALLJUMP_RIGHT]).animation.currentFrame == 8 || condition == FALL_LEFT) { //20
+						changeCondition(FALL_RIGHT);
+					}
 				} else if (AnimationCostume(_costumes[JUMP_LEFT]).animation.currentFrame == 8 || condition == FALL_RIGHT) { //20
+					changeCondition(FALL_LEFT);
+				} else if (AnimationCostume(_costumes[WALLJUMP_LEFT]).animation.currentFrame == 8 || condition == FALL_RIGHT) { //20
 					changeCondition(FALL_LEFT);
 				}
 			}
@@ -232,9 +249,9 @@ package {
 		}
 		
 		private function setCoords():void {
-			var x:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO - 19.6818;
-			var x2:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO + 19.6818;
-			var y:Number = parent.getBody().GetPosition().y * PhysiVals.RATIO - 26.37;
+			var x:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO;// - 19.6818;
+			var x2:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO;// + 19.6818;
+			var y:Number = parent.getBody().GetPosition().y * PhysiVals.RATIO;// - 26.37;
 			for each (var costume:AnimationCostume in _costumes) {
 				if (costume.id.indexOf("right") != -1) {
 					costume.setCoords(x, y);
@@ -252,12 +269,12 @@ package {
 		private function changeAnimation(spriteIndex:int):void {
 			hideCostumes();
 			var index:int = spriteIndex;
-			if (parent.carryingItem is Umbrella && index < 20) {
-				index += 8;
-			} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 24) {
-				index += 16;
-			} else if (parent.carryingItem is Jetpack && index < 33) {
-				index += 24;
+			if (parent.carryingItem is Umbrella && index < 24) {
+				index += 10;
+			} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 28) {
+				index += 20;
+			} else if (parent.carryingItem is Jetpack && index < 39) {
+				index += 30;
 			}
 			if (visible) {	
 				AnimationCostume(_costumes[index]).play();
@@ -281,12 +298,12 @@ package {
 			if (!visible) {
 				visible = true;
 				var index:int = condition;
-				if (parent.carryingItem is Umbrella && index < 20) {
-					index += 8;
-				} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 24) {
-					index += 16;
-				} else if (parent.carryingItem is Jetpack && index < 33) {
-					index += 24;
+				if (parent.carryingItem is Umbrella && index < 24) {
+					index += 10;
+				} else if ((parent.carryingItem is Bazooka || parent.carryingItem is SnowGun) && index < 28) {
+					index += 20;
+				} else if (parent.carryingItem is Jetpack && index < 39) {
+					index += 30;
 				}
 				AnimationCostume(_costumes[index]).animation.visible = true;
 			}
