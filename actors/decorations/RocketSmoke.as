@@ -9,18 +9,11 @@ package {
 		private var costume:AnimationCostume;
 		
 		public function RocketSmoke(location:Point) {
-			costume = new AnimationCostume("rocketSmoke", CameraManager._dynamicLayer, 0.1, 0.1, 5);
-			costume.setCoords(location.x * 30, location.y * 30);
+			costume = new AnimationCostume("rocketSmoke", CameraManager._dynamicLayer);
+			costume.setScale(0.1);
+			costume.setLocation(location.x * 30, location.y * 30);
 			costume.play();
-		}
-		
-		override public function updateNow():void {
-			if (costume) {
-				if (costume.checkAndStop()) {
-					costume.remove();
-				}
-			}
-			super.updateNow();
+			costume.animation.onEnd = costume.remove;
 		}
 	}
 }

@@ -121,9 +121,9 @@ package {
 		
 		private static function createLevel1():void {
 			//var loader:LoadingBig = new LoadingBig();
-			var standardPlatform:Standard = new Standard(1, 0, 200, 1);
-			var standardPlatform2:Standard = new Standard(0, -60, 1, 60);
-			var standardPlatform3:Standard = new Standard(5, -20, 20, 1);
+			new Standard(1, 0, 200, 1);
+			new Standard(0, -60, 1, 60);
+			new Standard(5, -20, 20, 1);
 			new Cloud(1, -15);
 			new JumpThrough(5, -10, 10, 0.1);
 			new SpringBush(18, -1);
@@ -165,7 +165,7 @@ package {
 			//new LevelEditor();
 			//loader.setLoaded();
 		}
-		
+		/*
 		private static function createLevel2():void {
 			
 		}
@@ -180,9 +180,9 @@ package {
 		
 		private static function createLevel7():void {
 			
-		}
+		}*/
 		
-		private static function createLevel8():void {
+		//private static function createLevel8():void {
 			/*var standardPlatform3:Standard = new Standard(12, -2, 1, 1);*/
 			/*var teleporter1:Teleporter = new Teleporter(8.6, -3, 3.3, 0.5, new Point(20 * 20, -3 * 20));	
 			var teleporter2:Teleporter = new Teleporter(18.6, -1, 3.3, 0.5, new Point(10 * 20, -5 * 20));*/
@@ -251,9 +251,9 @@ package {
 			/*var zap:AnimationCostume = new AnimationCostume("zapped", CameraManager.pLayer, 0.128, 0.14285714285714288, 8);
 			zap.setCoords(0, 0);
 			zap.play();*/
-		}
+		//}
 		
-		private static function createLevel9():void {
+		//private static function createLevel9():void {
 			/*Shape params
 			 * body
 			 * special
@@ -292,6 +292,6 @@ package {
 			jumpThrough:Boolean = false;
 			fixedRotation:Boolean = false;
 			bullet:Boolean = false;*/
-		}
+		//}
 	}
 }

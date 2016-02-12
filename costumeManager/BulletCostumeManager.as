@@ -19,7 +19,9 @@ package {
 		}
 		
 		private function createCostumes(size:Number):void {
-			_costumes.push(new AnimationCostume("bullet_rocket", CameraManager.pLayer, 0.2, 0.2));
+			var animCostume:AnimationCostume = new AnimationCostume("bullet_rocket", CameraManager.pLayer);
+			animCostume.setScale(0.2);
+			_costumes.push(animCostume);
 			AnimationCostume(_costumes[0]).play();
 		}
 		
@@ -27,10 +29,10 @@ package {
 			var x:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO;
 			var y:Number = parent.getBody().GetPosition().y * PhysiVals.RATIO;
 			var vel:b2Vec2 = parent.getBody().GetLinearVelocity();
-			var angle:Number = 180-Math.atan2(vel.x, vel.y) * 180 / Math.PI;
+			var angle:Number = 180 - Math.atan2(vel.x, vel.y) * 180 / Math.PI;
 			for each (var costume:AnimationCostume in _costumes) {
-				costume.setCoords(x, y);
-				costume.animation.rotation = angle;
+				costume.setLocation(x, y);
+				costume.setAngle(angle);
 			}
 		}
 	}

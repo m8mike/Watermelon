@@ -8,9 +8,10 @@ package {
 		private var costume:AnimationCostume;
 		
 		public function DiamondBonus(x:Number, y:Number) {
-			costume = new AnimationCostume("diamond_bonus", CameraManager._staticLayer, 0.15, 0.15);
-			costume.setCoords(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			costume.animation.visible = true;
+			costume = new AnimationCostume("diamond_bonus", CameraManager._staticLayer);
+			costume.setScale(0.15);
+			costume.setLocation(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			costume.show();
 			super(x, y);
 		}
 		

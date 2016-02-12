@@ -44,9 +44,10 @@ package {
 			if (costume.parent) {
 				costume.parent.removeChild(costume);
 			}
-			if (costume is Bitmap) {
+			/*if (costume is Bitmap) {
+				trace("disposing TreeBelow");
 				Bitmap(costume).bitmapData.dispose();
-			}
+			}*/
 			super.removeCostumes();
 		}
 		

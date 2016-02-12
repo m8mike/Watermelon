@@ -77,13 +77,15 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
-			hat = new AnimationCostume(costumeId, CameraManager._dynamicLayer, 0.2, 0.2);
-			hat.setCoords(location.x, location.y);
+			//var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
+			hat = new AnimationCostume(costumeId, CameraManager._dynamicLayer);
+			hat.setScale(0.2);
+			hat.setLocation(location.x, location.y);
 			//hat.setCoords(location.x - 0.01 * clipDef.width, location.y - 0.018 * clipDef.height);
 			hat.play();
-			topHat = new AnimationCostume(costumeIdTop, CameraManager.belowLayer, 0.2, 0.2);
-			topHat.setCoords(location.x, location.y);
+			topHat = new AnimationCostume(costumeIdTop, CameraManager.belowLayer);
+			topHat.setScale(0.2);
+			topHat.setLocation(location.x, location.y);
 			topHat.play();
 		}
 		
@@ -93,12 +95,12 @@ package {
 			loc.Multiply(PhysiVals.RATIO);
 			loc.x += 2;
 			loc.y += 3.4;
-			var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
-			topHat.setCoords(loc.x, loc.y);
-			hat.setCoords(loc.x, loc.y);
+			//var clipDef:MovieClip = new (getDefinitionByName(costumeId))();
+			topHat.setLocation(loc.x, loc.y);
+			hat.setLocation(loc.x, loc.y);
 			//hat.setCoords(loc.x - 0.01 * clipDef.width, loc.y - 0.018 * clipDef.height);
-			topHat.animation.rotation = angle;
-			hat.animation.rotation = angle;
+			topHat.setAngle(angle);
+			hat.setAngle(angle);
 			super.updateCostumes();
 		}
 		

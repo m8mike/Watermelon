@@ -23,7 +23,7 @@ package {
 			var y:Number = (e.stageY - CameraManager.pLayer.y) / 90;
 			var x1:Number = (e.stageX - CameraManager.pLayer.x) / 60;
 			var y1:Number = (e.stageY - CameraManager.pLayer.y) / 60;
-			var p:b2Vec2 = new b2Vec2(x, y);
+			//var p:b2Vec2 = new b2Vec2(x, y);
 			var callback:Array = [];
 			var aabb:b2AABB = new b2AABB();
 			aabb.lowerBound.Set(x, y);

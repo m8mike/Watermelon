@@ -50,17 +50,18 @@ package {
 				default:
 					trace("error in hatBonus");
 			}
-			costume = new AnimationCostume(id, CameraManager._staticLayer, 0.03, 0.03);
-			costume.setCoords(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			costume.animation.visible = true;
+			costume = new AnimationCostume(id, CameraManager._staticLayer);
+			costume.setScale(0.03);
+			costume.setLocation(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			costume.show();
 			super(x, y);
 		}
 	
 		override public function pick(player:Player):void {
 			super.pick(player);
-			var x:Number = player.getSpriteLoc().x/20;
-			var y:Number = player.getSpriteLoc().y/20;
-			var controls:Controls = player.controls;
+			//var x:Number = player.getSpriteLoc().x/20;
+			//var y:Number = player.getSpriteLoc().y/20;
+			//var controls:Controls = player.controls;
 			//player.remove();
 			//Platformer.dummyPlayer = new DummyPlayer(x, y, controls, hatId);
 			player.changeHat(hatId);

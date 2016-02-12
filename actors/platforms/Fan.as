@@ -29,8 +29,9 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-		   costume = new AnimationCostume("fan_working", CameraManager._dynamicLayer, 0.2, 0.2);
-		   costume.setCoords(location.x + 2.5 * PhysiVals.MIN_SQARE, location.y + 10 * PhysiVals.MIN_SQARE);
+		   costume = new AnimationCostume("fan_working", CameraManager._dynamicLayer);
+		   costume.setScale(0.2);
+		   costume.setLocation(location.x + 2.5 * PhysiVals.MIN_SQARE, location.y + 10 * PhysiVals.MIN_SQARE);
 		   costume.play();
 		}
 		

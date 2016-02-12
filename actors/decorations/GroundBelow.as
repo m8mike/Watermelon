@@ -16,7 +16,7 @@ package {
 		public var width:Number = 1;
 		public var height:Number = 1;
 		
-		public function GroundBelow(x:Number, y:Number, w:Number = 1, h:Number = 1) {
+		public function GroundBelow(x:Number, y:Number) {
 			super();
 			location = new Point(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
 			super.reload();
@@ -62,9 +62,10 @@ package {
 			if (costume.parent) {
 				costume.parent.removeChild(costume);
 			}
-			if (costume is Bitmap) {
+			/*if (costume is Bitmap) {
+				trace("disposing GroindBelow");
 				Bitmap(costume).bitmapData.dispose();
-			}
+			}*/
 			super.removeCostumes();
 		}
 		

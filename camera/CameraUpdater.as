@@ -100,18 +100,23 @@ package {
 				previous.x += vel.x;
 				previous.y += vel.y;
 			}
-			var groveSection:Point = new Point(
-				spriteLoc.x + previous.x / 3, 
-				spriteLoc.y + previous.y / 3);
 			var purpleSection:Point = new Point(
 				spriteLoc.x, 
 				spriteLoc.y - previous.y / 3);
+			/*var groveSection:Point = new Point(
+				spriteLoc.x + previous.x / 3, 
+				spriteLoc.y + previous.y / 3);
 			var lazySection:Point = new Point(
 				spriteLoc.x - previous.x / 3, 
 				spriteLoc.y - previous.y / 3);
 			var greenSection:Point = new Point(
 				spriteLoc.x, 
 				groveSection.y - 18.144);
+			var ariSection:Point = new Point(
+				//greenSection.x*(1-percentage) + lazySection.x * percentage,
+				groveSection.x,
+				greenSection.y * percentage + lazySection.y * (1 - percentage));
+				*/
 			var percentage:Number = 0.5;
 			if (Platformer._player.getBody().GetLinearVelocity().y >= 0) {
 				percentage *= 0.9;
@@ -120,11 +125,6 @@ package {
 					percentage *= 1.1;
 				}
 			}
-			var ariSection:Point = new Point(
-				//greenSection.x*(1-percentage) + lazySection.x * percentage,
-				groveSection.x,
-				greenSection.y * percentage + lazySection.y * (1 - percentage));
-				
 			purpleSection.y  -= 18.144;
 			return purpleSection;
 			/*if (Platformer._player.getBody().GetLinearVelocity().y >= 0) {

@@ -27,14 +27,7 @@ package {
 		
 		public static var editorStateTF:TextField;
 		public static var actorType:DropDownMenu;
-		/*
-		private static const characterList:Array = ["CrateBox", "Diminishing", "Dummy", "DummyCircle", 
-														"DummySplitter", "Ghost", "Player"];
-		private static const collectableList:Array = ["BazookaBonus", "BubbleBonus", "JetpackBonus", "Key", 
-														"SnowGunBonus", "UmbrellaBonus", "DiamondBonus"];
-		public static const platformList:Array = ["Cloud", "Door", "JumpThrough", "Spikes", "SpringBush", 
-													"Standard", "Teleproter", "EndLevel", "TopHat", "Wooden", "Fan"];
-		*/
+		
 		public function HUD() {
 			
 		}

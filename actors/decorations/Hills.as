@@ -28,25 +28,25 @@ package {
 			line4 = [];
 			for (var i:int = -2; i < 5; i++) {
 				line1.push(new AnimationCostume("hillsWithTrees1", CameraManager._camera01));
-				AnimationCostume(line1[i + 2]).setCoords(offset, 0);
-				AnimationCostume(line1[i + 2]).animation.visible = true;
+				AnimationCostume(line1[i + 2]).setLocation(offset, 0);
+				AnimationCostume(line1[i + 2]).show();
 				if (numHills > 1) {
-					offset -= AnimationCostume(line1[i + 2]).animation.width / 2;
+					offset -= AnimationCostume(line1[i + 2]).animation.bitmap.width / 2;
 					line2.push(new AnimationCostume("hillsWithTrees2", CameraManager._camera03));
-					AnimationCostume(line2[i + 2]).setCoords(offset / 2 * 0.75, 0);
-					AnimationCostume(line2[i + 2]).animation.visible = true;
+					AnimationCostume(line2[i + 2]).setLocation(offset / 2 * 0.75, 0);
+					AnimationCostume(line2[i + 2]).show();
 				}
 				if (numHills > 2) {
 					line3.push(new AnimationCostume("hillsWithTrees3", CameraManager._camera02));
-					AnimationCostume(line3[i + 2]).setCoords(offset / 2, 0);
-					AnimationCostume(line3[i + 2]).animation.visible = true;
+					AnimationCostume(line3[i + 2]).setLocation(offset / 2, 0);
+					AnimationCostume(line3[i + 2]).show();
 				}
 				if (numHills > 3) {
 					line4.push(new AnimationCostume("hillsWithTrees4", CameraManager._camera04));
-					AnimationCostume(line4[i + 2]).setCoords(offset / 4, 0);
-					AnimationCostume(line4[i + 2]).animation.visible = true;
+					AnimationCostume(line4[i + 2]).setLocation(offset / 4, 0);
+					AnimationCostume(line4[i + 2]).show();
 				}
-				offset += AnimationCostume(line1[i + 2]).animation.width * 4 / 3;
+				offset += AnimationCostume(line1[i + 2]).animation.bitmap.width * 4 / 3;
 			}
 			NumScroller(EditorBackground._numScrollers[0]).asset = line1;
 			NumScroller(EditorBackground._numScrollers[1]).asset = line2;

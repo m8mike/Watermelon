@@ -13,23 +13,14 @@ package {
 		public static const BLOW:String = "rocketBlow";
 		
 		public function Dust(size:Number, location:Point, id:String = DUST) {
-			if (id == FLINDERS) {
-				costume = new AnimationCostume(id, CameraManager.pLayer, size / 100, size / 100, 6);
-			} else {
-				costume = new AnimationCostume(id, CameraManager.pLayer, size / 100, size / 100, 10);
+			if (id != FLINDERS) {
 				SoundMusic.playChoom();
 			}
-			costume.setCoords(location.x * 30, location.y * 30);
+			costume = new AnimationCostume(id, CameraManager.pLayer);
+			costume.setScale(size / 100);
+			costume.animation.onEnd = costume.remove;
+			costume.setLocation(location.x * 30, location.y * 30);
 			costume.play();
-		}
-		
-		override public function updateNow():void {
-			if (costume) {
-				if (costume.checkAndStop()) {
-					costume.remove();
-				}
-			}
-			super.updateNow();
 		}
 	}
 }

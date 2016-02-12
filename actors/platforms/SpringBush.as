@@ -25,14 +25,9 @@ package {
 			super.init(body, shape.getSimpleSprite(location));
 		}
 		
-		override public function updateNow():void {
-			if (playing) {
-				if (costume.checkAndStop()) {
-					costume.animation.gotoAndStop(1);
-					playing = false;
-				}
-			}
-			super.updateNow();
+		private function backToStart():void {	
+			costume.animation.gotoAndStop(1);
+			playing = false;
 		}
 		
 		public function hit():void {
@@ -53,17 +48,19 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			costume = new AnimationCostume("bush_spring1", CameraManager._dynamicLayer, 0.25, 0.25, 10);
-			costume.setCoords(location.x, location.y);
-			costume.animation.visible = true;
+			costume = new AnimationCostume("bush_spring1", CameraManager._dynamicLayer);
+			costume.setScale(0.25);
+			costume.setLocation(location.x, location.y);
+			costume.show();
+			costume.animation.onEnd = backToStart;
 		}
 		
 		override public function updateCostumes():void {
 			var angle:Number = body.GetAngle() / Math.PI * 180;
-			costume.animation.rotation = angle;
+			costume.setAngle(angle);
 			var loc:b2Vec2 = body.GetPosition().Copy();
 			loc.Multiply(PhysiVals.RATIO);
-			costume.setCoords(loc.x, loc.y);
+			costume.setLocation(loc.x, loc.y);
 			super.updateCostumes();
 		}
 		

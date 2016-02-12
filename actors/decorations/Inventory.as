@@ -40,9 +40,10 @@ package {
 		public function addDiamond():void {
 			diamondCount++;
 			if (!diamondIcon) {
-				diamondIcon = new AnimationCostume("diamond_bonus", CameraManager.inventory, 0.5, 0.5);
-				diamondIcon.setCoords(50, 50);
-				diamondIcon.animation.visible = true;
+				diamondIcon = new AnimationCostume("diamond_bonus", CameraManager.inventory);
+				diamondIcon.setScale(0.5);
+				diamondIcon.setLocation(50, 50);
+				diamondIcon.show();
 				diamondText = new TextField();
 				diamondText.x = 80;
 				diamondText.y = 40;

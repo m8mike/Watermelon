@@ -69,9 +69,10 @@ package {
 			if (costume.parent) {
 				costume.parent.removeChild(costume);
 			}
-			if (costume is Bitmap) {
+			/*if (costume is Bitmap) {
+				trace("disposing GroindZero");
 				Bitmap(costume).bitmapData.dispose();
-			}
+			}*/
 			super.removeCostumes();
 		}
 		

@@ -28,15 +28,16 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			costume = new AnimationCostume("cloudblue", CameraManager._dynamicLayer, 0.5, 0.5);
-			costume.setCoords(location.x, location.y);
-			costume.animation.visible = true;
+			costume = new AnimationCostume("cloudblue", CameraManager._dynamicLayer);
+			costume.setScale(0.5);
+			costume.setLocation(location.x, location.y);
+			costume.show();
 		}
 		
 		override public function updateCostumes():void {
 			var loc:b2Vec2 = body.GetPosition().Copy();
 			loc.Multiply(PhysiVals.RATIO);
-			costume.setCoords(loc.x, loc.y);
+			costume.setLocation(loc.x, loc.y);
 			super.updateCostumes();
 		}
 		

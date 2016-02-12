@@ -10,8 +10,9 @@ package {
 		private var direction:Boolean = true;
 		
 		public function Gun(id:String) {
-			costume = new AnimationCostume(id, CameraManager._dynamicLayer, 0.04, 0.04);
-			costume.animation.visible = true;
+			costume = new AnimationCostume(id, CameraManager._dynamicLayer);
+			costume.setScale(0.04);
+			costume.show();
 			Platformer.thisIs.stage.addEventListener(MouseEvent.MOUSE_MOVE, setAngle);
 		}
 		
@@ -25,36 +26,36 @@ package {
 			}
 			if (direction == Platformer._player.direction) {
 				if (direction) {
-					costume.animation.scaleX = -1 * Math.abs(costume.animation.scaleX);
-					costume.animation.rotation = 90 - Math.atan2(x, y) * 180 / Math.PI;
+					costume.flipRight(false);
+					costume.setAngle(90 - Math.atan2(x, y) * 180 / Math.PI);
 				} else {
-					costume.animation.scaleX = Math.abs(costume.animation.scaleX);
-					costume.animation.rotation = -90 - Math.atan2(x, y) * 180 / Math.PI;
+					costume.flipRight(true);
+					costume.setAngle(-90 - Math.atan2(x, y) * 180 / Math.PI);
 				}
 			} else {
 				if (Platformer._player.direction) {
-					costume.animation.scaleX = -1 * Math.abs(costume.animation.scaleX);
-					costume.animation.rotation = 90 - Math.atan2(10, 0) * 180 / Math.PI;
+					costume.flipRight(false);
+					costume.setAngle(90 - Math.atan2(10, 0) * 180 / Math.PI);
 				} else {
-					costume.animation.scaleX = Math.abs(costume.animation.scaleX);
-					costume.animation.rotation = -90 - Math.atan2(-10, 0) * 180 / Math.PI;
+					costume.flipRight(true)
+					costume.setAngle(-90 - Math.atan2(-10, 0) * 180 / Math.PI);
 				}
 			}
 		}
 		
 		public function setCoords(x:Number, y:Number) {
-			costume.animation.y = y;
+			costume.animation.bitmap.y = y;
 			if (direction == Platformer._player.direction) {
 				if (direction) {
-					costume.animation.x = x - 11;
+					costume.animation.bitmap.x = x - 11;
 				} else {
-					costume.animation.x = x;
+					costume.animation.bitmap.x = x;
 				}
 			} else {
 				if (Platformer._player.direction) {
-					costume.animation.x = x - 11;
+					costume.animation.bitmap.x = x - 11;
 				} else {
-					costume.animation.x = x;
+					costume.animation.bitmap.x = x;
 				}
 			}
 		}

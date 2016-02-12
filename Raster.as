@@ -6,8 +6,6 @@ package {
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import raster.touchmypixel.peepee.utils.Animation;
-	import raster.touchmypixel.peepee.utils.AnimationCache;
 	/**
 	 * ...
 	 * @author Mad Mike
@@ -68,12 +66,16 @@ package {
 			cacheAnimation("hat11");
 			cacheAnimation("hat12");
 			cacheAnimation("hat14");
+			
+			cacheAnimation("red_splash");
+			cacheAnimation("zapped");
+			cacheAnimation("birds");
 			/*cacheAnimation("level_completed");
 			cacheAnimation("level_not_completed");
 			cacheAnimation("level_closed");*/
 			cacheItems();
 		}
-		// вызывать перед созданием игрока
+		/*// вызывать перед созданием игрока
 		public static function cachePlayer(player:Player):void {
 			Animation.playerToCache = player;
 			cacheAnimation("go_right");
@@ -100,7 +102,7 @@ package {
 			cacheAnimation("zapped");
 			cacheAnimation("birds");
 		}
-		
+		*/
 		public static function cacheItems():void {
 			cacheAnimation("bazookaHands");
 			cacheAnimation("bazookaSnowHands");
@@ -110,14 +112,11 @@ package {
 		}
 		
 		public static function getAnimation(id):Animation {
-			var animationCache:AnimationCache = AnimationCache.getInstance();
-			return animationCache.getAnimation(id);
+			return AnimationCache.getAnimation(id);
 		}
 		
-		public static function cacheAnimation(identifier:String, useSpriteSheet:Boolean = false):Animation {
-			var animationCache:AnimationCache = AnimationCache.getInstance();
-			animationCache.replaceExisting = true;
-			return animationCache.cacheAnimation(identifier, useSpriteSheet);
+		public static function cacheAnimation(identifier:String):Animation {
+			return AnimationCache.cacheAnimation(identifier);
 		}
 		
 		public static function rasterize2(clip:Sprite):void {

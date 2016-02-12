@@ -9,7 +9,7 @@ package {
 	* @author Mad Mike
 	*/
 	public class Ghost extends Character {
-		private var point2:Point;
+		//private var point2:Point;
 		public var behavior:Behavior;
 		
 		public function Ghost(x:int, y:int, offsetToMove:Point = null) {

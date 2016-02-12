@@ -20,7 +20,7 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			var source:MovieClip = new tutorial_sponsor();
+			var source:MovieClip = new tutorial_board();
 			costume = Costume.bitmapFromMC(source);
 			costume.x = location.x - source.width / 2;
 			costume.y = location.y - source.height;
@@ -44,9 +44,9 @@ package {
 			if (costume.parent) {
 				costume.parent.removeChild(costume);
 			}
-			if (costume is Bitmap) {
+			/*if (costume is Bitmap) {
 				Bitmap(costume).bitmapData.dispose();
-			}
+			}*/
 			super.removeCostumes();
 		}
 		

@@ -32,7 +32,7 @@ package {
 			//x *= 1.25;
 			//y *= 1.25;
 			
-			var p:b2Vec2 = new b2Vec2(x1, y1);
+			//var p:b2Vec2 = new b2Vec2(x1, y1);
 			var callback:Array = [];
 			var aabb:b2AABB = new b2AABB();
 			aabb.lowerBound.Set(x1, y1);

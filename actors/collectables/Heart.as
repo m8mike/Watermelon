@@ -7,9 +7,10 @@ package {
 		private var costume:AnimationCostume;
 		
 		public function Heart(x:Number, y:Number) {
-			costume = new AnimationCostume("heart", CameraManager._staticLayer, 0.15, 0.15);
-			costume.setCoords(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
-			costume.animation.visible = true;
+			costume = new AnimationCostume("heart", CameraManager._staticLayer);
+			costume.setScale(0.15);
+			costume.setLocation(x * PhysiVals.MIN_SQARE, y * PhysiVals.MIN_SQARE);
+			costume.show();
 			super(x, y);
 		}
 		

@@ -18,7 +18,9 @@ package {
 		}
 		
 		private function createCostumes():void {
-			_costumes.push(new AnimationCostume("crate_box", CameraManager.pLayer, 0.2, 0.2));
+			var animCostume:AnimationCostume = new AnimationCostume("crate_box", CameraManager.pLayer);
+			animCostume.setScale(0.2);
+			_costumes.push(animCostume);
 			AnimationCostume(_costumes[0]).play();
 		}
 		
@@ -26,8 +28,8 @@ package {
 			var x:Number = parent.getBody().GetPosition().x * PhysiVals.RATIO;
 			var y:Number = parent.getBody().GetPosition().y * PhysiVals.RATIO;
 			for each (var costume:AnimationCostume in _costumes) {
-				costume.setCoords(x, y);
-				costume.animation.rotation = parent.getBody().GetAngle() * 180 / Math.PI;
+				costume.setLocation(x, y);
+				//costume.animation.rotation = parent.getBody().GetAngle() * 180 / Math.PI;
 			}
 		}
 	}

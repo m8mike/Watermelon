@@ -7,9 +7,6 @@ package {
 	* @author Mad Mike
 	*/
 	public class GhostCostumeManager extends CostumeManager {
-		
-		private var condition:int = 1; //состояние персонажа для анимации и т.д.
-		private var changedCondition:Boolean = false;
 		private var parent:Ghost;
 		
 		public function GhostCostumeManager(ghost:Ghost) {
@@ -24,7 +21,9 @@ package {
 		}
 		
 		private function createCostumes():void {
-			_costumes.push(new AnimationCostume("ghost1", CameraManager.pLayer, 0.2, 0.2));
+			var animCostume:AnimationCostume = new AnimationCostume("ghost1", CameraManager.pLayer);
+			animCostume.setScale(0.2);
+			_costumes.push(animCostume);
 			AnimationCostume(_costumes[0]).play();
 		}
 		
@@ -35,12 +34,12 @@ package {
 			var y:Number = loc.y * PhysiVals.RATIO;// + 12;
 			var vel:b2Vec2 = body.GetLinearVelocity();
 			for each (var costume:AnimationCostume in _costumes) {
-				costume.setCoords(x, y);
-				costume.animation.rotation = parent.getBody().GetAngle() * 180 / Math.PI;
+				costume.setLocation(x, y);
+				costume.setAngle(parent.getBody().GetAngle() * 180 / Math.PI);
 				if (vel.x < 0) {
-					costume.animation.scaleX = -Math.abs(costume.animation.scaleX);
+					costume.flipRight(false);
 				} else {
-					costume.animation.scaleX = Math.abs(costume.animation.scaleX);
+					costume.flipRight(true);
 				}
 			}
 		}

@@ -42,11 +42,11 @@ package {
 		
 		public function changeState():void {
 			if (condition == NORMAL) {
-				costume.animation.visible = false;
+				costume.hide();
 				damaged.play();
 				condition--;
 			} else if (condition == DAMAGED) {
-				damaged.animation.visible = false;
+				damaged.hide();
 				this.remove();
 			}
 		}
@@ -56,11 +56,13 @@ package {
 		}
 		
 		override protected function createCostumes():void {
-			costume = new AnimationCostume("wooden_block", CameraManager._dynamicLayer, 0.2, 0.2);
-			costume.setCoords(location.x, location.y);
+			costume = new AnimationCostume("wooden_block", CameraManager._dynamicLayer);
+			costume.setScale(0.2);
+			costume.setLocation(location.x, location.y);
 			costume.play();
-			damaged = new AnimationCostume("wooden_block_damaged", CameraManager._dynamicLayer, 0.2, 0.2);
-			damaged.setCoords(location.x, location.y);
+			damaged = new AnimationCostume("wooden_block_damaged", CameraManager._dynamicLayer);
+			damaged.setScale(0.2);
+			damaged.setLocation(location.x, location.y);
 		}
 		
 		override public function updateCostumes():void {
@@ -68,12 +70,12 @@ package {
 			var loc:b2Vec2 = body.GetPosition().Copy();
 			loc.Multiply(PhysiVals.RATIO);
 			if (costume) {
-				costume.setCoords(loc.x, loc.y);
-				costume.animation.rotation = angle;
+				costume.setLocation(loc.x, loc.y);
+				costume.setAngle(angle);
 			}
 			if (damaged) {
-				damaged.setCoords(loc.x, loc.y);
-				damaged.animation.rotation = angle;
+				damaged.setLocation(loc.x, loc.y);
+				damaged.setAngle(angle);
 			}
 			super.updateCostumes();
 		}

@@ -43,9 +43,10 @@ package {
 			var count:int = int(width);
 			while (count >= 1) {
 				count--;
-				var costume:AnimationCostume = new AnimationCostume("spikes_2", spikesCostume, 0.05, 0.05);
-				costume.setCoords(count * PhysiVals.MIN_SQARE, 0);
-				costume.animation.visible = true;
+				var costume:AnimationCostume = new AnimationCostume("spikes_2", spikesCostume);
+				costume.setScale(0.05);
+				costume.setLocation(count * PhysiVals.MIN_SQARE, 0);
+				costume.show();
 				_costumes.push(costume);
 			}
 			CameraManager._dynamicLayer.addChild(spikesCostume);

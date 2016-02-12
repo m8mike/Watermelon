@@ -45,9 +45,9 @@ package {
 			if (costume.parent) {
 				costume.parent.removeChild(costume);
 			}
-			if (costume is Bitmap) {
+			/*if (costume is Bitmap) {
 				Bitmap(costume).bitmapData.dispose();
-			}
+			}*/
 			super.removeCostumes();
 		}
 		

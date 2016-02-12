@@ -64,9 +64,10 @@ package {
 			sectionWidth = 0;
 			while (sectionWidth < width * PhysiVals.MIN_SQARE) {
 				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
-				var ceiling:AnimationCostume = new AnimationCostume("GroundBackground", costume, 0.15, 0.15);
-				ceiling.setCoords(40 * m - 11 * (m - 1) - 18, 0);
-				ceiling.animation.visible = true;
+				var ceiling:AnimationCostume = new AnimationCostume("GroundBackground", costume);
+				ceiling.setScale(0.15);
+				ceiling.setLocation(40 * m - 11 * (m - 1) - 18, 0);
+				ceiling.show();
 				m++;
 			}
 			costume.x = location.x;

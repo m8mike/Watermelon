@@ -64,7 +64,7 @@ package {
 			heightChanger.text = text + String(current + num - e.stageY);
 			//asset.y = assetY + parseInt(heightChanger.text.substr(text.length));
 			for each (var costume:AnimationCostume in asset) {
-				costume.animation.y = parseInt(heightChanger.text.substr(text.length));
+				costume.animation.bitmap.y = parseInt(heightChanger.text.substr(text.length));
 			}
 		}
 	}

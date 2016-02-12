@@ -4,7 +4,6 @@ package {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.geom.Point;
-	import raster.touchmypixel.peepee.utils.Animation;
 	
 	/**
 	* Класс для управления камерами
@@ -226,6 +225,7 @@ package {
 				while (layer.numChildren) {	
 					k = layer.numChildren - 1;
 					if (layer.getChildAt(k) is Bitmap) {
+						trace("disposing CameraManager");
 						Bitmap(layer.getChildAt(k)).bitmapData.dispose();
 					}
 					if (layer.getChildAt(k) is DisplayObjectContainer) {

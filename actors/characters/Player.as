@@ -30,14 +30,6 @@ package
 		public var inCloud:Boolean = false;
 		public var inFan:Boolean = false;
 		
-		//cache animation with
-		public var animationMode:int = 0;
-		public static const NO_ITEMS:int = 0;
-		public static const UMBRELLA_IN_RIGHT_HAND:int = 1;
-		public static const NO_HANDS:int = 2;
-		public static const ROCKETS:int = 3;
-		public static const UMBRELLA_GO:int = 4;
-		
 		public var controls:Controls;
 		public var inventory:Inventory;
 		public var spawnPoint:Point;
@@ -95,7 +87,7 @@ package
 		}
 		
 		public function hit():void {
-			if (invincibilityTime <= 0 && PlayerCostumeManager(costumeManager).condition != PlayerCostumeManager.STUNNED) {
+			if (invincibilityTime <= 0 && PlayerCostumeManager(costumeManager).conditionIsStunned()) {
 				PlayerCostumeManager(costumeManager).startZapp();
 				invincibilityTime = 50;
 				invincibilityKoef = 2;
@@ -119,7 +111,6 @@ package
 			invincibilityTime = 0;
 			PlayerBodyManager(bodyManager).initBody(spawnPoint, controls, vel);
 			deleted = false;
-			PlayerCostumeManager(costumeManager).condition = PlayerCostumeManager.STAY_RIGHT;
 			PlayerCostumeManager(costumeManager).show();
 			Controls.allowControls();
 		}
@@ -172,17 +163,14 @@ package
 				if (invincibilityTime % Math.round(invincibilityKoef)) {
 					PlayerCostumeManager(costumeManager).show();
 				} else {
-					if (PlayerCostumeManager(costumeManager).condition != PlayerCostumeManager.ZAPPED) {
+					if (PlayerCostumeManager(costumeManager).conditionIsZapped()) {
 						PlayerCostumeManager(costumeManager).hide();
 					}
 					invincibilityKoef += 0.2;
 				}
 			}
 			if (inFan) {
-				if ((PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_GO_LEFT) ||
-					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_GO_RIGHT) ||
-					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_LEFT) ||
-					(PlayerCostumeManager(costumeManager).condition == PlayerCostumeManager.UMBRELLA_RIGHT)) {
+				if ((PlayerCostumeManager(costumeManager).conditionIsUmbrella())) {
 					getBody().ApplyForce(new b2Vec2(0, -5), getBody().GetWorldCenter());
 				}
 			}

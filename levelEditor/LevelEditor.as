@@ -15,13 +15,6 @@ package {
 	* @author Mad Mike
 	*/
 	public class LevelEditor {
-		private var type:String = "unknown";
-		private var x:Number;
-		private var y:Number;
-		private var w:Number;
-		private var h:Number;
-		private var angle:Number;
-		
 		public static var bodyProperties:EditorBodyProperties;
 		public static var background:EditorBackground;
 		public static var spawn:EditorSpawn;
@@ -74,7 +67,7 @@ package {
 			var x1:Number = 1 / CameraManager.zoomKoef * (e.stageX - CameraManager.pLayer.x) / 108;
 			var y1:Number = 1 / CameraManager.zoomKoef * (e.stageY - CameraManager.pLayer.y) / 108;
 			
-			var p:b2Vec2 = new b2Vec2(x1, y1);
+			//var p:b2Vec2 = new b2Vec2(x1, y1);
 			var callback:Array = [];
 			var aabb:b2AABB = new b2AABB();
 			aabb.lowerBound.Set(x1, y1);
@@ -225,7 +218,7 @@ package {
 			var x1:Number = 1 / CameraManager.zoomKoef * (e.stageX - CameraManager.pLayer.x) / 108;
 			var y1:Number = 1 / CameraManager.zoomKoef * (e.stageY - CameraManager.pLayer.y) / 108;
 			
-			var p:b2Vec2 = new b2Vec2(x1, y1);
+			//var p:b2Vec2 = new b2Vec2(x1, y1);
 			var callback:Array = [];
 			var aabb:b2AABB = new b2AABB();
 			aabb.lowerBound.Set(x1, y1);

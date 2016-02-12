@@ -79,6 +79,7 @@ package
 				frameXs.push(flooredX);
 				frameYs.push(flooredY);
 				
+				trace("disposing BmpFrames");
 				scratchBitmapData.dispose();
 			}
 			res.totalFrames = res.frames.length;

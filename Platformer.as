@@ -19,6 +19,8 @@ package {
 		public static var collectables:Array = [];
 		public static var decorations:Array = [];
 		
+		public static var animations:Array = [];
+		
 		public static var levelsToComplete:Array = [];
 		
 		public static var _bodiesToRemove:Array = [];
@@ -130,6 +132,9 @@ package {
 						DummySplitter(character).initBody();
 					}
 				}
+			}
+			for each(var anim:Animation in animations) {
+				anim.update();
 			}
 			/*if (ghostCount == 0) {
 				new Ghost(30, -10);

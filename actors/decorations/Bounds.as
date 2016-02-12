@@ -23,27 +23,31 @@ package {
 			hCeiling = new MovieClip();
 			while (sectionWidth < h * PhysiVals.MIN_SQARE) {
 				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
-				leftBound = new AnimationCostume("GroundBackground", verticals, 0.15, 0.15);
-				leftBound.setCoords(0, 40 * m - 11 * (m - 1) - 21);
-				leftBound.animation.rotation = -90;
-				leftBound.animation.visible = true;
-				rightBound = new AnimationCostume("GroundBackground", verticals, 0.15, 0.15);
-				rightBound.setCoords(w * PhysiVals.MIN_SQARE, 40 * m - 11 * (m - 1) - 21);
-				rightBound.animation.rotation = 90;
-				rightBound.animation.visible = true;
+				leftBound = new AnimationCostume("GroundBackground", verticals);
+				leftBound.setScale(0.15);
+				leftBound.setLocation(0, 40 * m - 11 * (m - 1) - 21);
+				leftBound.setAngle(-90);
+				leftBound.show();
+				rightBound = new AnimationCostume("GroundBackground", verticals);
+				rightBound.setScale(0.15);
+				rightBound.setLocation(w * PhysiVals.MIN_SQARE, 40 * m - 11 * (m - 1) - 21);
+				rightBound.setAngle(90);
+				rightBound.show();
 				m++;
 			}
 			m = 1;
 			sectionWidth = 0;
 			while (sectionWidth < w * PhysiVals.MIN_SQARE) {
 				sectionWidth = 40 * m - 11 * (m - 1) - 21 + 44.88;
-				grass = new AnimationCostume("GrassBackground", hGrass, 0.15, 0.15);
-				grass.setCoords(40 * m - 11 * (m - 1) - 21, 0);
-				grass.animation.visible = true;
-				ceiling = new AnimationCostume("GroundBackground", hCeiling, 0.15, 0.15);
-				ceiling.setCoords(40 * m - 11 * (m - 1) - 21, h * PhysiVals.MIN_SQARE);
-				ceiling.animation.rotation = 180;
-				ceiling.animation.visible = true;
+				grass = new AnimationCostume("GrassBackground", hGrass);
+				grass.setScale(0.15);
+				grass.setLocation(40 * m - 11 * (m - 1) - 21, 0);
+				grass.show();
+				ceiling = new AnimationCostume("GroundBackground", hCeiling);
+				ceiling.setScale(0.15);
+				ceiling.setLocation(40 * m - 11 * (m - 1) - 21, h * PhysiVals.MIN_SQARE);
+				ceiling.setAngle(180);
+				ceiling.show();
 				m++;
 			}
 			verticals.x = x * PhysiVals.MIN_SQARE;

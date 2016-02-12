@@ -126,7 +126,7 @@ package {
 				return void;
 			}
 			if (!player.isOnGround()) {
-				if ((platform is TopHat || platform is Cloud || platform is Spikes) || Platformer._player.carryingItem is Jetpack) {
+				if ((platform is TopHat || platform is Cloud || platform is Spikes) || player.carryingItem is Jetpack) {
 					player.allowJumps(point.normal, false);
 				} else if (!(platform is SpringBush) && !(platform is Teleporter) 
 							&& !(platform is EndLevel) && !(platform is Fan)) {
